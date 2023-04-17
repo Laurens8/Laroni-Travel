@@ -23,6 +23,7 @@ namespace Laroni_Travel.Models
         [Required]
         public int RolId { get; set; }
 
+        //Navigatieproperty
         public ICollection<DeelnemerOpleiding> deelnemerOpleiding { get; set; }
         public Rol Rol { get; set; }
         public Bestemming Bestemming { get; set; }

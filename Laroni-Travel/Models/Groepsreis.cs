@@ -22,6 +22,7 @@ namespace Laroni_Travel.Models
         [Column(TypeName = "money")]
         public float Prijs { get; set; }
 
+        //Navigatieproperty
         public Bestemming bestemming { get; set; }
         public Thema thema { get; set; }
         public LeeftijdsCategorie leeftijdsCategorie { get; set; }

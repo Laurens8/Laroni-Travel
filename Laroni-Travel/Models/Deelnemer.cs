@@ -38,7 +38,7 @@ namespace Laroni_Travel.Models
         [Required]
         public bool Admin { get; set; }
 
-
+        //Navigatieproperty
         public virtual Bestemming Bestemming { get; set; }
         public virtual ICollection<Opleiding> opleidingen { get; set; }
         public virtual ICollection<DeelnemerOpleiding> deelnemerOpleiding { get; set; }

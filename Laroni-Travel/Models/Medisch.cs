@@ -20,6 +20,7 @@ namespace Laroni_Travel.Models
         [Required]
         public string Behandeling { get; set; }
 
-        public ICollection<Deelnemer> Deelnemer { get; set; }
+        //Navigatieproperty
+        public Deelnemer Deelnemer { get; set; }
     }
 }
