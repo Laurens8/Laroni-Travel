@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Laroni_Travel.View
 {
     /// <summary>
-    /// Interaction logic for TestHome.xaml
+    /// Interaction logic for InlogView.xaml
     /// </summary>
-    public partial class TestHome : Window
+    public partial class InlogView : Window
     {
-        public TestHome()
+        public InlogView()
         {
             InitializeComponent();
         }
