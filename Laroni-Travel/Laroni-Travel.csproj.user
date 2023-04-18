@@ -7,7 +7,19 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="View\TestHome.xaml.cs">
+    <Compile Update="View\HomeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\InlogView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\PersoonView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ReizenView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\WachtwoordVergetenView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -15,7 +27,19 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\TestHome.xaml">
+    <Page Update="View\HomeView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\InlogView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\PersoonView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ReizenView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\WachtwoordVergetenView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
