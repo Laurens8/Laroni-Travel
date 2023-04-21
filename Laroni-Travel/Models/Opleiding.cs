@@ -15,7 +15,7 @@ namespace Laroni_Travel.Models
         [Required]
         public string Beschrijving { get; set; }
         [Required]
-        public DateOnly Datum { get; set; }
+        public DateTime Datum { get; set; }
         [Required]
         public int BestemmingId { get; set; }
         [Required]

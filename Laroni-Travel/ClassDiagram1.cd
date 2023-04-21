@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Laroni_Travel.Models.Bestemming">
+    <Position X="6.75" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIABQIAAAAAAhAAEAAAAAAAAAoAAAAAACAA=</HashCode>
+      <FileName>Models\Bestemming.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laroni_Travel.Models.Deelnemer">
+    <Position X="1.75" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAgADgIAAAACAgQAAAAAgACAAAIgAAAAQCAA=</HashCode>
+      <FileName>Models\Deelnemer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laroni_Travel.Models.DeelnemerGroepsreis">
+    <Position X="9.25" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAABIAAAAAAAAAAQAAAAAAAAAAAAAoAAAAAAAAAQABA=</HashCode>
+      <FileName>Models\DeelnemerGroepsreis.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laroni_Travel.Models.DeelnemerOpleiding">
+    <Position X="9.5" Y="6.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAQAAAAAAgAAEAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Models\DeelnemerOpleiding.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laroni_Travel.Models.Groepsreis">
+    <Position X="4.75" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgAAIAAAAAAAQBABAAAAAAAAAAAAIAAAAAAgAAAAEAA=</HashCode>
+      <FileName>Models\Groepsreis.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laroni_Travel.Models.LeeftijdsCategorie">
+    <Position X="7.25" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\LeeftijdsCategorie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laroni_Travel.Models.Medisch">
+    <Position X="10" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAADAAIAAAAAAIAAQAAA=</HashCode>
+      <FileName>Models\Medisch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laroni_Travel.Models.Opleiding">
+    <Position X="1.75" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAwAAAAAAAAAAAAAACAiAAAAAAAAEQABA=</HashCode>
+      <FileName>Models\Opleiding.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laroni_Travel.Models.OpleidingBestemming">
+    <Position X="4.5" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACABQAAAAAAAAAAAAAAAACAAABAAAAAAAAA=</HashCode>
+      <FileName>Models\OpleidingBestemming.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laroni_Travel.Models.Rol">
+    <Position X="4.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Models\Rol.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laroni_Travel.Models.Thema">
+    <Position X="7.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Thema.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
