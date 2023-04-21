@@ -26,7 +26,7 @@ namespace Laroni_Travel.Models
         [Required]
         public string Gemeente { get; set; }
         [Required]
-        public DateOnly Geboortedatum { get; set; }
+        public DateTime Geboortedatum { get; set; }
         [Required]
         public string Geslacht { get; set; }
         [Required]
