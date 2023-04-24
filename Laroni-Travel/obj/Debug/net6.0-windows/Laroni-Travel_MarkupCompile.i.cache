@@ -4,17 +4,30 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
+C:\Users\laure\OneDrive\Desktop\laroni-travel\Laroni-Travel\Laroni-Travel\obj\Debug\net6.0-windows\
+=======
 C:\Users\Robin\OneDrive\Documenten\Agile\Laroni-travel\Laroni-Travel\Laroni-Travel\obj\Debug\net6.0-windows\
+>>>>>>> bb76048835b95d67cf8da7dc28c4f86986df13c8
 Laroni_Travel
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
+<<<<<<< HEAD
+C:\Users\laure\OneDrive\Desktop\laroni-travel\Laroni-Travel\Laroni-Travel\App.xaml
+6-159792190
+
+411491706237
+225-1866331360
+MainWindow.xaml;View\HomeView.xaml;View\InlogView.xaml;View\PersoonView.xaml;View\ReizenView.xaml;View\WachtwoordVergetenView.xaml;
+=======
 C:\Users\Robin\OneDrive\Documenten\Agile\Laroni-travel\Laroni-Travel\Laroni-Travel\App.xaml
 7633603078
 
 40513527803
 228-479046282
 MainWindow.xaml;View\HomeView.xaml;View\InlogView.xaml;View\OpleidingView.xaml;View\PersoonView.xaml;View\ReizenView.xaml;View\WachtwoordVergetenView.xaml;
+>>>>>>> bb76048835b95d67cf8da7dc28c4f86986df13c8
 
 False
 

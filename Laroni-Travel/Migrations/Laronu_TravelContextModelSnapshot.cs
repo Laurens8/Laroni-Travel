@@ -70,13 +70,10 @@ namespace Laroni_Travel.Migrations
                     b.Property<bool>("Admin")
                         .HasColumnType("bit");
 
-                    b.Property<int>("BestemmingId")
+                    b.Property<int?>("BestemmingId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DeelnemerGroepsreisId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Familiennaam")
+                    b.Property<string>("Familienaam")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -120,8 +117,6 @@ namespace Laroni_Travel.Migrations
 
                     b.HasIndex("BestemmingId");
 
-                    b.HasIndex("DeelnemerGroepsreisId");
-
                     b.ToTable("Deelnemers");
                 });
 
@@ -143,6 +138,8 @@ namespace Laroni_Travel.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("DeelnemerGroepsreisId");
+
+                    b.HasIndex("DeelnemerId");
 
                     b.HasIndex("GroepsreisId");
 
@@ -182,54 +179,42 @@ namespace Laroni_Travel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GroepsreisId"));
 
-                    b.Property<string>("BestemmingId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("BestemmingId1")
+                    b.Property<int>("BestemmingId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LeeftijdsCategorieID")
+                    b.Property<int>("LeeftijdsCategorieId")
                         .HasColumnType("int");
-
-                    b.Property<string>("LeeftijdsCategorieId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Prijs")
                         .HasColumnType("money");
 
-                    b.Property<string>("ThemaId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ThemaId1")
+                    b.Property<int>("ThemaId")
                         .HasColumnType("int");
 
                     b.HasKey("GroepsreisId");
 
-                    b.HasIndex("BestemmingId1");
+                    b.HasIndex("BestemmingId");
 
-                    b.HasIndex("LeeftijdsCategorieID");
+                    b.HasIndex("LeeftijdsCategorieId");
 
-                    b.HasIndex("ThemaId1");
+                    b.HasIndex("ThemaId");
 
                     b.ToTable("Groepsreisen");
                 });
 
             modelBuilder.Entity("Laroni_Travel.Models.LeeftijdsCategorie", b =>
                 {
-                    b.Property<int>("LeeftijdsCategorieID")
+                    b.Property<int>("LeeftijdsCategorieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LeeftijdsCategorieID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LeeftijdsCategorieId"));
 
                     b.Property<string>("Naam")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("LeeftijdsCategorieID");
+                    b.HasKey("LeeftijdsCategorieId");
 
                     b.ToTable("LeeftijdsCategorieen");
                 });
@@ -276,25 +261,10 @@ namespace Laroni_Travel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("BestemmingId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Datum")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DeelnemerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RolId")
-                        .HasColumnType("int");
-
                     b.HasKey("OpleidingId");
-
-                    b.HasIndex("BestemmingId");
-
-                    b.HasIndex("DeelnemerId");
-
-                    b.HasIndex("RolId");
 
                     b.ToTable("Opleidingen");
                 });
@@ -358,21 +328,19 @@ namespace Laroni_Travel.Migrations
 
             modelBuilder.Entity("Laroni_Travel.Models.Deelnemer", b =>
                 {
-                    b.HasOne("Laroni_Travel.Models.Bestemming", "Bestemming")
-                        .WithMany("deelnemers")
-                        .HasForeignKey("BestemmingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Laroni_Travel.Models.DeelnemerGroepsreis", null)
-                        .WithMany("Deelnemer")
-                        .HasForeignKey("DeelnemerGroepsreisId");
-
-                    b.Navigation("Bestemming");
+                    b.HasOne("Laroni_Travel.Models.Bestemming", null)
+                        .WithMany("Deelnemers")
+                        .HasForeignKey("BestemmingId");
                 });
 
             modelBuilder.Entity("Laroni_Travel.Models.DeelnemerGroepsreis", b =>
                 {
+                    b.HasOne("Laroni_Travel.Models.Deelnemer", "Deelnemer")
+                        .WithMany("DeelnemerGroepsreizen")
+                        .HasForeignKey("DeelnemerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Laroni_Travel.Models.Groepsreis", "Groepsreis")
                         .WithMany()
                         .HasForeignKey("GroepsreisId")
@@ -385,6 +353,8 @@ namespace Laroni_Travel.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Deelnemer");
+
                     b.Navigation("Groepsreis");
 
                     b.Navigation("Rol");
@@ -392,54 +362,54 @@ namespace Laroni_Travel.Migrations
 
             modelBuilder.Entity("Laroni_Travel.Models.DeelnemerOpleiding", b =>
                 {
-                    b.HasOne("Laroni_Travel.Models.Deelnemer", "deelnemer")
-                        .WithMany("deelnemerOpleiding")
+                    b.HasOne("Laroni_Travel.Models.Deelnemer", "Deelnemer")
+                        .WithMany("DeelnemerOpleidingen")
                         .HasForeignKey("DeelnemerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Laroni_Travel.Models.Opleiding", "opleiding")
-                        .WithMany("deelnemerOpleiding")
+                    b.HasOne("Laroni_Travel.Models.Opleiding", "Opleiding")
+                        .WithMany("DeelnemerOpleidingen")
                         .HasForeignKey("OpleidingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("deelnemer");
+                    b.Navigation("Deelnemer");
 
-                    b.Navigation("opleiding");
+                    b.Navigation("Opleiding");
                 });
 
             modelBuilder.Entity("Laroni_Travel.Models.Groepsreis", b =>
                 {
-                    b.HasOne("Laroni_Travel.Models.Bestemming", "bestemming")
+                    b.HasOne("Laroni_Travel.Models.Bestemming", "Bestemming")
                         .WithMany()
-                        .HasForeignKey("BestemmingId1")
+                        .HasForeignKey("BestemmingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Laroni_Travel.Models.LeeftijdsCategorie", "leeftijdsCategorie")
+                    b.HasOne("Laroni_Travel.Models.LeeftijdsCategorie", "LeeftijdsCategorieen")
                         .WithMany()
-                        .HasForeignKey("LeeftijdsCategorieID")
+                        .HasForeignKey("LeeftijdsCategorieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Laroni_Travel.Models.Thema", "thema")
+                    b.HasOne("Laroni_Travel.Models.Thema", "Thema")
                         .WithMany()
-                        .HasForeignKey("ThemaId1")
+                        .HasForeignKey("ThemaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("bestemming");
+                    b.Navigation("Bestemming");
 
-                    b.Navigation("leeftijdsCategorie");
+                    b.Navigation("LeeftijdsCategorieen");
 
-                    b.Navigation("thema");
+                    b.Navigation("Thema");
                 });
 
             modelBuilder.Entity("Laroni_Travel.Models.Medisch", b =>
                 {
                     b.HasOne("Laroni_Travel.Models.Deelnemer", "Deelnemer")
-                        .WithMany()
+                        .WithMany("Medische")
                         .HasForeignKey("DeelnemerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -447,41 +417,16 @@ namespace Laroni_Travel.Migrations
                     b.Navigation("Deelnemer");
                 });
 
-            modelBuilder.Entity("Laroni_Travel.Models.Opleiding", b =>
-                {
-                    b.HasOne("Laroni_Travel.Models.Bestemming", "Bestemming")
-                        .WithMany("opleidingen")
-                        .HasForeignKey("BestemmingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Laroni_Travel.Models.Deelnemer", null)
-                        .WithMany("opleidingen")
-                        .HasForeignKey("DeelnemerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Laroni_Travel.Models.Rol", "Rol")
-                        .WithMany()
-                        .HasForeignKey("RolId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Bestemming");
-
-                    b.Navigation("Rol");
-                });
-
             modelBuilder.Entity("Laroni_Travel.Models.OpleidingBestemming", b =>
                 {
                     b.HasOne("Laroni_Travel.Models.Bestemming", "Bestemming")
-                        .WithMany("opleidingBestemming")
+                        .WithMany("OpleidingBestemmingen")
                         .HasForeignKey("BestemmingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Laroni_Travel.Models.Opleiding", "Opleiding")
-                        .WithMany()
+                        .WithMany("OpleidingBestemmingen")
                         .HasForeignKey("OpleidingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -493,28 +438,25 @@ namespace Laroni_Travel.Migrations
 
             modelBuilder.Entity("Laroni_Travel.Models.Bestemming", b =>
                 {
-                    b.Navigation("deelnemers");
+                    b.Navigation("Deelnemers");
 
-                    b.Navigation("opleidingBestemming");
-
-                    b.Navigation("opleidingen");
+                    b.Navigation("OpleidingBestemmingen");
                 });
 
             modelBuilder.Entity("Laroni_Travel.Models.Deelnemer", b =>
                 {
-                    b.Navigation("deelnemerOpleiding");
+                    b.Navigation("DeelnemerGroepsreizen");
 
-                    b.Navigation("opleidingen");
-                });
+                    b.Navigation("DeelnemerOpleidingen");
 
-            modelBuilder.Entity("Laroni_Travel.Models.DeelnemerGroepsreis", b =>
-                {
-                    b.Navigation("Deelnemer");
+                    b.Navigation("Medische");
                 });
 
             modelBuilder.Entity("Laroni_Travel.Models.Opleiding", b =>
                 {
-                    b.Navigation("deelnemerOpleiding");
+                    b.Navigation("DeelnemerOpleidingen");
+
+                    b.Navigation("OpleidingBestemmingen");
                 });
 #pragma warning restore 612, 618
         }

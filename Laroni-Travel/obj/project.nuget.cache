@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
+  "dgSpecHash": "xw219MCDszJWeXz6sphancJRTBfCreJJ11t4jpzPhoxmqARRjCX9MFF6fnktZsuMR2XmPRtk9ZA3EyOhgprtMQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\laure\\OneDrive\\Desktop\\laroni-travel\\Laroni-Travel\\Laroni-Travel\\Laroni-Travel.csproj",
+=======
   "dgSpecHash": "F5hzXm60WLUjwVuRMOXVfzLv7c+CadAGxzUV98/5MobfXq2SjUpmSsMGS87v4IU9w7W99jWjN5dajyokG+yxUA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Robin\\OneDrive\\Documenten\\Agile\\Laroni-travel\\Laroni-Travel\\Laroni-Travel\\Laroni-Travel.csproj",
+>>>>>>> bb76048835b95d67cf8da7dc28c4f86986df13c8
   "expectedPackageFiles": [
     "C:\\Users\\Robin\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Robin\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

@@ -13,18 +13,18 @@ namespace Laroni_Travel.Models
         [Key]
         public int GroepsreisId { get; set; }
         [Required]
-        public string BestemmingId { get; set; }
+        public int BestemmingId { get; set; }
         [Required]
-        public string ThemaId { get; set; }
+        public int ThemaId { get; set; }
         [Required]
-        public string LeeftijdsCategorieId { get; set; }
+        public int LeeftijdsCategorieId { get; set; }
         [Required]
         [Column(TypeName = "money")]
         public float Prijs { get; set; }
 
         //Navigatieproperty
-        public Bestemming bestemming { get; set; }
-        public Thema thema { get; set; }
-        public LeeftijdsCategorie leeftijdsCategorie { get; set; }
+        public Bestemming Bestemming { get; set; }
+        public Thema Thema { get; set; }
+        public LeeftijdsCategorie LeeftijdsCategorieen { get; set; }
     }
 }

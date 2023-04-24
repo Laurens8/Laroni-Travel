@@ -50,7 +50,11 @@ namespace Laroni_Travel {
         /// InitializeComponent
         /// </summary>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+<<<<<<< HEAD
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "7.0.3.0")]
+=======
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "7.0.2.0")]
+>>>>>>> bb76048835b95d67cf8da7dc28c4f86986df13c8
         public void InitializeComponent() {
             if (_contentLoaded) {
                 return;
@@ -76,7 +80,11 @@ namespace Laroni_Travel {
         /// </summary>
         [System.STAThreadAttribute()]
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+<<<<<<< HEAD
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "7.0.3.0")]
+=======
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "7.0.2.0")]
+>>>>>>> bb76048835b95d67cf8da7dc28c4f86986df13c8
         public static void Main() {
             Laroni_Travel.App app = new Laroni_Travel.App();
             app.InitializeComponent();

@@ -18,7 +18,7 @@ namespace Laroni_Travel.Models
         public int OpleidingId { get; set; }
 
         //Navigatieproperty
-        public Deelnemer deelnemer { get; set; }
-        public Opleiding opleiding { get; set; }
+        public Deelnemer Deelnemer { get; set; }
+        public Opleiding Opleiding { get; set; }
     }
 }

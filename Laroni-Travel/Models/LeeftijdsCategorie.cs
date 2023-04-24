@@ -11,7 +11,7 @@ namespace Laroni_Travel.Models
     public class LeeftijdsCategorie
     {
         [Key]
-        public int LeeftijdsCategorieID { get; set; }
+        public int LeeftijdsCategorieId { get; set; }
         [Required]
         public string Naam { get; set; }
     }
