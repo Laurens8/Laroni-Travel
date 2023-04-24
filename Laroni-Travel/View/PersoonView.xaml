@@ -5,8 +5,82 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laroni_Travel.View"
         mc:Ignorable="d"
-        Title="PersoonView" Height="450" Width="800">
+        Title="PersoonView" Height="600" Width="1080"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
-        
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                <GradientStop Color="#060047" />
+                <GradientStop Color="#B3005E" Offset="1" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid Width="200" HorizontalAlignment="Left" Background="#060047">
+            <StackPanel>
+                <Grid Height="150" VerticalAlignment="Top">
+                    <Image Source="Image\Laroni-Travel.png" Width="150" Height="150" Grid.Row="0" />
+                </Grid>
+                <ListView>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Monitor" Foreground="White" Width="25" Height="25" Margin="5" />
+                            <TextBlock Text="Dashboard" Foreground="White" FontSize="24" Margin="5" />
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+                <ListView>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Account" Foreground="White" Width="25" Height="25" Margin="5" />
+                            <TextBlock Text="Personen" Foreground="White" FontSize="24" Margin="5" />
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+                <ListView>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Globe" Foreground="White" Width="25" Height="25" Margin="5" />
+                            <TextBlock Text="Reizen" Foreground="White" FontSize="24" Margin="5" />
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+                <ListView>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="School" Foreground="White" Width="25" Height="25" Margin="5" />
+                            <TextBlock Text="Opleidingen" Foreground="White" FontSize="24" Margin="5" />
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+                <ListView>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox
+                                Width="150"
+                                Margin="10"
+                                BorderBrush="#553370"
+                                materialDesign:HintAssist.Hint=" Search..."
+                                AcceptsReturn="True"
+                                IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto" Foreground="White" />
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+                <ListView>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <materialDesign:PackIcon Kind="Logout" Foreground="White" Width="45" Height="50" Margin="75 15 75 100" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
