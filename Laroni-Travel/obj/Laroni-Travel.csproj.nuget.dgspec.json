@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\laure\\OneDrive\\Desktop\\scrum project\\Laroni-Travel\\Laroni-Travel\\Laroni-Travel.csproj": {}
+    "C:\\Users\\Robin\\OneDrive\\Documenten\\Agile\\Laroni-travel\\Laroni-Travel\\Laroni-Travel\\Laroni-Travel.csproj": {}
   },
   "projects": {
-    "C:\\Users\\laure\\OneDrive\\Desktop\\scrum project\\Laroni-Travel\\Laroni-Travel\\Laroni-Travel.csproj": {
+    "C:\\Users\\Robin\\OneDrive\\Documenten\\Agile\\Laroni-travel\\Laroni-Travel\\Laroni-Travel\\Laroni-Travel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\laure\\OneDrive\\Desktop\\scrum project\\Laroni-Travel\\Laroni-Travel\\Laroni-Travel.csproj",
+        "projectUniqueName": "C:\\Users\\Robin\\OneDrive\\Documenten\\Agile\\Laroni-travel\\Laroni-Travel\\Laroni-Travel\\Laroni-Travel.csproj",
         "projectName": "Laroni-Travel",
-        "projectPath": "C:\\Users\\laure\\OneDrive\\Desktop\\scrum project\\Laroni-Travel\\Laroni-Travel\\Laroni-Travel.csproj",
-        "packagesPath": "C:\\Users\\laure\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\laure\\OneDrive\\Desktop\\scrum project\\Laroni-Travel\\Laroni-Travel\\obj\\",
+        "projectPath": "C:\\Users\\Robin\\OneDrive\\Documenten\\Agile\\Laroni-travel\\Laroni-Travel\\Laroni-Travel\\Laroni-Travel.csproj",
+        "packagesPath": "C:\\Users\\Robin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Robin\\OneDrive\\Documenten\\Agile\\Laroni-travel\\Laroni-Travel\\Laroni-Travel\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\laure\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Robin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,6 +48,10 @@
             "FakeItEasy": {
               "target": "Package",
               "version": "[7.3.1, )"
+            },
+            "MaterialDesignThemes": {
+              "target": "Package",
+              "version": "[4.8.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -86,7 +95,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
