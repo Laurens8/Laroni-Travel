@@ -16,16 +16,9 @@ namespace Laroni_Travel.Models
         public string Beschrijving { get; set; }
         [Required]
         public DateTime Datum { get; set; }
-        [Required]
-        public int BestemmingId { get; set; }
-        [Required]
-        public int DeelnemerId { get; set; }
-        [Required]
-        public int RolId { get; set; }
 
         //Navigatieproperty
-        public ICollection<DeelnemerOpleiding> deelnemerOpleiding { get; set; }
-        public Rol Rol { get; set; }
-        public Bestemming Bestemming { get; set; }
+        public virtual ICollection<OpleidingBestemming> OpleidingBestemmingen { get; set; }
+        public ICollection<DeelnemerOpleiding> DeelnemerOpleidingen { get; set; }
     }
 }

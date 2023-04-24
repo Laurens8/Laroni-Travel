@@ -16,7 +16,7 @@ namespace Laroni_Travel.Models
         [Required]
         public string Voornaam { get; set; }
         [Required]
-        public string Familiennaam { get; set; }
+        public string Familienaam { get; set; }
         [Required]
         public string Straatnaam { get; set; }
         [Required]
@@ -39,8 +39,8 @@ namespace Laroni_Travel.Models
         public bool Admin { get; set; }
 
         //Navigatieproperty
-        public virtual Bestemming Bestemming { get; set; }
-        public virtual ICollection<Opleiding> opleidingen { get; set; }
-        public virtual ICollection<DeelnemerOpleiding> deelnemerOpleiding { get; set; }
+        public virtual ICollection<DeelnemerGroepsreis> DeelnemerGroepsreizen { get; set; }
+        public virtual ICollection<DeelnemerOpleiding> DeelnemerOpleidingen { get; set; }
+        public virtual ICollection<Medisch> Medische { get; set; }
     }
 }

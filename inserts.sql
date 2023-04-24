@@ -1,4 +1,4 @@
-INSERT INTO Deelnemer 
+INSERT INTO Deelnemers 
 (Voornaam, Familienaam, Geboortedatum, Geslacht, Straatnaam, Huisnummer, Gemeente, Postcode, Ziekenfonds, Monitor, Hoofdmonitor, Admin) 
 VALUES
 ('Emma', 'Maes', '2003-03-08', 'V', 'Kerkstraat', '12', 'Antwerpen', '2000', 1, 0, 0, 0),
@@ -21,7 +21,7 @@ VALUES
 ('Léa', 'Rousseau', '2005-07-28', 'V', 'Rue des Dominicains', '8', 'Brugge', '8000', 1, 0, 0, 0),
 ('Lou', 'Bertrand', '2002-04-16', 'V', 'Rue de Flandre', '52', 'Gent', '9000', 1, 0, 0, 0);
 
-INSERT INTO Medisch 
+INSERT INTO Medische 
 (Omschrijving, Medicatie, Behandeling)
 VALUES 
 ('Hoge bloeddruk', 'Lisinopril', 'Leefstijlaanpassingen'),
@@ -35,14 +35,14 @@ VALUES
 ('Acne', 'Retinoïden', 'Verwijzing naar dermatoloog');
 
 
-INSERT INTO Rol
+INSERT INTO Rolen
 (Naam)
 VALUES
 ('deelnemer'),
 ('monitor'),
 ('hoofdmonitor');
 
-INSERT INTO Leeftijdscategorie
+INSERT INTO Leeftijdscategorieen
 (Naam)
 VALUES
 ('Kinderen: 0-12 jaar'),
@@ -51,7 +51,7 @@ VALUES
 ('Volwassenen: 26-59 jaar'),
 ('Ouderen: 60 jaar en ouder');
 
-INSERT INTO Bestemming 
+INSERT INTO Bestemmingen 
 (Naam, Straatnaam, Huisnummer, Gemeente, Postcode, Land)
 VALUES 
 ('Het Heijderbos', 'Hommersumseweg', '43', 'Heijen', '6598 MC', 'Nederland'),
@@ -75,7 +75,7 @@ VALUES
 ('Landal Het Vennenbos', 'Schouwberg', '7', 'Hapert', '5527 JH', 'Nederland'),
 ('Bungalowpark Les Doyards', 'Rue des Peupliers', '10', 'Malmedy', '4960', 'België');
 
-INSERT INTO Thema
+INSERT INTO Themas
 (Naam)
 VALUES
 ('Avontuurlijk'),
@@ -89,7 +89,7 @@ VALUES
 ('Taal'),
 ('Themapark');
 
-INSERT INTO Opleiding 
+INSERT INTO Opleidingen 
 (Beschrijving, Datum) 
 VALUES 
 ('Monitor', '2023-06-12'),
@@ -113,7 +113,7 @@ VALUES
 ('Monitor', '2023-08-05'),
 ('Hoofdmonitor', '2023-08-08');
 
-INSERT INTO DeelnemerOpleiding
+INSERT INTO DeelnemerOpleidingen
 (DeelnemerId, OpleidingId)
 VALUES
 (1,2),
@@ -137,7 +137,7 @@ VALUES
 (4,5),
 (5,4);
 
-INSERT INTO OpleidingBestemming
+INSERT INTO OpleidingBestemmingen
 (OpleidingId, BestemmingId)
 VALUES
 (1,1),
@@ -161,7 +161,7 @@ VALUES
 (4,4),
 (4,5);
 
-INSERT INTO Groepsreis
+INSERT INTO Groepsreisen
 (BestemmingId, ThemaId, LeeftijdscategorieId, PrijsPerDeelnemer)
 VALUES 
 (1, 1, 1, 425.50),
@@ -185,7 +185,7 @@ VALUES
 (4, 2, 4, 225.00),
 (5, 3, 5, 375.25);
 
-INSERT INTO DeelnemerGroepsreis (DeelnemerId, GroepsreisId, RolId)
+INSERT INTO DeelnemerGroepsreisen (DeelnemerId, GroepsreisId, RolId)
 VALUES 
 (1, 1, 3),
 (2, 1, 2),

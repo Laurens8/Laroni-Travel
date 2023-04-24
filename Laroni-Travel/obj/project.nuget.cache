@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "09pNpwsPY9SCxfTF9igZ3Tyz6TtMZb5sMa9787849aoki6LS8gzDXj5pThDmH4OfVd3Gk3J2cCq+2QpoiFijWQ==",
+  "dgSpecHash": "xw219MCDszJWeXz6sphancJRTBfCreJJ11t4jpzPhoxmqARRjCX9MFF6fnktZsuMR2XmPRtk9ZA3EyOhgprtMQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\laure\\OneDrive\\Desktop\\scrum project\\Laroni-Travel\\Laroni-Travel\\Laroni-Travel.csproj",
+  "projectFilePath": "C:\\Users\\laure\\OneDrive\\Desktop\\laroni-travel\\Laroni-Travel\\Laroni-Travel\\Laroni-Travel.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\laure\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\laure\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

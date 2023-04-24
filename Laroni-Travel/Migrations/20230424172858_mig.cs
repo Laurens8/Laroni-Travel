@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Laroni_Travel.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class mig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,13 +33,27 @@ namespace Laroni_Travel.Migrations
                 name: "LeeftijdsCategorieen",
                 columns: table => new
                 {
-                    LeeftijdsCategorieID = table.Column<int>(type: "int", nullable: false)
+                    LeeftijdsCategorieId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Naam = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LeeftijdsCategorieen", x => x.LeeftijdsCategorieID);
+                    table.PrimaryKey("PK_LeeftijdsCategorieen", x => x.LeeftijdsCategorieId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Opleidingen",
+                columns: table => new
+                {
+                    OpleidingId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Beschrijving = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Datum = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Opleidingen", x => x.OpleidingId);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,77 +83,13 @@ namespace Laroni_Travel.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Groepsreisen",
-                columns: table => new
-                {
-                    GroepsreisId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BestemmingId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ThemaId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LeeftijdsCategorieId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Prijs = table.Column<decimal>(type: "money", nullable: false),
-                    BestemmingId1 = table.Column<int>(type: "int", nullable: false),
-                    ThemaId1 = table.Column<int>(type: "int", nullable: false),
-                    LeeftijdsCategorieID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Groepsreisen", x => x.GroepsreisId);
-                    table.ForeignKey(
-                        name: "FK_Groepsreisen_Bestemmingen_BestemmingId1",
-                        column: x => x.BestemmingId1,
-                        principalTable: "Bestemmingen",
-                        principalColumn: "BestemmingId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Groepsreisen_LeeftijdsCategorieen_LeeftijdsCategorieID",
-                        column: x => x.LeeftijdsCategorieID,
-                        principalTable: "LeeftijdsCategorieen",
-                        principalColumn: "LeeftijdsCategorieID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Groepsreisen_Themas_ThemaId1",
-                        column: x => x.ThemaId1,
-                        principalTable: "Themas",
-                        principalColumn: "ThemaId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DeelnemerGroepsreisen",
-                columns: table => new
-                {
-                    DeelnemerGroepsreisId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DeelnemerId = table.Column<int>(type: "int", nullable: false),
-                    GroepsreisId = table.Column<int>(type: "int", nullable: false),
-                    RolId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DeelnemerGroepsreisen", x => x.DeelnemerGroepsreisId);
-                    table.ForeignKey(
-                        name: "FK_DeelnemerGroepsreisen_Groepsreisen_GroepsreisId",
-                        column: x => x.GroepsreisId,
-                        principalTable: "Groepsreisen",
-                        principalColumn: "GroepsreisId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DeelnemerGroepsreisen_Rolen_RolId",
-                        column: x => x.RolId,
-                        principalTable: "Rolen",
-                        principalColumn: "RolId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Deelnemers",
                 columns: table => new
                 {
                     DeelnemerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Voornaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Familiennaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Familienaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Straatnaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Huisnummer = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Postcode = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -150,8 +100,7 @@ namespace Laroni_Travel.Migrations
                     Monitor = table.Column<bool>(type: "bit", nullable: false),
                     HoofdMonitor = table.Column<bool>(type: "bit", nullable: false),
                     Admin = table.Column<bool>(type: "bit", nullable: false),
-                    BestemmingId = table.Column<int>(type: "int", nullable: false),
-                    DeelnemerGroepsreisId = table.Column<int>(type: "int", nullable: true)
+                    BestemmingId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -160,69 +109,66 @@ namespace Laroni_Travel.Migrations
                         name: "FK_Deelnemers_Bestemmingen_BestemmingId",
                         column: x => x.BestemmingId,
                         principalTable: "Bestemmingen",
-                        principalColumn: "BestemmingId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Deelnemers_DeelnemerGroepsreisen_DeelnemerGroepsreisId",
-                        column: x => x.DeelnemerGroepsreisId,
-                        principalTable: "DeelnemerGroepsreisen",
-                        principalColumn: "DeelnemerGroepsreisId");
+                        principalColumn: "BestemmingId");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Medische",
+                name: "OpleidingBestemmingen",
                 columns: table => new
                 {
-                    MedischId = table.Column<int>(type: "int", nullable: false)
+                    OpleidingBestemmingId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DeelnemerId = table.Column<int>(type: "int", nullable: false),
-                    Omschrijving = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Medicatie = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Behandeling = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    OpleidingId = table.Column<int>(type: "int", nullable: false),
+                    BestemmingId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Medische", x => x.MedischId);
+                    table.PrimaryKey("PK_OpleidingBestemmingen", x => x.OpleidingBestemmingId);
                     table.ForeignKey(
-                        name: "FK_Medische_Deelnemers_DeelnemerId",
-                        column: x => x.DeelnemerId,
-                        principalTable: "Deelnemers",
-                        principalColumn: "DeelnemerId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Opleidingen",
-                columns: table => new
-                {
-                    OpleidingId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Beschrijving = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Datum = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BestemmingId = table.Column<int>(type: "int", nullable: false),
-                    DeelnemerId = table.Column<int>(type: "int", nullable: false),
-                    RolId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Opleidingen", x => x.OpleidingId);
-                    table.ForeignKey(
-                        name: "FK_Opleidingen_Bestemmingen_BestemmingId",
+                        name: "FK_OpleidingBestemmingen_Bestemmingen_BestemmingId",
                         column: x => x.BestemmingId,
                         principalTable: "Bestemmingen",
                         principalColumn: "BestemmingId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Opleidingen_Deelnemers_DeelnemerId",
-                        column: x => x.DeelnemerId,
-                        principalTable: "Deelnemers",
-                        principalColumn: "DeelnemerId",
+                        name: "FK_OpleidingBestemmingen_Opleidingen_OpleidingId",
+                        column: x => x.OpleidingId,
+                        principalTable: "Opleidingen",
+                        principalColumn: "OpleidingId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Groepsreisen",
+                columns: table => new
+                {
+                    GroepsreisId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BestemmingId = table.Column<int>(type: "int", nullable: false),
+                    ThemaId = table.Column<int>(type: "int", nullable: false),
+                    LeeftijdsCategorieId = table.Column<int>(type: "int", nullable: false),
+                    Prijs = table.Column<decimal>(type: "money", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Groepsreisen", x => x.GroepsreisId);
+                    table.ForeignKey(
+                        name: "FK_Groepsreisen_Bestemmingen_BestemmingId",
+                        column: x => x.BestemmingId,
+                        principalTable: "Bestemmingen",
+                        principalColumn: "BestemmingId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Opleidingen_Rolen_RolId",
-                        column: x => x.RolId,
-                        principalTable: "Rolen",
-                        principalColumn: "RolId",
+                        name: "FK_Groepsreisen_LeeftijdsCategorieen_LeeftijdsCategorieId",
+                        column: x => x.LeeftijdsCategorieId,
+                        principalTable: "LeeftijdsCategorieen",
+                        principalColumn: "LeeftijdsCategorieId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Groepsreisen_Themas_ThemaId",
+                        column: x => x.ThemaId,
+                        principalTable: "Themas",
+                        principalColumn: "ThemaId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -253,30 +199,64 @@ namespace Laroni_Travel.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OpleidingBestemmingen",
+                name: "Medische",
                 columns: table => new
                 {
-                    OpleidingBestemmingId = table.Column<int>(type: "int", nullable: false)
+                    MedischId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OpleidingId = table.Column<int>(type: "int", nullable: false),
-                    BestemmingId = table.Column<int>(type: "int", nullable: false)
+                    DeelnemerId = table.Column<int>(type: "int", nullable: false),
+                    Omschrijving = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Medicatie = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Behandeling = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OpleidingBestemmingen", x => x.OpleidingBestemmingId);
+                    table.PrimaryKey("PK_Medische", x => x.MedischId);
                     table.ForeignKey(
-                        name: "FK_OpleidingBestemmingen_Bestemmingen_BestemmingId",
-                        column: x => x.BestemmingId,
-                        principalTable: "Bestemmingen",
-                        principalColumn: "BestemmingId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OpleidingBestemmingen_Opleidingen_OpleidingId",
-                        column: x => x.OpleidingId,
-                        principalTable: "Opleidingen",
-                        principalColumn: "OpleidingId",
+                        name: "FK_Medische_Deelnemers_DeelnemerId",
+                        column: x => x.DeelnemerId,
+                        principalTable: "Deelnemers",
+                        principalColumn: "DeelnemerId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "DeelnemerGroepsreisen",
+                columns: table => new
+                {
+                    DeelnemerGroepsreisId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DeelnemerId = table.Column<int>(type: "int", nullable: false),
+                    GroepsreisId = table.Column<int>(type: "int", nullable: false),
+                    RolId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeelnemerGroepsreisen", x => x.DeelnemerGroepsreisId);
+                    table.ForeignKey(
+                        name: "FK_DeelnemerGroepsreisen_Deelnemers_DeelnemerId",
+                        column: x => x.DeelnemerId,
+                        principalTable: "Deelnemers",
+                        principalColumn: "DeelnemerId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DeelnemerGroepsreisen_Groepsreisen_GroepsreisId",
+                        column: x => x.GroepsreisId,
+                        principalTable: "Groepsreisen",
+                        principalColumn: "GroepsreisId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DeelnemerGroepsreisen_Rolen_RolId",
+                        column: x => x.RolId,
+                        principalTable: "Rolen",
+                        principalColumn: "RolId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DeelnemerGroepsreisen_DeelnemerId",
+                table: "DeelnemerGroepsreisen",
+                column: "DeelnemerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DeelnemerGroepsreisen_GroepsreisId",
@@ -304,24 +284,19 @@ namespace Laroni_Travel.Migrations
                 column: "BestemmingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Deelnemers_DeelnemerGroepsreisId",
-                table: "Deelnemers",
-                column: "DeelnemerGroepsreisId");
+                name: "IX_Groepsreisen_BestemmingId",
+                table: "Groepsreisen",
+                column: "BestemmingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Groepsreisen_BestemmingId1",
+                name: "IX_Groepsreisen_LeeftijdsCategorieId",
                 table: "Groepsreisen",
-                column: "BestemmingId1");
+                column: "LeeftijdsCategorieId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Groepsreisen_LeeftijdsCategorieID",
+                name: "IX_Groepsreisen_ThemaId",
                 table: "Groepsreisen",
-                column: "LeeftijdsCategorieID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Groepsreisen_ThemaId1",
-                table: "Groepsreisen",
-                column: "ThemaId1");
+                column: "ThemaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Medische_DeelnemerId",
@@ -337,26 +312,14 @@ namespace Laroni_Travel.Migrations
                 name: "IX_OpleidingBestemmingen_OpleidingId",
                 table: "OpleidingBestemmingen",
                 column: "OpleidingId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Opleidingen_BestemmingId",
-                table: "Opleidingen",
-                column: "BestemmingId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Opleidingen_DeelnemerId",
-                table: "Opleidingen",
-                column: "DeelnemerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Opleidingen_RolId",
-                table: "Opleidingen",
-                column: "RolId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "DeelnemerGroepsreisen");
+
             migrationBuilder.DropTable(
                 name: "DeelnemerOpleidingen");
 
@@ -367,28 +330,25 @@ namespace Laroni_Travel.Migrations
                 name: "OpleidingBestemmingen");
 
             migrationBuilder.DropTable(
-                name: "Opleidingen");
-
-            migrationBuilder.DropTable(
-                name: "Deelnemers");
-
-            migrationBuilder.DropTable(
-                name: "DeelnemerGroepsreisen");
-
-            migrationBuilder.DropTable(
                 name: "Groepsreisen");
 
             migrationBuilder.DropTable(
                 name: "Rolen");
 
             migrationBuilder.DropTable(
-                name: "Bestemmingen");
+                name: "Deelnemers");
+
+            migrationBuilder.DropTable(
+                name: "Opleidingen");
 
             migrationBuilder.DropTable(
                 name: "LeeftijdsCategorieen");
 
             migrationBuilder.DropTable(
                 name: "Themas");
+
+            migrationBuilder.DropTable(
+                name: "Bestemmingen");
         }
     }
 }
