@@ -52,16 +52,31 @@
                 <ListView>
                     <ListViewItem>
                         <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="School" Foreground="White" Width="25" Height="25" Margin="5" />
+                            <TextBlock Text="Opleidingen" Foreground="White" FontSize="24" Margin="5" />
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+                <ListView>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal">
                             <TextBox
                                 Width="150"
                                 Margin="10"
                                 BorderBrush="#553370"
-    materialDesign:HintAssist.Hint=" Search..."
-    AcceptsReturn="True"
-    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
-    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-    TextWrapping="Wrap"
-    VerticalScrollBarVisibility="Auto" Foreground="White" />
+                                materialDesign:HintAssist.Hint=" Search..."
+                                AcceptsReturn="True"
+                                IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto" Foreground="White" />
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+                <ListView>
+                    <ListViewItem>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <materialDesign:PackIcon Kind="Logout" Foreground="White" Width="45" Height="50" Margin="75 15 75 100" VerticalAlignment="Center" />
                         </StackPanel>
                     </ListViewItem>
                 </ListView>
