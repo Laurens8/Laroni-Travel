@@ -56,13 +56,13 @@ namespace Laroni_Travel.ViewModels
         {
             if (SelectedDeelnemer != null)
             {
-                //if (DeelnemerRecord.IsGeldig())
-                //{
-                //    _unitOfWork.DeelnemersRepo.ToevoegenOfAanpassen(DeelnemerRecord);
-                //    int ok = _unitOfWork.Save();
+                if (DeelnemerRecord.IsGeldig())
+                {
+                    _unitOfWork.DeelnemersRepo.ToevoegenOfAanpassen(DeelnemerRecord);
+                    int ok = _unitOfWork.Save();
 
-                //    FoutmeldingInstellenNaSave(ok, "Deelnemer is niet aangepast");
-                //}
+                    FoutmeldingInstellenNaSave(ok, "Deelnemer is niet aangepast");
+                }
             }
             else
             {
@@ -106,13 +106,13 @@ namespace Laroni_Travel.ViewModels
             if (this.IsGeldig())
             {
                 DeelnemerRecord.DeelnemerId = int.Parse(ID);
-                //if (DeelnemerRecord.IsGeldig())
-                //{
-                //    _unitOfWork.DeelnemersRepo.Toevoegen(DeelnemerRecord);
-                //    int ok = _unitOfWork.Save();
+                if (DeelnemerRecord.IsGeldig())
+                {
+                    _unitOfWork.DeelnemersRepo.Toevoegen(DeelnemerRecord);
+                    int ok = _unitOfWork.Save();
 
-                //    FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
-                //}
+                    FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
+                }
             }
         }
 
@@ -178,14 +178,14 @@ namespace Laroni_Travel.ViewModels
 
         public override void Execute(object parameter)
         {
-            //switch (parameter.ToString())
-            //{
-            //    case "Zoeken": Zoeken(); break;
-            //    case "Verwijderen": Verwijderen(); break;
-            //    case "Toevoegen": Toevoegen(); break;
-            //    case "Aanpassen": Aanpassen(); break;
-            //    case "Annuleren": Resetten(); break;
-            //}
+            switch (parameter.ToString())
+            {
+                case "Zoeken": Zoeken(); break;
+                case "Verwijderen": Verwijderen(); break;
+                case "Toevoegen": Toevoegen(); break;
+                case "Aanpassen": Aanpassen(); break;
+                case "Annuleren": Resetten(); break;
+            }
         }
 
         public void Dispose()

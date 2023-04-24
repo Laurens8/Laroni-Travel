@@ -1,5 +1,5 @@
-INSERT INTO Deelnemer 
-(voornaam, familienaam, geboortedatum, geslacht, straatnaam, huisnummer, gemeente, postcode, isLidZiekenfonds, isMonitor, isHoofdmonitor, isAdmin) 
+INSERT INTO Deelnemers
+(Voornaam, Familienaam, Geboortedatum, Geslacht, Straatnaam, Huisnummer, Gemeente, Postcode, Ziekenfonds, Monitor, Hoofdmonitor, Admin) 
 VALUES
 ('Emma', 'Maes', '2003-03-08', 'V', 'Kerkstraat', '12', 'Antwerpen', '2000', 1, 0, 0, 0),
 ('Liam', 'Peeters', '2002-06-25', 'M', 'Stationsstraat', '45', 'Gent', '9000', 0, 0, 1, 0),
@@ -21,8 +21,8 @@ VALUES
 ('Léa', 'Rousseau', '2005-07-28', 'V', 'Rue des Dominicains', '8', 'Brugge', '8000', 1, 0, 0, 0),
 ('Lou', 'Bertrand', '2002-04-16', 'V', 'Rue de Flandre', '52', 'Gent', '9000', 1, 0, 0, 0);
 
-INSERT INTO Medisch 
-(omschrijving, medicatie, behandeling)
+INSERT INTO Medische 
+(Omschrijving, Medicatie, Behandeling)
 VALUES 
 ('Hoge bloeddruk', 'Lisinopril', 'Leefstijlaanpassingen'),
 ('Diabetes mellitus type 2', 'Metformine', 'Leefstijlaanpassingen en medicatie'),
@@ -35,15 +35,15 @@ VALUES
 ('Acne', 'Retinoïden', 'Verwijzing naar dermatoloog');
 
 
-INSERT INTO Rol
-(naam)
+INSERT INTO Rolen
+(Naam)
 VALUES
 ('deelnemer'),
 ('monitor'),
 ('hoofdmonitor');
 
-INSERT INTO Leeftijdscategorie
-(naam)
+INSERT INTO Leeftijdscategorieen
+(Naam)
 VALUES
 ('Kinderen: 0-12 jaar'),
 ('Tieners: 13-19 jaar'),
@@ -51,8 +51,8 @@ VALUES
 ('Volwassenen: 26-59 jaar'),
 ('Ouderen: 60 jaar en ouder');
 
-INSERT INTO Bestemming 
-(naam, straatnaam, huisnummer, gemeente, postcode, land)
+INSERT INTO Bestemmingen
+(Naam, Straatnaam, Huisnummer, Gemeente, Postcode, Land)
 VALUES 
 ('Het Heijderbos', 'Hommersumseweg', '43', 'Heijen', '6598 MC', 'Nederland'),
 ('Sunparks Kempense Meren', 'Postelsesteenweg', '100', 'Mol', '2400', 'België'),
@@ -75,8 +75,8 @@ VALUES
 ('Landal Het Vennenbos', 'Schouwberg', '7', 'Hapert', '5527 JH', 'Nederland'),
 ('Bungalowpark Les Doyards', 'Rue des Peupliers', '10', 'Malmedy', '4960', 'België');
 
-INSERT INTO Thema
-(naam)
+INSERT INTO Themas
+(Naam)
 VALUES
 ('Avontuurlijk'),
 ('Cultuur'),
@@ -89,8 +89,8 @@ VALUES
 ('Taal'),
 ('Themapark');
 
-INSERT INTO Opleiding 
-(beschrijving, datum) 
+INSERT INTO Opleidingen
+(Beschrijving, Datum) 
 VALUES 
 ('Monitor', '2023-06-12'),
 ('Monitor', '2023-06-15'),
@@ -113,8 +113,8 @@ VALUES
 ('Monitor', '2023-08-05'),
 ('Hoofdmonitor', '2023-08-08');
 
-INSERT INTO DeelnemerOpleiding
-(deelnemerId, opleidingId)
+INSERT INTO DeelnemerOpleidingen
+(DeelnemerId, OpleidingId)
 VALUES
 (1,2),
 (1,3),
@@ -137,8 +137,8 @@ VALUES
 (4,5),
 (5,4);
 
-INSERT INTO OpleidingBestemming
-(opleidingId, bestemmingId)
+INSERT INTO OpleidingBestemmingen
+(OpleidingId, BestemmingId)
 VALUES
 (1,1),
 (1,2),
@@ -161,8 +161,8 @@ VALUES
 (4,4),
 (4,5);
 
-INSERT INTO Groepsreis
-(bestemmingId, themaId, leeftijdscategorieId, prijsPerDeelnemer)
+INSERT INTO Groepsreizen
+(BestemmingId, ThemaId, LeeftijdscategorieId, Prijs)
 VALUES 
 (1, 1, 1, 425.50),
 (2, 2, 2, 210.00),
@@ -185,7 +185,7 @@ VALUES
 (4, 2, 4, 225.00),
 (5, 3, 5, 375.25);
 
-INSERT INTO DeelnemerGroepsreis (deelnemerId, groepsreisId, rolId)
+INSERT INTO DeelnemerGroepsreisen (DeelnemerId, GroepsreisId, RolId)
 VALUES 
 (1, 1, 3),
 (2, 1, 2),

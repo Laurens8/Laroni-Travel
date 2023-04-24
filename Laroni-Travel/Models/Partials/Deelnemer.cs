@@ -19,5 +19,10 @@ namespace Laroni_Travel.Models.Partials
                 return "";
             }
         }
+
+        public bool IsGeldig()
+        {
+            return string.IsNullOrWhiteSpace(Error);
+        }
     }  
 }
