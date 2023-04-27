@@ -36,8 +36,9 @@
                 <ListView>
                     <ListViewItem>
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Account" Foreground="White" Width="25" Height="25" Margin="5" />
-                            <TextBlock Text="Personen" Foreground="White" FontSize="24" Margin="5" />
+                            <materialDesign:PackIcon Kind="Account" Foreground="White" Width="25" Height="25" Margin="5"/>
+                            <TextBlock Text="Personen" Foreground="White" FontSize="24" Margin="5"/>
+                            <Button Command="{Binding}" CommandParameter="OpenPersoonView" Visibility="Visible" Width="32"/>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>
@@ -46,6 +47,7 @@
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Globe" Foreground="White" Width="25" Height="25" Margin="5" />
                             <TextBlock Text="Reizen" Foreground="White" FontSize="24" Margin="5" />
+                            <Button Command="{Binding}" CommandParameter="OpenReizenView" Visibility="Visible"></Button>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>
@@ -54,6 +56,7 @@
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="School" Foreground="White" Width="25" Height="25" Margin="5" />
                             <TextBlock Text="Opleidingen" Foreground="White" FontSize="24" Margin="5" />
+                            <Button Command="{Binding}" CommandParameter="OpenOpleidingView" Visibility="Visible"></Button>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>
