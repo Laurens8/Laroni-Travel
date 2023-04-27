@@ -29,7 +29,7 @@ namespace Laroni_Travel.ViewModels
             {
                 _selectedDeelnemer = value;
                 DeelnemerRecordInstellen();
-                NotifyPropertyChanged("SelectedOrderlijn");
+                NotifyPropertyChanged("SelectedDeelnemer");
             }
         }
 
@@ -167,25 +167,17 @@ namespace Laroni_Travel.ViewModels
         {
             switch (parameter.ToString())
             {
-                case "Zoeken": return true;
-                case "Verwijderen": return true;
-                case "Toevoegen": return true;
-                case "Aanpassen": return true;
-                case "Annuleren": return true;
+                case "Aanmelden": return true;         
             }
             return true;
         }
 
         public override void Execute(object parameter)
         {
-            //switch (parameter.ToString())
-            //{
-            //    case "Zoeken": Zoeken(); break;
-            //    case "Verwijderen": Verwijderen(); break;
-            //    case "Toevoegen": Toevoegen(); break;
-            //    case "Aanpassen": Aanpassen(); break;
-            //    case "Annuleren": Resetten(); break;
-            //}
+            switch (parameter.ToString())
+            {
+                case "Aanmelden": Zoeken(); break;               
+            }
         }
 
         public void Dispose()

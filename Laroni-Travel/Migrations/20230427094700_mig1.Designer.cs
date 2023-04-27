@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Laroni_Travel.Migrations
 {
     [DbContext(typeof(Laronu_TravelContext))]
-    [Migration("20230424172858_mig")]
-    partial class mig
+    [Migration("20230427094700_mig1")]
+    partial class mig1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,6 +75,10 @@ namespace Laroni_Travel.Migrations
 
                     b.Property<int?>("BestemmingId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Familienaam")
                         .IsRequired()
