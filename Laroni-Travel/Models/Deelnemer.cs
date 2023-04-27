@@ -18,6 +18,8 @@ namespace Laroni_Travel.Models
         [Required]
         public string Familienaam { get; set; }
         [Required]
+        public string Email { get; set; }
+        [Required]
         public string Straatnaam { get; set; }
         [Required]
         public string Huisnummer { get; set; }

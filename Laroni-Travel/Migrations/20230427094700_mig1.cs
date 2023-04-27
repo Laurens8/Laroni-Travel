@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Laroni_Travel.Migrations
 {
     /// <inheritdoc />
-    public partial class mig : Migration
+    public partial class mig1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -90,6 +90,7 @@ namespace Laroni_Travel.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Voornaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Familienaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Straatnaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Huisnummer = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Postcode = table.Column<string>(type: "nvarchar(max)", nullable: false),

@@ -1,25 +1,25 @@
 ﻿INSERT INTO Deelnemers
-(Voornaam, Familienaam, Geboortedatum, Geslacht, Straatnaam, Huisnummer, Gemeente, Postcode, Ziekenfonds, Monitor, Hoofdmonitor, Admin) 
+(Voornaam, Familienaam, Email,Geboortedatum, Geslacht, Straatnaam, Huisnummer, Gemeente, Postcode, Ziekenfonds, Monitor, Hoofdmonitor, Admin) 
 VALUES
-('Emma', 'Maes', '2003-03-08', 'V', 'Kerkstraat', '12', 'Antwerpen', '2000', 1, 0, 0, 0),
-('Liam', 'Peeters', '2002-06-25', 'M', 'Stationsstraat', '45', 'Gent', '9000', 0, 0, 1, 0),
-('Olivia', 'Jacobs', '2004-09-14', 'V', 'Leuvensesteenweg', '32', 'Brussel', '1000', 1, 0, 0, 0),
-('Noah', 'Dubois', '2003-12-18', 'M', 'Avenue des Arts', '78', 'Brugge', '8000', 0, 1, 0, 0),
-('Amélie', 'Martin', '2005-04-22', 'V', 'Rue Royale', '25', 'Luik', '4000', 1, 0, 0, 0),
-('Lucas', 'Lambert', '2004-01-05', 'M', 'Chaussée de Louvain', '56', 'Namen', '5000', 0, 0, 1, 0),
-('Elise', 'Simon', '2002-08-30', 'V', 'Rue de la Loi', '64', 'Brussel', '1000', 1, 0, 0, 0),
-('Arthur', 'Dubois', '2004-11-12', 'M', 'Rue du Marché', '10', 'Luik', '4000', 0, 1, 0, 0),
-('Juliette', 'Dupont', '2003-07-17', 'V', 'Place Sainte-Catherine', '22', 'Brussel', '1000', 1, 0, 0, 0),
-('Victor', 'Leroy', '2005-02-19', 'M', 'Avenue Louise', '88', 'Brussel', '1050', 0, 0, 1, 0),
-('Louise', 'Garcia', '2002-09-11', 'V', 'Rue de la Bourse', '14', 'Antwerpen', '2000', 1, 0, 0, 0),
-('Maxime', 'Renard', '2004-06-03', 'M', 'Place des Palais', '5', 'Brussel', '1000', 0, 1, 0, 0),
-('Camille', 'Dubois', '2003-03-25', 'V', 'Rue des Fripiers', '30', 'Brussel', '1000', 1, 0, 0, 0),
-('Sophie', 'Leclercq', '2003-09-21', 'V', 'Rue de la Station', '9', 'Namen', '5000', 1, 0, 0, 0),
-('Thomas', 'Lemaire', '2002-12-05', 'M', 'Rue des Augustins', '16', 'Luik', '4000', 0, 1, 0, 0),
-('Charlotte', 'Dubois', '2004-05-11', 'V', 'Rue du Marché aux Herbes', '32', 'Brussel', '1000', 1, 0, 0, 0),
-('Théo', 'Moreau', '2003-02-14', 'M', 'Chaussée de Wavre', '124', 'Brussel', '1000', 0, 0, 1, 0),
-('Léa', 'Rousseau', '2005-07-28', 'V', 'Rue des Dominicains', '8', 'Brugge', '8000', 1, 0, 0, 0),
-('Lou', 'Bertrand', '2002-04-16', 'V', 'Rue de Flandre', '52', 'Gent', '9000', 1, 0, 0, 0);
+('Emma', 'Maes', 'Emma@email.com','2003-03-08', 'V', 'Kerkstraat', '12', 'Antwerpen', '2000', 1, 0, 0, 0),
+('Liam', 'Peeters', 'Liam@email.com','2002-06-25', 'M', 'Stationsstraat', '45', 'Gent', '9000', 0, 0, 1, 0),
+('Olivia', 'Jacobs', 'Olivia@email.com','2004-09-14', 'V', 'Leuvensesteenweg', '32', 'Brussel', '1000', 1, 0, 0, 0),
+('Noah', 'Dubois', 'Noah@email.com','2003-12-18', 'M', 'Avenue des Arts', '78', 'Brugge', '8000', 0, 1, 0, 0),
+('Amélie', 'Martin', 'Amélie@email.com','2005-04-22', 'V', 'Rue Royale', '25', 'Luik', '4000', 1, 0, 0, 0),
+('Lucas', 'Lambert', 'Lucas@email.com','2004-01-05', 'M', 'Chaussée de Louvain', '56', 'Namen', '5000', 0, 0, 1, 0),
+('Elise', 'Simon', 'Elise@email.com','2002-08-30', 'V', 'Rue de la Loi', '64', 'Brussel', '1000', 1, 0, 0, 0),
+('Arthur', 'Dubois', 'Arthur@email.com','2004-11-12', 'M', 'Rue du Marché', '10', 'Luik', '4000', 0, 1, 0, 0),
+('Juliette', 'Dupont', 'Juliette@email.com','2003-07-17', 'V', 'Place Sainte-Catherine', '22', 'Brussel', '1000', 1, 0, 0, 0),
+('Victor', 'Leroy', 'Victor@email.com','2005-02-19', 'M', 'Avenue Louise', '88', 'Brussel', '1050', 0, 0, 1, 0),
+('Louise', 'Garcia', 'Louise@email.com','2002-09-11', 'V', 'Rue de la Bourse', '14', 'Antwerpen', '2000', 1, 0, 0, 0),
+('Maxime', 'Renard', 'Maxime@email.com','2004-06-03', 'M', 'Place des Palais', '5', 'Brussel', '1000', 0, 1, 0, 0),
+('Camille', 'Dubois', 'Camille@email.com','2003-03-25', 'V', 'Rue des Fripiers', '30', 'Brussel', '1000', 1, 0, 0, 0),
+('Sophie', 'Leclercq', 'Sophie@email.com','2003-09-21', 'V', 'Rue de la Station', '9', 'Namen', '5000', 1, 0, 0, 0),
+('Thomas', 'Lemaire', 'Thomas@email.com','2002-12-05', 'M', 'Rue des Augustins', '16', 'Luik', '4000', 0, 1, 0, 0),
+('Charlotte', 'Dubois', 'Charlotte@email.com','2004-05-11', 'V', 'Rue du Marché aux Herbes', '32', 'Brussel', '1000', 1, 0, 0, 0),
+('Théo', 'Moreau', 'Théo@email.com','2003-02-14', 'M', 'Chaussée de Wavre', '124', 'Brussel', '1000', 0, 0, 1, 0),
+('Léa', 'Rousseau', 'Léa@email.com','2005-07-28', 'V', 'Rue des Dominicains', '8', 'Brugge', '8000', 1, 0, 0, 0),
+('Lou', 'Bertrand', 'Lou@email.com','2002-04-16', 'V', 'Rue de Flandre', '52', 'Gent', '9000', 1, 0, 0, 0);
 
 INSERT INTO Medische 
 (DeelnemerId,Omschrijving, Medicatie, Behandeling)

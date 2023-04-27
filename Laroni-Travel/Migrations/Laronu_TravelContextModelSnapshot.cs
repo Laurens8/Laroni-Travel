@@ -73,6 +73,10 @@ namespace Laroni_Travel.Migrations
                     b.Property<int?>("BestemmingId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Familienaam")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
