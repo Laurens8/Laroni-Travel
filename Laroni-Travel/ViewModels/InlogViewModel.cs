@@ -48,7 +48,8 @@ namespace Laroni_Travel.ViewModels
                 var view = new HomeView();
                 view.DataContext = vm;
                 view.Show();
-            }           
+                App.Current.MainWindow.Close();
+            }
         }
 
         public void Zoeken()

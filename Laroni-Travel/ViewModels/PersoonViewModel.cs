@@ -36,12 +36,7 @@ namespace Laroni_Travel.ViewModels
         public override string this[string columnName]
         {
             get
-            {
-                if (columnName == "DeelnemerId" && !int.TryParse(ID, out int intID))
-                {
-                    return "" + Environment.NewLine;
-                }
-
+            {               
                 return "";
             }
         }
