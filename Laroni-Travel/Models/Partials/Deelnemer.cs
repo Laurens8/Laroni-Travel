@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Laroni_Travel.Models.Partials
 {
-    public class Deelnemer : Basisklasse
+    public partial class Deelnemer : Basisklasse
     {
         public override string this[string columnName]
         {

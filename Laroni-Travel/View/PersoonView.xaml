@@ -40,6 +40,7 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <TextBox
+                    Text="{Binding ID}"
         materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
         VerticalAlignment="center"
         materialDesign:HintAssist.Hint="Search..."
@@ -48,7 +49,7 @@
         Style="{StaticResource MaterialDesignOutlinedTextBox}"
         TextWrapping="Wrap"
         VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15" />
-                <Button materialDesign:ButtonAssist.CornerRadius="20" Height="50" Content="Zoeken" Grid.Row="0" Grid.Column="2" Margin="15" Background="#3D004E" />
+                <Button materialDesign:ButtonAssist.CornerRadius="20" Height="50" Content="Zoeken" Grid.Row="0" Grid.Column="2" Margin="15" Background="#3D004E" Command="{Binding}" CommandParameter="Zoeken"/>
                 <DataGrid ItemsSource="{Binding Deelnemers}"
                   SelectedItem="{Binding GeselecteerdeDeelnemer}"
 
@@ -74,6 +75,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBox
+                    Text="{Binding Voornaam}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Voornaam"
     AcceptsReturn="True"
@@ -83,6 +85,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="2" Grid.Column="0" Background="White" Margin="10" />
                 <TextBox
+                    Text="{Binding Familienaam}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Familienaam"
     AcceptsReturn="True"
@@ -92,6 +95,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="3" Grid.Column="0" Background="White" Margin="10" />
                 <TextBox
+                    Text="{Binding Geslacht}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Geslacht"
     AcceptsReturn="True"
@@ -100,8 +104,9 @@
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
     Grid.Row="4" Grid.Column="0" Background="White" Margin="10" />
-                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Geboortedatum" Grid.Row="5" Grid.Column="0" />
+                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Geboortedatum" Grid.Row="5" Grid.Column="0" Text="{Binding Geboortedatum}"/>
                 <TextBox
+                    Text="{Binding Email}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Email"
     AcceptsReturn="True"
@@ -111,6 +116,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="6" Grid.Column="0" Background="White" Margin="10" />
                 <TextBox
+                    Text="{Binding Straatnaam}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Straatnaam"
     AcceptsReturn="True"
@@ -120,6 +126,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="2" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
+                    Text="{Binding Huisnummer}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Huisnummer"
     AcceptsReturn="True"
@@ -129,6 +136,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="3" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
+                    Text="{Binding Postcode}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Postcode"
     AcceptsReturn="True"
@@ -138,6 +146,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="4" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
+                    Text="{Binding Gemeente}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Gemeente"
     AcceptsReturn="True"
@@ -147,17 +156,21 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="5" Grid.Column="1" Background="White" Margin="10" />
                 <CheckBox
+                    IsChecked="{Binding Ziekenfons}"
         Content="Lid Ziekenfonds" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
                 <CheckBox
+                    IsChecked="{Binding Monitor}"
         Content="Monitor" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
                 <CheckBox
+                    IsChecked="{Binding Hoofdmonitor}"
         Content="Hoofdmonitor" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
                 <CheckBox
+                    IsChecked="{Binding Admin}"
         Content="Admin" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Content="Toevoegen" Grid.Row="7" Grid.Column="0" Margin="10" Background="#3D004E" />
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Content="Aanmaken" Grid.Row="7" Grid.Column="1" Margin="10" Background="#3D004E" />
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Content="Verwijderen" Grid.Row="7" Grid.Column="2" Margin="10" Background="#3D004E" />
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Content="Annuleren" Grid.Row="8" Grid.Column="1" Margin="10" Background="#3D004E" />
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Content="Toevoegen" Grid.Row="7" Grid.Column="0" Margin="10" Background="#3D004E" Command="{Binding}" CommandParameter="Toevoegen"/>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Content="Aanmaken" Grid.Row="7" Grid.Column="1" Margin="10" Background="#3D004E" Command="{Binding}" CommandParameter="Aanpassen"/>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Content="Verwijderen" Grid.Row="7" Grid.Column="2" Margin="10" Background="#3D004E" Command="{Binding}" CommandParameter="Verwijderen"/>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Content="Annuleren" Grid.Row="8" Grid.Column="1" Margin="10" Background="#3D004E" Command="{Binding}" CommandParameter="Resetten"/>
             </Grid>
         </ScrollViewer>
         <Grid Width="200" HorizontalAlignment="Left" Background="#060047">

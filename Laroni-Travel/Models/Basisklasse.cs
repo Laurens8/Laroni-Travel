@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Laroni_Travel.Models.Partials
+namespace Laroni_Travel.Models
 {
     public abstract class Basisklasse : IDataErrorInfo
     {
@@ -24,14 +24,17 @@ namespace Laroni_Travel.Models.Partials
 
                 foreach (var item in this.GetType().GetProperties()) //reflection
                 {
-                    string fout = this[item.Name];
-                    if (!string.IsNullOrWhiteSpace(fout))
+                    if (item.CanRead)
                     {
-                        foutmeldingen += fout + Environment.NewLine;
+                        string fout = this[item.Name];
+                        if (!string.IsNullOrWhiteSpace(fout))
+                        {
+                            foutmeldingen += fout + Environment.NewLine;
+                        }
                     }
                 }
                 return foutmeldingen;
             }
-        }    
+        }
     }
 }
