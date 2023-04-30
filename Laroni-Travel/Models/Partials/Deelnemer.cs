@@ -12,7 +12,7 @@ namespace Laroni_Travel.Models.Partials
         {
             get
             {
-                if (columnName == "DeelnemerId")
+                if (true)
                 {
                     return "";
                 }                

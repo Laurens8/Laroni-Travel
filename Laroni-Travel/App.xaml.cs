@@ -17,8 +17,8 @@ namespace Laroni_Travel
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            var vm = new PersoonViewModel();
-            var view = new PersoonView();
+            var vm = new InlogViewModel();
+            var view = new InlogView();
             view.DataContext = vm;
             view.Show();
         }
