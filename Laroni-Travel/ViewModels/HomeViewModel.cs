@@ -20,34 +20,40 @@ namespace Laroni_Travel.ViewModels
 
         public void OpenPersoonView()
         {
+            Foutmelding = "";
             if (Foutmelding == "")
             {
                 var vm = new PersoonViewModel();
                 var view = new PersoonView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
         public void OpenReizenView()
         {
+            Foutmelding = "";
             if (Foutmelding == "")
             {
                 var vm = new ReizenViewModel();
                 var view = new ReizenView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
         public void OpenOpleidingView()
         {
+            Foutmelding = "";
             if (Foutmelding == "")
             {
                 var vm = new OpleidingViewModel();
                 var view = new OpleidingView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 

@@ -180,7 +180,7 @@ namespace Laroni_Travel.ViewModels
         {
             get
             {
-                if (columnName == "DeelnemerId" && !int.TryParse(ID, out int deelnemerId))
+                if (columnName == "DeelnemerId")
                 {
                     return "deelnemerId moet een numerieke waarde zijn!" + Environment.NewLine;
                 }
@@ -247,7 +247,7 @@ namespace Laroni_Travel.ViewModels
         {
             if (this.IsGeldig())
             {
-                DeelnemerRecord.DeelnemerId = int.Parse(ID);
+                //DeelnemerRecord.DeelnemerId = int.Parse(ID);
                 if (IsGeldig())
                 {
                     _unitOfWork.DeelnemersRepo.Toevoegen(DeelnemerRecord);

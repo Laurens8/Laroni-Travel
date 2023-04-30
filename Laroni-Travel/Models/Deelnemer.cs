@@ -11,7 +11,7 @@ namespace Laroni_Travel.Models
 {
     public class Deelnemer
     {
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key()]
         public int DeelnemerId { get; set; }
         [Required]
         public string Voornaam { get; set; }
