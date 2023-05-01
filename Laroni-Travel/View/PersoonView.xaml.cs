@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Laroni_Travel.ViewModels;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,44 @@ namespace Laroni_Travel.View
         public PersoonView()
         {
             InitializeComponent();
+        }
+
+        private void lvNavbar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lviDashboard.IsSelected)
+            {
+                var vm = new HomeViewModel();
+                var view = new HomeView();
+                view.DataContext = vm;
+                view.Show();
+            }
+            if (lviReizen.IsSelected)
+            {
+                var vm = new ReizenViewModel();
+                var view = new ReizenView();
+                view.DataContext = vm;
+                view.Show();
+                this.Close();
+            }
+            if (lviOpleidingen.IsSelected)
+            {
+                var vm = new OpleidingViewModel();
+                var view = new OpleidingView();
+                view.DataContext = vm;
+                view.Show();
+            }
+            if (lviLogout.IsSelected)
+            {
+                var vm = new InlogViewModel();
+                var view = new InlogView();
+                view.DataContext = vm;
+                view.Show();
+            }
+            this.Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

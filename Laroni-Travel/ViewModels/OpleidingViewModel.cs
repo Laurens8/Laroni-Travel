@@ -16,7 +16,7 @@ namespace Laroni_Travel.ViewModels
 
         public override bool CanExecute(object parameter)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void Dispose()
@@ -26,7 +26,6 @@ namespace Laroni_Travel.ViewModels
 
         public override void Execute(object parameter)
         {
-            throw new NotImplementedException();
         }
     }
 }
