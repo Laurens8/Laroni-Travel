@@ -15,10 +15,9 @@ namespace Laroni_Travel.ViewModels
     {
         private IUnitOfWork _unitOfWork = new UnitOfWork(new Laronu_TravelContext());
 
-        public override string this[string columnName] => throw new NotImplementedException();
         public string Foutmelding { get; set; }
-
-        public void OpenPersoonView()
+        public override string this[string columnName] => throw new NotImplementedException();
+        /*public void OpenPersoonView()
         {
             if (Foutmelding == "")
             {
@@ -49,32 +48,32 @@ namespace Laroni_Travel.ViewModels
                 view.DataContext = vm;
                 view.Show();
             }
-        }
+        }*/
 
         public override bool CanExecute(object parameter)
         {
-            switch (parameter.ToString())
+            /*switch (parameter.ToString())
             {
                 case "OpenPersoonView": return true;
                 case "OpenReizenView": return true;
                 case "OpenOpleidingView": return true;
-            }
+            }*/
             return true;
-        }
-
-        public override void Execute(object parameter)
-        {
-            switch (parameter.ToString())
-            {
-                case "OpenPersoonView": OpenPersoonView(); break;
-                case "OpenReizenView": OpenReizenView(); break;
-                case "OpenOpleidingView": OpenOpleidingView(); break;
-            }
         }
 
         public void Dispose()
         {
             _unitOfWork?.Dispose();
+        }
+
+        public override void Execute(object parameter)
+        {
+            /*switch (parameter.ToString())
+            {
+                case "OpenPersoonView": OpenPersoonView(); break;
+                case "OpenReizenView": OpenReizenView(); break;
+                case "OpenOpleidingView": OpenOpleidingView(); break;
+            }*/
         }
     }
 }

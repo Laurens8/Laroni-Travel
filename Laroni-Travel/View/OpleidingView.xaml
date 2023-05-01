@@ -25,39 +25,31 @@
                 <Grid Height="150" VerticalAlignment="Top">
                     <Image Source="Image\Laroni-Travel.png" Width="150" Height="150" Grid.Row="0" />
                 </Grid>
-                <ListView>
-                    <ListViewItem>
+                <ListView x:Name="lvNavbar" SelectionChanged="lvNavbar_SelectionChanged">
+                    <ListViewItem x:Name="lviDashboard">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Monitor" Foreground="White" Width="25" Height="25" Margin="5" />
                             <TextBlock Text="Dashboard" Foreground="White" FontSize="24" Margin="5" />
                         </StackPanel>
                     </ListViewItem>
-                </ListView>
-                <ListView>
-                    <ListViewItem>
+                    <ListViewItem x:Name="lviPersonen">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Account" Foreground="White" Width="25" Height="25" Margin="5" />
                             <TextBlock Text="Personen" Foreground="White" FontSize="24" Margin="5" />
                         </StackPanel>
                     </ListViewItem>
-                </ListView>
-                <ListView>
-                    <ListViewItem>
+                    <ListViewItem x:Name="lviReizen">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Globe" Foreground="White" Width="25" Height="25" Margin="5" />
                             <TextBlock Text="Reizen" Foreground="White" FontSize="24" Margin="5" />
                         </StackPanel>
                     </ListViewItem>
-                </ListView>
-                <ListView>
-                    <ListViewItem>
+                    <ListViewItem x:Name="lviOpleidingen">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="School" Foreground="White" Width="25" Height="25" Margin="5" />
                             <TextBlock Text="Opleidingen" Foreground="White" FontSize="24" Margin="5" />
                         </StackPanel>
                     </ListViewItem>
-                </ListView>
-                <ListView>
                     <ListViewItem>
                         <StackPanel Orientation="Horizontal">
                             <TextBox
@@ -72,11 +64,9 @@
                                 VerticalScrollBarVisibility="Auto" Foreground="White" />
                         </StackPanel>
                     </ListViewItem>
-                </ListView>
-                <ListView>
-                    <ListViewItem>
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="Logout" Foreground="White" Width="45" Height="50" Margin="75 15 75 100" VerticalAlignment="Center" />
+                    <ListViewItem x:Name="lviLogout">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Logout" Foreground="White" Width="45" Height="50" Margin="65 15 65 100" VerticalAlignment="Center" />
                         </StackPanel>
                     </ListViewItem>
                 </ListView>
