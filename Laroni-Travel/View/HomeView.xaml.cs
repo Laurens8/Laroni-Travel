@@ -29,7 +29,7 @@ namespace Laroni_Travel.View
         {
             if (lviPersonen.IsSelected)
             {
-                var vm = new HomeViewModel();
+                var vm = new PersoonViewModel();
                 var view = new PersoonView();
                 view.DataContext = vm;
                 view.Show();

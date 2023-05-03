@@ -19,10 +19,11 @@ namespace Laroni_Travel.ViewModels
         private IUnitOfWork _unitOfWork = new UnitOfWork(new Laronu_TravelContext());
 
         public ObservableCollection<Deelnemer> Deelnemers { get; set; }
-        public Deelnemer DeelnemerRecord { get; set; }
+        
         public string Foutmelding { get; set; }
         public string ID { get; set; }
         private Deelnemer _selectedDeelnemer;
+        private Deelnemer _deelnemerRecord;
         private int _deelnemerId;
         private string _voornaam;
         private string _familienaam;
@@ -37,6 +38,16 @@ namespace Laroni_Travel.ViewModels
         private bool _monitor;
         private bool _hoofdMonitor;
         private bool _admin;
+
+        public Deelnemer DeelnemerRecord
+        {
+            get { return _deelnemerRecord; }
+            set
+            {
+                _deelnemerRecord = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public int DeelnemerId
         {
@@ -190,6 +201,7 @@ namespace Laroni_Travel.ViewModels
 
         public PersoonViewModel() 
         {
+            Geboortedatum = DateTime.Now;
             Deelnemers = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen());
             DeelnemerRecordInstellen();
         }
@@ -215,18 +227,18 @@ namespace Laroni_Travel.ViewModels
         public void Zoeken()
         {
             Foutmelding = "";
-            if (IsGeldig())
-            {
+            //if (IsGeldig())
+            //{
                 RefreshDeelnemer();
                 if (Deelnemers == null || Deelnemers.Count <= 0)
                 {
                     Foutmelding = "Er zijn geen Deelnemer gevonden horende bij DeelnemerId " + ID;
                 }
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 Foutmelding = this.Error;
-            }
+            //}
         }
 
         public void Verwijderen()
@@ -245,17 +257,17 @@ namespace Laroni_Travel.ViewModels
 
         public void Toevoegen()
         {
-            if (this.IsGeldig())
-            {
-                //DeelnemerRecord.DeelnemerId = int.Parse(ID);
-                if (IsGeldig())
-                {
+            //if (this.IsGeldig())
+            //{
+            //    //DeelnemerRecord.DeelnemerId = int.Parse(ID);
+            //    if (IsGeldig())
+            //    {
                     _unitOfWork.DeelnemersRepo.Toevoegen(DeelnemerRecord);
                     int ok = _unitOfWork.Save();
 
-                    FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
-                }
-            }
+            //        FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
+            //    }
+            //}
         }
 
         private void DeelnemerRecordInstellen()
@@ -263,6 +275,7 @@ namespace Laroni_Travel.ViewModels
             if (SelectedDeelnemer != null)
             {
                 DeelnemerRecord = SelectedDeelnemer;
+                NotifyPropertyChanged(nameof(SelectedDeelnemer));
             }
             else
             {
@@ -303,6 +316,7 @@ namespace Laroni_Travel.ViewModels
             List<Deelnemer> listDeelnemers = _unitOfWork.DeelnemersRepo.Ophalen(x => x.DeelnemerId == i).ToList();
 
             Deelnemers = new ObservableCollection<Deelnemer>(listDeelnemers);
+            NotifyPropertyChanged(nameof(Deelnemers));
         }
 
         public override bool CanExecute(object parameter)
