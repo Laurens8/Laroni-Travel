@@ -162,7 +162,7 @@
                     IsChecked="{Binding DeelnemerRecord.Monitor}"
         Content="Monitor" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
                 <CheckBox
-                    IsChecked="{Binding DeelnemerRecord.Hoofdmonitor}"
+                    IsChecked="{Binding DeelnemerRecord.HoofdMonitor}"
         Content="Hoofdmonitor" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
                 <CheckBox
                     IsChecked="{Binding DeelnemerRecord.Admin}"

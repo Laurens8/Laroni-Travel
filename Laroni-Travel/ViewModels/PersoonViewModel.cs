@@ -1,4 +1,5 @@
-﻿using dal.Data.UnitOfWork;
+﻿using Castle.Core.Internal;
+using dal.Data.UnitOfWork;
 using Laroni_Travel.Data;
 using Laroni_Travel.Models;
 //using Laroni_Travel.Models.Partials;
@@ -187,13 +188,83 @@ namespace Laroni_Travel.ViewModels
             }
         }
 
+        public bool IsNumeriek(string input)
+        {
+            bool isNumeriek;
+            if (input.All(char.IsDigit))
+            {
+                return isNumeriek = true;
+            }
+            else
+            {
+                return isNumeriek = false;
+            }
+        }
+
+        public bool ValidateEmail(string input)
+        {
+            bool email;
+            if (input.Contains("@") && input.Contains("."))
+            {
+                return email = true;
+            }
+            else
+            {
+                return email = false;
+            }
+        }
+
         public override string this[string columnName]
         {
             get
             {
-                if (columnName == "DeelnemerId")
+                if (columnName == "Voornaam" && Voornaam.IsNullOrEmpty())
                 {
-                    return "deelnemerId moet een numerieke waarde zijn!" + Environment.NewLine;
+                    return "Voornaam moet ingevuld zijn";
+                }
+               if (columnName == "Familienaam" && Familienaam.IsNullOrEmpty())
+                {
+                    return "Familienaam moet ingevuld zijn";
+                }
+                if (columnName == "Email" && Email.IsNullOrEmpty())
+                {
+                    return "Email moet ingevuld zijn";
+                }
+                if (columnName == "Straatnaam" && Straatnaam.IsNullOrEmpty())
+                {
+                    return "Straatnaam moet ingevuld zijn";
+                }
+                if (columnName == "Huisnummer" && Huisnummer.IsNullOrEmpty())
+                {
+                    return "Huisnummer moet ingevuld zijn";
+                }
+                if (columnName == "Postcode" && Postcode.IsNullOrEmpty())
+                {
+                    return "Postcode moet ingevuld zijn";
+                }
+                if (columnName == "Gemeente" && Gemeente.IsNullOrEmpty())
+                {
+                    return "Gemeente moet ingevuld zijn";
+                }
+                if (columnName == "Geboortedatum" && Geboortedatum == null)
+                {
+                    return "Geboortedatum moet ingevuld zijn";
+                }
+                if (columnName == "Geslacht" && Geslacht.IsNullOrEmpty())
+                {
+                    return "Geslacht moet ingevuld zijn";
+                }               
+                if (columnName == "Email" && !ValidateEmail(Email))
+                {
+                    return "Email moet een geldig email adres zijn";
+                }
+                if (columnName == "Postcode" && !IsNumeriek(Postcode))
+                {
+                    return "Postcode moet een nummer zijn";
+                }
+                if (columnName == "Huisnummer" && !IsNumeriek(Huisnummer))
+                {
+                    return "Huisnummer moet een nummer zijn";
                 }
                 return "";
             }
@@ -247,7 +318,9 @@ namespace Laroni_Travel.ViewModels
             {
                 _unitOfWork.DeelnemersRepo.Verwijderen(SelectedDeelnemer.DeelnemerId);
                 int ok = _unitOfWork.Save();
-                FoutmeldingInstellenNaSave(ok, "Deelnemer is niet verwijderd");
+                Deelnemers = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen());
+                NotifyPropertyChanged(nameof(Deelnemers));
+                //     FoutmeldingInstellenNaSave(ok, "Deelnemer is niet verwijderd");
             }
             else
             {
@@ -264,8 +337,10 @@ namespace Laroni_Travel.ViewModels
             //    {
                     _unitOfWork.DeelnemersRepo.Toevoegen(DeelnemerRecord);
                     int ok = _unitOfWork.Save();
+            Deelnemers = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen());
+            NotifyPropertyChanged(nameof(Deelnemers));
 
-            //        FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
+            // FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
             //    }
             //}
         }
@@ -285,16 +360,17 @@ namespace Laroni_Travel.ViewModels
 
         public void Resetten()
         {
-            if (this.IsGeldig())
-            {
+            //if (this.IsGeldig())
+            //{
                 SelectedDeelnemer = null;
                 DeelnemerRecordInstellen();
                 Foutmelding = "";
-            }
-            else
-            {
-                Foutmelding = this.Error;
-            }
+                NotifyPropertyChanged(nameof(SelectedDeelnemer));
+            //}
+            //else
+            //{
+            //    Foutmelding = this.Error;
+            //}
         }
 
         private void FoutmeldingInstellenNaSave(int ok, string melding)
