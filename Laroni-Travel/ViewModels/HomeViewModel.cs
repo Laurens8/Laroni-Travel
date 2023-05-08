@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -14,32 +15,46 @@ namespace Laroni_Travel.ViewModels
     public class HomeViewModel : BaseViewmodel, IDisposable, ICommand
     {
         private IUnitOfWork _unitOfWork = new UnitOfWork(new Laronu_TravelContext());
-
         public string Foutmelding { get; set; }
         public override string this[string columnName] => throw new NotImplementedException();
-        /*public void OpenPersoonView()
+
+        public override bool CanExecute(object parameter)
         {
-            Foutmelding = "";
-            if (Foutmelding == "")
+            switch (parameter.ToString())
             {
-                var vm = new PersoonViewModel();
-                var view = new PersoonView();
-                view.DataContext = vm;
-                view.Show();
-                App.Current.MainWindow.Close();
+                case "OpenPersoonView": return true;
+                case "OpenReizenView": return true;
+                case "OpenOpleidingView": return true;
+                case "OpenInlogView": return true;
+            }
+            return true;
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork?.Dispose();
+        }
+
+        public override void Execute(object parameter)
+        {
+            switch (parameter.ToString())
+            {
+                case "OpenPersoonView": OpenPersoonView(); break;
+                case "OpenReizenView": OpenReizenView(); break;
+                case "OpenOpleidingView": OpenOpleidingView(); break;
+                case "OpenInlogView": OpenInlogView(); break;
             }
         }
 
-        public void OpenReizenView()
+        public void OpenInlogView()
         {
             Foutmelding = "";
             if (Foutmelding == "")
             {
-                var vm = new ReizenViewModel();
-                var view = new ReizenView();
+                var vm = new InlogViewModel();
+                var view = new InlogView();
                 view.DataContext = vm;
                 view.Show();
-                App.Current.MainWindow.Close();
             }
         }
 
@@ -52,34 +67,31 @@ namespace Laroni_Travel.ViewModels
                 var view = new OpleidingView();
                 view.DataContext = vm;
                 view.Show();
-                App.Current.MainWindow.Close();
             }
-        }*/
-
-        public override bool CanExecute(object parameter)
-        {
-            /*switch (parameter.ToString())
-            {
-                case "OpenPersoonView": return true;
-                case "OpenReizenView": return true;
-                case "OpenOpleidingView": return true;
-            }*/
-            return true;
         }
 
-        public void Dispose()
+        public void OpenPersoonView()
         {
-            _unitOfWork?.Dispose();
+            Foutmelding = "";
+            if (Foutmelding == "")
+            {
+                var vm = new PersoonViewModel();
+                var view = new PersoonView();
+                view.DataContext = vm;
+                view.Show();
+            }
         }
 
-        public override void Execute(object parameter)
+        public void OpenReizenView()
         {
-            /*switch (parameter.ToString())
+            Foutmelding = "";
+            if (Foutmelding == "")
             {
-                case "OpenPersoonView": OpenPersoonView(); break;
-                case "OpenReizenView": OpenReizenView(); break;
-                case "OpenOpleidingView": OpenOpleidingView(); break;
-            }*/
+                var vm = new ReizenViewModel();
+                var view = new ReizenView();
+                view.DataContext = vm;
+                view.Show();
+            }
         }
     }
 }

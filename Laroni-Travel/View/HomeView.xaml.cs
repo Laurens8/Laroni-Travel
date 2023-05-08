@@ -24,39 +24,5 @@ namespace Laroni_Travel.View
         {
             InitializeComponent();
         }
-
-        private void lvNavbar_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (lviPersonen.IsSelected)
-            {
-                var vm = new PersoonViewModel();
-                var view = new PersoonView();
-                view.DataContext = vm;
-                view.Show();
-            }
-            if (lviReizen.IsSelected)
-            {
-                var vm = new ReizenViewModel();
-                var view = new ReizenView();
-                view.DataContext = vm;
-                view.Show();
-            }
-            if (lviOpleidingen.IsSelected)
-            {
-                var vm = new OpleidingViewModel();
-                var view = new OpleidingView();
-                view.DataContext = vm;
-                view.Show();
-            }
-            if (lviLogout.IsSelected)
-            {
-                var vm = new InlogViewModel();
-                var view = new InlogView();
-                view.DataContext = vm;
-                view.Show();
-            }
-
-            this.Close();
-        }
     }
 }

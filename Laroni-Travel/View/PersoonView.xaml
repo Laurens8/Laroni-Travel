@@ -12,7 +12,7 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        FontFamily="{DynamicResource MaterialDesignFont}" Loaded="Window_Loaded">
+        FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
@@ -25,8 +25,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
                     <ColumnDefinition />
-                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
@@ -38,9 +38,14 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <TextBox
-                    Text="{Binding ID}"
+                    Text="{Binding Voornaam}"
         materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
         VerticalAlignment="center"
         materialDesign:HintAssist.Hint="Search..."
@@ -49,13 +54,18 @@
         Style="{StaticResource MaterialDesignOutlinedTextBox}"
         TextWrapping="Wrap"
         VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15" />
-                <Button materialDesign:ButtonAssist.CornerRadius="20" Height="50" Content="Zoeken" Grid.Row="0" Grid.Column="2" Margin="15" Background="#3D004E" Command="{Binding}" CommandParameter="Zoeken" />
+                <Button materialDesign:ButtonAssist.CornerRadius="20" Height="50" Grid.Row="0" Grid.Column="2" Margin="15" Background="#3D004E" Command="{Binding}" CommandParameter="Zoeken">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Search" Margin="0 0 10 0" />
+                        <TextBlock>Zoeken</TextBlock>
+                    </StackPanel>
+                </Button>
                 <DataGrid ItemsSource="{Binding Deelnemers}"
                   SelectedItem="{Binding SelectedDeelnemer}"
 
                   AutoGenerateColumns="False" IsReadOnly="True"
                   AlternatingRowBackground="#BC80AB"
-                  Background="WhiteSmoke"
+                  Background="LightGray"
                   Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="10">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding DeelnemerId}" Header="Id" />
@@ -167,10 +177,96 @@
                 <CheckBox
                     IsChecked="{Binding DeelnemerRecord.Admin}"
         Content="Admin" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Content="Toevoegen" Grid.Row="7" Grid.Column="0" Margin="10" Background="#3D004E" Command="{Binding}" CommandParameter="Toevoegen" />
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Content="Aanmaken" Grid.Row="7" Grid.Column="1" Margin="10" Background="#3D004E" Command="{Binding}" CommandParameter="Aanpassen" />
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Content="Verwijderen" Grid.Row="7" Grid.Column="2" Margin="10" Background="#3D004E" Command="{Binding}" CommandParameter="Verwijderen" />
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Content="Annuleren" Grid.Row="8" Grid.Column="1" Margin="10" Background="#3D004E" Command="{Binding}" CommandParameter="Resetten" />
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="2" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenDeelnemer">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="add" Margin="0 0 10 0" />
+                        <TextBlock>Deelnemer</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="3" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="AanpassenDeelnemer">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Edit" Margin="0 0 10 0" />
+                        <TextBlock>Deelnemer</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="4" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="VerwijderenDeelnemer">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Delete" Margin="0 0 10 0" />
+                        <TextBlock>Deelnemer</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="5" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ResettenDeelnemer">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Cancel" Margin="0 0 10 0" />
+                        <TextBlock>Annuleren</TextBlock>
+                    </StackPanel>
+                </Button>
+                <DataGrid ItemsSource="{Binding Medisch}"
+                  SelectedItem="{Binding SelectedMedisch}"
+                  AutoGenerateColumns="False" IsReadOnly="True"
+                  AlternatingRowBackground="#BC80AB"
+                  Background="LightGray"
+                  Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="10 30 10 10">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Omschrijving}" Header="Aandoening" />
+                        <DataGridTextColumn Binding="{Binding Medicatie}" Header="Medicatie" />
+                        <DataGridTextColumn Binding="{Binding Behandeling}" Header="Behandeling" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <TextBox
+                    Text="{Binding MedischRecord.Omschrijving}"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Aandoening"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="9" Grid.Column="0" Background="White" Margin="10" />
+                <TextBox
+                    Text="{Binding MedischRecord.Medicatie}"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Medicatie"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="9" Grid.Column="1" Background="White" Margin="10" />
+                <TextBox
+                    Text="{Binding MedischRecord.Behandeling}"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Behandeling"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="10" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="White" Margin="10" />
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="8" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="Toevoegen">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="add" Margin="0 0 10 0" />
+                        <TextBlock>Ziekte</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="9" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="Aanpassen">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Edit" Margin="0 0 10 0" />
+                        <TextBlock>Ziekte</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="10" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="Verwijderen">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Delete" Margin="0 0 10 0" />
+                        <TextBlock>Ziekte</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="11" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="Resetten">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Cancel" Margin="0 0 10 0" />
+                        <TextBlock>Annuleren</TextBlock>
+                    </StackPanel>
+                </Button>
             </Grid>
         </ScrollViewer>
         <Grid Width="200" HorizontalAlignment="Left" Background="#060047">
@@ -178,34 +274,33 @@
                 <Grid Height="150" VerticalAlignment="Top">
                     <Image Source="Image\Laroni-Travel.png" Width="150" Height="150" Grid.Row="0" />
                 </Grid>
-                <ListView x:Name="lvNavbar" SelectionChanged="lvNavbar_SelectionChanged">
-                    <ListViewItem x:Name="lviDashboard">
+                <ListView x:Name="lvNavbar">
+                    <Button VerticalAlignment="Top" Style="{StaticResource MaterialDesignFlatDarkButton}" ToolTip="MaterialDesignFlatButton" Foreground="White" Height="50" Command="{Binding}" CommandParameter="OpenHomeView">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Monitor" Foreground="White" Width="25" Height="25" Margin="5" />
-                            <TextBlock Text="Dashboard" Foreground="White" FontSize="24" Margin="5" />
+                            <materialDesign:PackIcon Kind="Monitor" Margin="0 0 10 0" Width="24" Height="24" />
+                            <TextBlock FontSize="22">Dashboard</TextBlock>
                         </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem x:Name="lviPersonen">
+                    </Button>
+                    <Button VerticalAlignment="Top" Style="{StaticResource MaterialDesignFlatDarkButton}" ToolTip="MaterialDesignFlatButton" Foreground="White" Height="50" Command="{Binding}" CommandParameter="OpenPersoonView">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Account" Foreground="White" Width="25" Height="25" Margin="5" />
-                            <TextBlock Text="Personen" Foreground="White" FontSize="24" Margin="5" />
+                            <materialDesign:PackIcon Kind="Person" Margin="0 0 10 0" Width="24" Height="24" />
+                            <TextBlock FontSize="22">Personen</TextBlock>
                         </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem x:Name="lviReizen">
+                    </Button>
+                    <Button VerticalAlignment="Top" Style="{StaticResource MaterialDesignFlatDarkButton}" ToolTip="MaterialDesignFlatButton" Foreground="White" Height="50" Command="{Binding}" CommandParameter="OpenReizenView">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Globe" Foreground="White" Width="25" Height="25" Margin="5" />
-                            <TextBlock Text="Reizen" Foreground="White" FontSize="24" Margin="5" />
+                            <materialDesign:PackIcon Kind="Globe" Margin="0 0 10 0" Width="24" Height="24" />
+                            <TextBlock FontSize="22">Reizen</TextBlock>
                         </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem x:Name="lviOpleidingen">
+                    </Button>
+                    <Button VerticalAlignment="Top" Style="{StaticResource MaterialDesignFlatDarkButton}" ToolTip="MaterialDesignFlatButton" Foreground="White" Height="50" Command="{Binding}" CommandParameter="OpenOpleidingView">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="School" Foreground="White" Width="25" Height="25" Margin="5" />
-                            <TextBlock Text="Opleidingen" Foreground="White" FontSize="24" Margin="5" />
+                            <materialDesign:PackIcon Kind="School" Margin="0 0 10 0" Width="24" Height="24" />
+                            <TextBlock FontSize="22">Opleiding</TextBlock>
                         </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox
+                    </Button>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox
                                 Width="150"
                                 Margin="10"
                                 BorderBrush="#553370"
@@ -215,13 +310,12 @@
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                 TextWrapping="Wrap"
                                 VerticalScrollBarVisibility="Auto" Foreground="White" />
+                    </StackPanel>
+                    <Button VerticalAlignment="Top" Style="{StaticResource MaterialDesignFlatDarkButton}" ToolTip="MaterialDesignFlatButton" Foreground="White" Height="50" Command="{Binding}" CommandParameter="OpenInlogView">
+                        <StackPanel Orientation="Horizontal" Margin="50 0 50 0">
+                            <materialDesign:PackIcon Kind="Logout" Margin="0 0 10 0" Width="24" Height="24" />
                         </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem x:Name="lviLogout">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Logout" Foreground="White" Width="45" Height="50" Margin="65 15 65 100" VerticalAlignment="Center" />
-                        </StackPanel>
-                    </ListViewItem>
+                    </Button>
                 </ListView>
             </StackPanel>
         </Grid>
