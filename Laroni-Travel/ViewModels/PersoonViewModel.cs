@@ -19,9 +19,13 @@ namespace Laroni_Travel.ViewModels
 {
     public class PersoonViewModel : BaseViewmodel, IDisposable, ICommand
     {
+        private string _omschrijving;
+        private string _medicatie;
+        private string _behandeling;
         private bool _admin;
         private int _deelnemerId;
         private Deelnemer _deelnemerRecord;
+        private Medisch _medischRecord;
         private string _email;
         private string _familienaam;
         private DateTime _geboortedatum;
@@ -32,7 +36,11 @@ namespace Laroni_Travel.ViewModels
         private bool _monitor;
         private string _postcode;
         private Deelnemer _selectedDeelnemer;
+        private Medisch _selectedMedisch;
         private string _straatnaam;
+        public string ID { get; set; }
+        public ObservableCollection<Deelnemer> Deelnemers { get; set; }
+        public ObservableCollection<Medisch> MedischLijst { get; set; }
         private IUnitOfWork _unitOfWork = new UnitOfWork(new Laronu_TravelContext());
 
         private string _voornaam = "";
@@ -43,6 +51,37 @@ namespace Laroni_Travel.ViewModels
             Geboortedatum = DateTime.Now;
             Voornaam = "";
             DeelnemerRecordInstellen();
+            MedischRecordInstellen();
+        }
+
+        public string Omschrijving
+        {
+            get { return _omschrijving; }
+            set
+            {
+                _omschrijving = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string Medicatie
+        {
+            get { return _medicatie; }
+            set
+            {
+                _medicatie = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string Behandeling
+        {
+            get { return _behandeling; }
+            set
+            {
+                _behandeling = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public bool Admin
@@ -75,7 +114,15 @@ namespace Laroni_Travel.ViewModels
             }
         }
 
-        public ObservableCollection<Deelnemer> Deelnemers { get; set; }
+        public Medisch MedischRecord
+        {
+            get { return _medischRecord; }
+            set
+            {
+                _medischRecord = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public string Email
         {
@@ -149,8 +196,6 @@ namespace Laroni_Travel.ViewModels
             }
         }
 
-        public string ID { get; set; }
-
         public bool Monitor
         {
             get { return _monitor; }
@@ -179,6 +224,17 @@ namespace Laroni_Travel.ViewModels
                 _selectedDeelnemer = value;
                 DeelnemerRecordInstellen();
                 NotifyPropertyChanged("SelectedDeelnemer");
+            }
+        }
+
+        public Medisch SelectedMedisch
+        {
+            get { return _selectedMedisch; }
+            set
+            {
+                _selectedMedisch = value;
+                MedischRecordInstellen();
+                NotifyPropertyChanged("SelectedMedisch");
             }
         }
 
@@ -286,6 +342,24 @@ namespace Laroni_Travel.ViewModels
             }
         }
 
+        public void AanpassenMedisch()
+        {
+            if (SelectedMedisch != null)
+            {
+                if (IsGeldig())
+                {
+                    _unitOfWork.MedischeRepo.Aanpassen(MedischRecord);
+                    int ok = _unitOfWork.Save();
+
+                    FoutmeldingInstellenNaSave(ok, "Medisch record is niet aangepast");
+                }
+            }
+            else
+            {
+                Foutmelding = "Selecteer een Medisch record!";
+            }
+        }
+
         public override bool CanExecute(object parameter)
         {
             switch (parameter.ToString())
@@ -293,8 +367,12 @@ namespace Laroni_Travel.ViewModels
                 case "ToevoegenDeelnemer": return true;
                 case "AanpassenDeelnemer": return true;
                 case "VerwijderenDeelnemer": return true;
+                case "ToevoegenMedisch": return true;
+                case "AanpassenMedisch": return true;
+                case "VerwijderenMedisch": return true;
                 case "Zoeken": return true;
                 case "ResettenDeelnemer": return true;
+                case "ResettenMedisch": return true;
                 case "OpenOpleidingView": return true;
                 case "OpenReizenView": return true;
                 case "OpenHomeView": return true;
@@ -321,6 +399,10 @@ namespace Laroni_Travel.ViewModels
                 case "OpenReizenView": OpenReizenView(); break;
                 case "OpenHomeView": OpenHomeView(); break;
                 case "OpenInlogView": OpenInlogView(); break;
+                case "ToevoegenMedisch": ToevoegenMedisch(); break;
+                case "AanpassenMedisch": AanpassenMedisch(); break;
+                case "VerwijderenMedisch": VerwijderenMedisch(); break;
+                case "ResettenMedisch": ResettenMedisch(); break;
             }
         }
 
@@ -400,6 +482,21 @@ namespace Laroni_Travel.ViewModels
             //}
         }
 
+        public void ResettenMedisch()
+        {
+            //if (this.IsGeldig())
+            //{
+            SelectedMedisch = null;
+            MedischRecordInstellen();
+            Foutmelding = "";
+            NotifyPropertyChanged(nameof(SelectedMedisch));
+            //}
+            //else
+            //{
+            //    Foutmelding = this.Error;
+            //}
+        }
+
         public void ToevoegenDeelnemer()
         {
             //if (this.IsGeldig())
@@ -411,6 +508,23 @@ namespace Laroni_Travel.ViewModels
             int ok = _unitOfWork.Save();
             Deelnemers = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen());
             NotifyPropertyChanged(nameof(Deelnemers));
+
+            // FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
+            //    }
+            //}
+        }
+
+        public void ToevoegenMedisch()
+        {
+            //if (this.IsGeldig())
+            //{
+            MedischRecord.DeelnemerId = int.Parse(ID);
+            //    if (IsGeldig())
+            //    {
+            _unitOfWork.MedischeRepo.Toevoegen(MedischRecord);
+            int ok = _unitOfWork.Save();
+            MedischLijst = new ObservableCollection<Medisch>(_unitOfWork.MedischeRepo.Ophalen());
+            NotifyPropertyChanged(nameof(MedischLijst));
 
             // FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
             //    }
@@ -446,15 +560,36 @@ namespace Laroni_Travel.ViewModels
             }
         }
 
+        public void VerwijderenMedisch()
+        {
+            if (SelectedMedisch != null)
+            {
+                _unitOfWork.MedischeRepo.Verwijderen(SelectedMedisch.DeelnemerId);
+                int ok = _unitOfWork.Save();
+                MedischLijst = new ObservableCollection<Medisch>(_unitOfWork.MedischeRepo.Ophalen());
+                NotifyPropertyChanged(nameof(MedischLijst));
+                //     FoutmeldingInstellenNaSave(ok, "Deelnemer is niet verwijderd");
+            }
+            else
+            {
+                Foutmelding = "Eerst Deelnemer selecteren";
+            }
+        }
+
         public void Zoeken()
         {
             Foutmelding = "";
             //if (IsGeldig())
             //{
             RefreshDeelnemer();
+            RefreshMedisch();
             if (Deelnemers == null || Deelnemers.Count <= 0)
             {
-                Foutmelding = "Er zijn geen Deelnemer gevonden horende bij " + Voornaam;
+                Foutmelding = "Er zijn geen Deelnemer gevonden horende bij " + Voornaam + " " + Familienaam;
+            }
+            if (MedischLijst == null || MedischLijst.Count <= 0)
+            {
+                Foutmelding = "Er zijn geen medisch records gevonden horende bij " + Voornaam + " " + Familienaam;
             }
             //}
             //else
@@ -476,12 +611,27 @@ namespace Laroni_Travel.ViewModels
             }
         }
 
+        private void MedischRecordInstellen()
+        {
+            if (SelectedMedisch != null)
+            {
+                MedischRecord = SelectedMedisch;
+                NotifyPropertyChanged(nameof(SelectedMedisch));
+            }
+            else
+            {
+                MedischRecord = new Medisch();
+            }
+        }
+
         private void FoutmeldingInstellenNaSave(int ok, string melding)
         {
             if (ok > 0)
             {
                 RefreshDeelnemer();
                 ResettenDeelnemer();
+                RefreshMedisch();
+                ResettenMedisch();
             }
             else
             {
@@ -492,9 +642,17 @@ namespace Laroni_Travel.ViewModels
         private void RefreshDeelnemer()
         {
             List<Deelnemer> listDeelnemers = _unitOfWork.DeelnemersRepo.Ophalen(x => x.Voornaam.Contains(Voornaam)).ToList();
-
+            ID = listDeelnemers[0].DeelnemerId.ToString();
             Deelnemers = new ObservableCollection<Deelnemer>(listDeelnemers);
             NotifyPropertyChanged(nameof(Deelnemers));
+        }
+
+        private void RefreshMedisch()
+        {
+            List<Medisch> listMedisch = (List<Medisch>)_unitOfWork.MedischeRepo.Ophalen(x => x.DeelnemerId == int.Parse(ID));
+
+            MedischLijst = new ObservableCollection<Medisch>(listMedisch);
+            NotifyPropertyChanged(nameof(MedischLijst));
         }
     }
 }
