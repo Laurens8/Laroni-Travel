@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Laroni_Travel.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -51,6 +52,19 @@ namespace Laroni_Travel.ViewModels
         public bool IsGeldig()
         {
             return string.IsNullOrWhiteSpace(Error);
+        }
+
+        private void ReizenRecordInstellen()
+        {
+            if (SelectedGroepsreis != null)
+            {
+                ReisRecord = SelectedGroepsreis;
+                NotifyPropertyChanged(nameof(SelectedGroepsreis));
+            }
+            else
+            {
+                ReisRecord = new Groepsreis();
+            }
         }
     }
 }
