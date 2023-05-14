@@ -21,6 +21,14 @@ namespace Laroni_Travel.Models
         [Required]
         [Column(TypeName = "money")]
         public float Prijs { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime Startdatum { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime Einddatum { get; set; }
 
         //Navigatieproperty
         public Bestemming Bestemming { get; set; }
