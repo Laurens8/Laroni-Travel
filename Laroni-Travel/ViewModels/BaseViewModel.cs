@@ -18,18 +18,7 @@ namespace Laroni_Travel.ViewModels
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public abstract bool CanExecute(object parameter);
-
-        public abstract void Execute(object parameter);
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public abstract string this[string columnName] { get; }
 
         public string Error
         {
@@ -49,22 +38,20 @@ namespace Laroni_Travel.ViewModels
             }
         }
 
+        public abstract string this[string columnName] { get; }
+
+        public abstract bool CanExecute(object parameter);
+
+        public abstract void Execute(object parameter);
+
         public bool IsGeldig()
         {
             return string.IsNullOrWhiteSpace(Error);
         }
 
-        private void ReizenRecordInstellen()
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            if (SelectedGroepsreis != null)
-            {
-                ReisRecord = SelectedGroepsreis;
-                NotifyPropertyChanged(nameof(SelectedGroepsreis));
-            }
-            else
-            {
-                ReisRecord = new Groepsreis();
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -20,6 +20,249 @@
                 <GradientStop Color="#B3005E" Offset="1" />
             </LinearGradientBrush>
         </Grid.Background>
+        <ScrollViewer VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="Auto" Padding="200 0 0 0">
+            <Grid Margin="200 0 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <TextBox
+                    Text="{Binding Voornaam}"
+        materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
+        VerticalAlignment="center"
+        materialDesign:HintAssist.Hint="Search..."
+        AcceptsReturn="True"
+        IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
+        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+        TextWrapping="Wrap"
+        VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15" />
+                <Button materialDesign:ButtonAssist.CornerRadius="20" Height="50" Grid.Row="0" Grid.Column="2" Margin="15" Background="#3D004E" Command="{Binding}" CommandParameter="Zoeken">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Search" Margin="0 0 10 0" />
+                        <TextBlock>Zoeken</TextBlock>
+                    </StackPanel>
+                </Button>
+                <DataGrid ItemsSource="{Binding Reizen}"
+                  SelectedItem="{Binding SelectedGroepsreis}"
+
+                  AutoGenerateColumns="False" IsReadOnly="True"
+                  AlternatingRowBackground="#BC80AB"
+                  Background="LightGray"
+                  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="10">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Thema.Naam}" Header="Thema" />
+                        <DataGridTextColumn Binding="{Binding LeeftijdsCategorie.Naam}" Header="Leeftijdscategorie" />
+                        <DataGridTextColumn Binding="{Binding Bestemming.Straatnaam}" Header="Straatnaam" />
+                        <DataGridTextColumn Binding="{Binding Bestemming.Huisnummer}" Header="Huisnr." />
+                        <DataGridTextColumn Binding="{Binding Bestemming.Postcode}" Header="PC" />
+                        <DataGridTextColumn Binding="{Binding Bestemming.Gemeente}" Header="Gemeente" />
+                        <DataGridTextColumn Binding="{Binding Bestemming.Land}" Header="Land" />
+                        <DataGridTextColumn Binding="{Binding Startdatum}" Header="Startdatum" />
+                        <DataGridTextColumn Binding="{Binding Einddatum}" Header="Einddatum" />
+                        <DataGridTextColumn Binding="{Binding Prijs}" Header="Prijs" />
+                        <DataGridTextColumn Binding="{Binding Drinkgeld}" Header="Drinkgeld" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <ComboBox
+    Width="256"
+    materialDesign:HintAssist.Hint="Some item"
+    IsEnabled="{Binding Path=IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}"
+    ItemsSource="{Binding Thema}"
+     SelectedValue="{Binding ReisRecord.ThemaId, ValidatesOnDataErrors=True}"
+    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+    Grid.Row="2" Grid.Column="0" Background="White" Margin="10" />
+                <ComboBox
+    Width="256"
+    materialDesign:HintAssist.Hint="Some item"
+    IsEnabled="{Binding Path=IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}"
+    ItemsSource="{Binding LeeftijdsCategorie}"
+     SelectedValue="{Binding ReisRecord.LeeftijdsCategorieId, ValidatesOnDataErrors=True}"
+    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+    Grid.Row="3" Grid.Column="0" Background="White" Margin="10" />
+
+                <TextBox
+                    Text="{Binding DeelnemerRecord.Geslacht}"
+    VerticalAlignment="Top"
+    materialDesign:HintAssist.Hint="Geslacht"
+    AcceptsReturn="True"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto"
+    Grid.Row="4" Grid.Column="0" Background="White" Margin="10" />
+                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Geboortedatum" Grid.Row="5" Grid.Column="0" Text="{Binding Geboortedatum}" />
+                <TextBox
+                    Text="{Binding DeelnemerRecord.Email}"
+    VerticalAlignment="Top"
+    materialDesign:HintAssist.Hint="Email"
+    AcceptsReturn="True"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto"
+    Grid.Row="6" Grid.Column="0" Background="White" Margin="10" />
+                <TextBox
+                    Text="{Binding DeelnemerRecord.Straatnaam}"
+    VerticalAlignment="Top"
+    materialDesign:HintAssist.Hint="Straatnaam"
+    AcceptsReturn="True"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto"
+    Grid.Row="2" Grid.Column="1" Background="White" Margin="10" />
+                <TextBox
+                    Text="{Binding DeelnemerRecord.Huisnummer}"
+    VerticalAlignment="Top"
+    materialDesign:HintAssist.Hint="Huisnummer"
+    AcceptsReturn="True"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto"
+    Grid.Row="3" Grid.Column="1" Background="White" Margin="10" />
+                <TextBox
+                    Text="{Binding DeelnemerRecord.Postcode}"
+    VerticalAlignment="Top"
+    materialDesign:HintAssist.Hint="Postcode"
+    AcceptsReturn="True"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto"
+    Grid.Row="4" Grid.Column="1" Background="White" Margin="10" />
+                <TextBox
+                    Text="{Binding DeelnemerRecord.Gemeente}"
+    VerticalAlignment="Top"
+    materialDesign:HintAssist.Hint="Gemeente"
+    AcceptsReturn="True"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto"
+    Grid.Row="5" Grid.Column="1" Background="White" Margin="10" />
+                <CheckBox
+                    IsChecked="{Binding DeelnemerRecord.Ziekenfonds}"
+        Content="Lid Ziekenfonds" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
+                <CheckBox
+                    IsChecked="{Binding DeelnemerRecord.Monitor}"
+        Content="Monitor" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
+                <CheckBox
+                    IsChecked="{Binding DeelnemerRecord.HoofdMonitor}"
+        Content="Hoofdmonitor" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
+                <CheckBox
+                    IsChecked="{Binding DeelnemerRecord.Admin}"
+        Content="Admin" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="2" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenDeelnemer">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="add" Margin="0 0 10 0" />
+                        <TextBlock>Deelnemer</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="3" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="AanpassenDeelnemer">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Edit" Margin="0 0 10 0" />
+                        <TextBlock>Deelnemer</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="4" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="VerwijderenDeelnemer">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Delete" Margin="0 0 10 0" />
+                        <TextBlock>Deelnemer</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="5" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ResettenDeelnemer">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Cancel" Margin="0 0 10 0" />
+                        <TextBlock>Annuleren</TextBlock>
+                    </StackPanel>
+                </Button>
+                <DataGrid ItemsSource="{Binding MedischLijst}"
+                  SelectedItem="{Binding SelectedMedisch}"
+                  AutoGenerateColumns="False" IsReadOnly="True"
+                  AlternatingRowBackground="#BC80AB"
+                  Background="LightGray"
+                  Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="10 30 10 10">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Omschrijving}" Header="Aandoening" />
+                        <DataGridTextColumn Binding="{Binding Medicatie}" Header="Medicatie" />
+                        <DataGridTextColumn Binding="{Binding Behandeling}" Header="Behandeling" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <TextBox
+                    Text="{Binding MedischRecord.Omschrijving}"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Aandoening"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="9" Grid.Column="0" Background="White" Margin="10" />
+                <TextBox
+                    Text="{Binding MedischRecord.Medicatie}"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Medicatie"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="9" Grid.Column="1" Background="White" Margin="10" />
+                <TextBox
+                    Text="{Binding MedischRecord.Behandeling}"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Behandeling"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="10" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="White" Margin="10" />
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="8" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenMedisch">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="add" Margin="0 0 10 0" />
+                        <TextBlock>Ziekte</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="9" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="AanpassenMedisch">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Edit" Margin="0 0 10 0" />
+                        <TextBlock>Ziekte</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="10" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="VerwijderenMedisch">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Delete" Margin="0 0 10 0" />
+                        <TextBlock>Ziekte</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="11" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ResettenMedisch">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Cancel" Margin="0 0 10 0" />
+                        <TextBlock>Annuleren</TextBlock>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </ScrollViewer>
         <Grid Width="200" HorizontalAlignment="Left" Background="#060047">
             <StackPanel>
                 <Grid Height="150" VerticalAlignment="Top">
