@@ -180,7 +180,7 @@
                         <TextBlock>Annuleren</TextBlock>
                     </StackPanel>
                 </Button>
-                <ListView ItemsSource="{Binding Reizen.Deelnemers}">
+                <ListView ItemsSource="{Binding Reizen.Deelnemers}" Height="175" Background="White" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn
