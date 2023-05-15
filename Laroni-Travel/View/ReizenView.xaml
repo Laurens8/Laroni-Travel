@@ -90,6 +90,7 @@
     IsEnabled="{Binding Path=IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}"
     ItemsSource="{Binding Thema}"
      SelectedValue="{Binding ReisRecord.ThemaId, ValidatesOnDataErrors=True}"
+                    SelectedValuePath="Id"
     Style="{StaticResource MaterialDesignOutlinedComboBox}"
     Grid.Row="2" Grid.Column="0" Background="White" Margin="10" />
                 <ComboBox
@@ -100,6 +101,7 @@
     IsEnabled="{Binding Path=IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}"
     ItemsSource="{Binding LeeftijdsCategorie}"
      SelectedValue="{Binding ReisRecord.LeeftijdsCategorieId, ValidatesOnDataErrors=True}"
+                    SelectedValuePath="Id"
     Style="{StaticResource MaterialDesignOutlinedComboBox}"
     Grid.Row="3" Grid.Column="0" Background="White" Margin="10" />
 
