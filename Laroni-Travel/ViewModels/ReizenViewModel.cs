@@ -1,7 +1,6 @@
 ﻿using dal.Data.UnitOfWork;
 using Laroni_Travel.Data;
 using Laroni_Travel.Models;
-using Laroni_Travel.Models.Partials;
 using Laroni_Travel.View;
 using System;
 using System.Collections.Generic;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Laroni_Travel.Models
 {
-    public class Deelnemer
+    public partial class Deelnemer
     {
         [Required]
         public bool Admin { get; set; }

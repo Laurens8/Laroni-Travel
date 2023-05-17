@@ -4,9 +4,8 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-using Laroni_Travel.Models;
 
-namespace Laroni_Travel.Models.Partials
+namespace Laroni_Travel.Models
 {
     public partial class Deelnemer : Basisklasse
     {
@@ -40,10 +39,54 @@ namespace Laroni_Travel.Models.Partials
         {
             get
             {
-                if (true)
+                if (columnName == "Voornaam" && string.IsNullOrWhiteSpace(Voornaam))
                 {
-                    return "";
-                }                
+                    return "Voornaam moet ingevuld zijn";
+                }
+                if (columnName == "Familienaam" && string.IsNullOrWhiteSpace(Familienaam))
+                {
+                    return "Familienaam moet ingevuld zijn";
+                }
+                if (columnName == "Email" && string.IsNullOrWhiteSpace(Email))
+                {
+                    return "Email moet ingevuld zijn";
+                }
+                if (columnName == "Straatnaam" && string.IsNullOrWhiteSpace(Straatnaam))
+                {
+                    return "Straatnaam moet ingevuld zijn";
+                }
+                if (columnName == "Huisnummer" && string.IsNullOrWhiteSpace(Huisnummer))
+                {
+                    return "Huisnummer moet ingevuld zijn";
+                }
+                if (columnName == "Postcode" && string.IsNullOrWhiteSpace(Postcode))
+                {
+                    return "Postcode moet ingevuld zijn";
+                }
+                if (columnName == "Gemeente" && string.IsNullOrWhiteSpace(Gemeente))
+                {
+                    return "Gemeente moet ingevuld zijn";
+                }
+                if (columnName == "Geboortedatum" && Geboortedatum == null)
+                {
+                    return "Geboortedatum moet ingevuld zijn";
+                }
+                if (columnName == "Geslacht" && string.IsNullOrWhiteSpace(Geslacht))
+                {
+                    return "Geslacht moet ingevuld zijn";
+                }
+                if (columnName == "Email" && !ValidateEmail(Email))
+                {
+                    return "Email moet een geldig email adres zijn";
+                }
+                if (columnName == "Postcode" && !IsNumeriek(Postcode))
+                {
+                    return "Postcode moet een nummer zijn";
+                }
+                if (columnName == "Huisnummer" && !IsNumeriek(Huisnummer))
+                {
+                    return "Huisnummer moet een nummer zijn";
+                }
                 return "";
             }
         }
