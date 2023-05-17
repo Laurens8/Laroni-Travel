@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Laroni_Travel.Migrations
 {
-    [DbContext(typeof(Laronu_TravelContext))]
+    [DbContext(typeof(Laroni_TravelContext))]
     [Migration("20230515180455_mig4")]
     partial class mig4
     {

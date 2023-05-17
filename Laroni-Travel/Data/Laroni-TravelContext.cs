@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Laroni_Travel.Data
 {
-    public class Laronu_TravelContext : DbContext
+    public class Laroni_TravelContext : DbContext
     {
         //public Laronu_TravelContext(DbContextOptions<Laronu_TravelContext> options) : base(options) { }
 
@@ -26,7 +26,7 @@ namespace Laroni_Travel.Data
         
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=Laronu-Travel;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=Laroni-Travel;Trusted_Connection=True;");
             }   
     }
 }

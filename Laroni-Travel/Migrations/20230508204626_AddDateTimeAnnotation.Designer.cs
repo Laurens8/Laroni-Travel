@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Laroni_Travel.Migrations
 {
-    [DbContext(typeof(Laronu_TravelContext))]
+    [DbContext(typeof(Laroni_TravelContext))]
     [Migration("20230508204626_AddDateTimeAnnotation")]
     partial class AddDateTimeAnnotation
     {

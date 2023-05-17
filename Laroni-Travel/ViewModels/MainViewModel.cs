@@ -11,7 +11,7 @@ namespace Laroni_Travel.ViewModels
 {
     public class MainViewModel : BaseViewmodel, IDisposable
     {
-        private IUnitOfWork _unitOfWork = new UnitOfWork(new Laronu_TravelContext());
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
 
         public override string this[string columnName] => throw new NotImplementedException();
 

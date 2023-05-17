@@ -10,7 +10,7 @@ namespace dal
     {
         public static List<Deelnemer> OphalenKDeelnemers()
         {
-            using (Laronu_TravelContext ctx = new Laronu_TravelContext())
+            using (Laroni_TravelContext ctx = new Laroni_TravelContext())
             {
                 //var query = ctx.Deelnemers.Include("Deelnemers");
                 var query = ctx.Deelnemers

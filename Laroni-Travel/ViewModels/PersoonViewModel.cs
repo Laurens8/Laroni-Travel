@@ -41,7 +41,7 @@ namespace Laroni_Travel.ViewModels
         public string ID { get; set; }
         public ObservableCollection<Deelnemer> Deelnemers { get; set; }
         public ObservableCollection<Medisch> MedischLijst { get; set; }
-        private IUnitOfWork _unitOfWork = new UnitOfWork(new Laronu_TravelContext());
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
 
         private string _voornaam = "";
         private bool _ziekenfonds;
@@ -524,7 +524,7 @@ namespace Laroni_Travel.ViewModels
             _unitOfWork.MedischeRepo.Toevoegen(MedischRecord);
             int ok = _unitOfWork.Save();
             MedischLijst = new ObservableCollection<Medisch>(_unitOfWork.MedischeRepo.Ophalen());
-            NotifyPropertyChanged(nameof(MedischLijst));
+            NotifyPropertyChanged(nameof(SelectedDeelnemer));
 
             // FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
             //    }
