@@ -72,7 +72,7 @@ namespace Laroni_Travel.ViewModels
         private ObservableCollection<Groepsreis> _reizen;
         private ObservableCollection<DeelnemerGroepsreis> _DeelnemersReisRecord;
         private ObservableCollection<LeeftijdsCategorie> _leeftijdsCategorie;
-        private IUnitOfWork _unitOfWork = new UnitOfWork(new Laronu_TravelContext());
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
 
         public ReizenViewModel()
         {

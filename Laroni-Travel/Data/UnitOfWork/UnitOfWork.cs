@@ -27,12 +27,12 @@ namespace dal.Data.UnitOfWork
 
         #endregion attributen
 
-        public UnitOfWork(Laronu_TravelContext ctx)
+        public UnitOfWork(Laroni_TravelContext ctx)
         {
             Context = ctx;
         }
 
-        private Laronu_TravelContext Context { get; }
+        private Laroni_TravelContext Context { get; }
 
         #region repositories
 

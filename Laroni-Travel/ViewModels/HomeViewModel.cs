@@ -14,7 +14,7 @@ namespace Laroni_Travel.ViewModels
 {
     public class HomeViewModel : BaseViewmodel, IDisposable, ICommand
     {
-        private IUnitOfWork _unitOfWork = new UnitOfWork(new Laronu_TravelContext());
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
         public string Foutmelding { get; set; }
         public override string this[string columnName] => throw new NotImplementedException();
 

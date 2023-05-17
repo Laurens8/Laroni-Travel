@@ -14,7 +14,7 @@ namespace Laroni_Travel.ViewModels
 {
     public class InlogViewModel : BaseViewmodel, IDisposable, ICommand
     {
-        private IUnitOfWork _unitOfWork = new UnitOfWork(new Laronu_TravelContext());
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
 
         public ObservableCollection<Deelnemer> Deelnemers { get; set; }
         public string Foutmelding { get; set; }
