@@ -1,8 +1,10 @@
 ﻿using dal.Data.UnitOfWork;
 using Laroni_Travel.Data;
+using Laroni_Travel.Models;
 using Laroni_Travel.View;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,17 @@ namespace Laroni_Travel.ViewModels
 {
     public class OpleidingViewModel : BaseViewmodel, IDisposable
     {
+        private Opleiding _opleidingSelected;
+        private Opleiding _opleidingRecord;
+        public string _beschrijving;
+        private DateTime _datum;
+        ICollection<OpleidingBestemming> OpleidingBestemmingen;
+
+        //OpleidingViewModel()
+        //{
+        //    OpleidingBestemmingen = new ICollection<OpleidingBestemming>(_unitOfWork.OpleidingBestemmingenRepo.Ophalen());
+        //}
+
         private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
         public string Foutmelding { get; set; }
         public override string this[string columnName] => throw new NotImplementedException();

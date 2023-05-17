@@ -3,8 +3,6 @@ using dal.Data.UnitOfWork;
 using Laroni_Travel.Data;
 using Laroni_Travel.Models;
 using Laroni_Travel.View;
-
-//using Laroni_Travel.Models.Partials;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -45,6 +43,11 @@ namespace Laroni_Travel.ViewModels
 
         private string _voornaam = "";
         private bool _ziekenfonds;
+
+        public override string this[string columnName] 
+        {
+            get { return columnName; }
+        }
 
         public PersoonViewModel()
         {
@@ -151,7 +154,7 @@ namespace Laroni_Travel.ViewModels
             get { return _geboortedatum; }
             set
             {
-                _geboortedatum = value;
+                _geboortedatum = value.Date;               
                 NotifyPropertyChanged();
             }
         }
@@ -221,7 +224,7 @@ namespace Laroni_Travel.ViewModels
             get { return _selectedDeelnemer; }
             set
             {
-                _selectedDeelnemer = value;
+                _selectedDeelnemer = value;              
                 DeelnemerRecordInstellen();
                 NotifyPropertyChanged("SelectedDeelnemer");
             }
@@ -266,75 +269,15 @@ namespace Laroni_Travel.ViewModels
                 _ziekenfonds = value;
                 NotifyPropertyChanged();
             }
-        }
-
-        public override string this[string columnName]
-        {
-            get
-            {
-                if (columnName == "Voornaam" && Voornaam.IsNullOrEmpty())
-                {
-                    return "Voornaam moet ingevuld zijn";
-                }
-                if (columnName == "Familienaam" && Familienaam.IsNullOrEmpty())
-                {
-                    return "Familienaam moet ingevuld zijn";
-                }
-                if (columnName == "Email" && Email.IsNullOrEmpty())
-                {
-                    return "Email moet ingevuld zijn";
-                }
-                if (columnName == "Straatnaam" && Straatnaam.IsNullOrEmpty())
-                {
-                    return "Straatnaam moet ingevuld zijn";
-                }
-                if (columnName == "Huisnummer" && Huisnummer.IsNullOrEmpty())
-                {
-                    return "Huisnummer moet ingevuld zijn";
-                }
-                if (columnName == "Postcode" && Postcode.IsNullOrEmpty())
-                {
-                    return "Postcode moet ingevuld zijn";
-                }
-                if (columnName == "Gemeente" && Gemeente.IsNullOrEmpty())
-                {
-                    return "Gemeente moet ingevuld zijn";
-                }
-                if (columnName == "Geboortedatum" && Geboortedatum == null)
-                {
-                    return "Geboortedatum moet ingevuld zijn";
-                }
-                if (columnName == "Geslacht" && Geslacht.IsNullOrEmpty())
-                {
-                    return "Geslacht moet ingevuld zijn";
-                }
-                if (columnName == "Email" && !ValidateEmail(Email))
-                {
-                    return "Email moet een geldig email adres zijn";
-                }
-                if (columnName == "Postcode" && !IsNumeriek(Postcode))
-                {
-                    return "Postcode moet een nummer zijn";
-                }
-                if (columnName == "Huisnummer" && !IsNumeriek(Huisnummer))
-                {
-                    return "Huisnummer moet een nummer zijn";
-                }
-                return "";
-            }
-        }
+        }     
 
         public void AanpassenDeelnemer()
         {
             if (SelectedDeelnemer != null)
             {
-                if (IsGeldig())
-                {
-                    _unitOfWork.DeelnemersRepo.Aanpassen(DeelnemerRecord);
-                    int ok = _unitOfWork.Save();
-
-                    FoutmeldingInstellenNaSave(ok, "Deelnemer is niet aangepast");
-                }
+                _unitOfWork.DeelnemersRepo.Aanpassen(DeelnemerRecord);
+                int ok = _unitOfWork.Save();
+                FoutmeldingInstellenNaSave(ok, "Deelnemer is niet aangepast");
             }
             else
             {
@@ -346,13 +289,9 @@ namespace Laroni_Travel.ViewModels
         {
             if (SelectedMedisch != null)
             {
-                if (IsGeldig())
-                {
-                    _unitOfWork.MedischeRepo.Aanpassen(MedischRecord);
-                    int ok = _unitOfWork.Save();
-
-                    FoutmeldingInstellenNaSave(ok, "Medisch record is niet aangepast");
-                }
+                _unitOfWork.MedischeRepo.Aanpassen(MedischRecord);
+                int ok = _unitOfWork.Save();
+                FoutmeldingInstellenNaSave(ok, "Medisch record is niet aangepast");
             }
             else
             {
@@ -468,14 +407,11 @@ namespace Laroni_Travel.ViewModels
         }
 
         public void ResettenDeelnemer()
-        {
-            //if (this.IsGeldig())
-            //{
+        {           
             SelectedDeelnemer = null;
             DeelnemerRecordInstellen();
             Foutmelding = "";
             NotifyPropertyChanged(nameof(SelectedDeelnemer));
-            //}
             //else
             //{
             //    Foutmelding = this.Error;
@@ -484,13 +420,11 @@ namespace Laroni_Travel.ViewModels
 
         public void ResettenMedisch()
         {
-            //if (this.IsGeldig())
-            //{
             SelectedMedisch = null;
             MedischRecordInstellen();
             Foutmelding = "";
             NotifyPropertyChanged(nameof(SelectedMedisch));
-            //}
+            
             //else
             //{
             //    Foutmelding = this.Error;
@@ -498,51 +432,23 @@ namespace Laroni_Travel.ViewModels
         }
 
         public void ToevoegenDeelnemer()
-        {
-            //if (this.IsGeldig())
-            //{
-            //    //DeelnemerRecord.DeelnemerId = int.Parse(ID);
-            //    if (IsGeldig())
-            //    {
-            _unitOfWork.DeelnemersRepo.Toevoegen(DeelnemerRecord);
-            int ok = _unitOfWork.Save();
-            Deelnemers = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen());
-            NotifyPropertyChanged(nameof(Deelnemers));
-
-            // FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
-            //    }
-            //}
+        {            
+                _unitOfWork.DeelnemersRepo.Toevoegen(DeelnemerRecord);
+                int ok = _unitOfWork.Save();
+                Deelnemers = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen());
+                NotifyPropertyChanged(nameof(Deelnemers));
+                FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");            
         }
 
         public void ToevoegenMedisch()
         {
-            //if (this.IsGeldig())
-            //{
-            MedischRecord.DeelnemerId = int.Parse(ID);
-            //    if (IsGeldig())
-            //    {
             _unitOfWork.MedischeRepo.Toevoegen(MedischRecord);
             int ok = _unitOfWork.Save();
             MedischLijst = new ObservableCollection<Medisch>(_unitOfWork.MedischeRepo.Ophalen());
             NotifyPropertyChanged(nameof(SelectedDeelnemer));
 
-            // FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
-            //    }
-            //}
-        }
-
-        public bool ValidateEmail(string input)
-        {
-            bool email;
-            if (input.Contains("@") && input.Contains("."))
-            {
-                return email = true;
-            }
-            else
-            {
-                return email = false;
-            }
-        }
+            FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
+        }               
 
         public void VerwijderenDeelnemer()
         {
@@ -552,7 +458,7 @@ namespace Laroni_Travel.ViewModels
                 int ok = _unitOfWork.Save();
                 Deelnemers = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen());
                 NotifyPropertyChanged(nameof(Deelnemers));
-                //     FoutmeldingInstellenNaSave(ok, "Deelnemer is niet verwijderd");
+                FoutmeldingInstellenNaSave(ok, "Deelnemer is niet verwijderd");
             }
             else
             {
@@ -568,7 +474,7 @@ namespace Laroni_Travel.ViewModels
                 int ok = _unitOfWork.Save();
                 MedischLijst = new ObservableCollection<Medisch>(_unitOfWork.MedischeRepo.Ophalen());
                 NotifyPropertyChanged(nameof(MedischLijst));
-                //     FoutmeldingInstellenNaSave(ok, "Deelnemer is niet verwijderd");
+                FoutmeldingInstellenNaSave(ok, "Deelnemer is niet verwijderd");
             }
             else
             {
@@ -579,10 +485,9 @@ namespace Laroni_Travel.ViewModels
         public void Zoeken()
         {
             Foutmelding = "";
-            //if (IsGeldig())
-            //{
-            RefreshDeelnemer();
-            RefreshMedisch();
+           
+                RefreshDeelnemer();
+                RefreshMedisch();
             if (Deelnemers == null || Deelnemers.Count <= 0)
             {
                 Foutmelding = "Er zijn geen Deelnemer gevonden horende bij " + Voornaam + " " + Familienaam;
@@ -590,12 +495,11 @@ namespace Laroni_Travel.ViewModels
             if (MedischLijst == null || MedischLijst.Count <= 0)
             {
                 Foutmelding = "Er zijn geen medisch records gevonden horende bij " + Voornaam + " " + Familienaam;
+            }           
+            else
+            {
+                Foutmelding = this.Error;
             }
-            //}
-            //else
-            //{
-            Foutmelding = this.Error;
-            //}
         }
 
         private void DeelnemerRecordInstellen()
