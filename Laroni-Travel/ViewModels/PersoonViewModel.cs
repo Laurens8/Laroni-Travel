@@ -345,19 +345,6 @@ namespace Laroni_Travel.ViewModels
             }
         }
 
-        public bool IsNumeriek(string input)
-        {
-            bool isNumeriek;
-            if (input.All(char.IsDigit))
-            {
-                return isNumeriek = true;
-            }
-            else
-            {
-                return isNumeriek = false;
-            }
-        }
-
         public void OpenHomeView()
         {
             Foutmelding = "";

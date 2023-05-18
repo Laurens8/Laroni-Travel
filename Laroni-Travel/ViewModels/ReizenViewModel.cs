@@ -71,20 +71,34 @@ namespace Laroni_Travel.ViewModels
         private ObservableCollection<Groepsreis> _reizen;
         private ObservableCollection<DeelnemerGroepsreis> _DeelnemersReisRecord;
         private ObservableCollection<LeeftijdsCategorie> _leeftijdsCategorie;
+        public int Deelnemers { get; set; }
         private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
 
         public ReizenViewModel()
         {
-            Reizen = new ObservableCollection<Groepsreis>(_unitOfWork.GroepsreisenRepo.Ophalen());
-            DeelnemersReis = new ObservableCollection<DeelnemerGroepsreis>(_unitOfWork.DeelnemerGroepsreisenRepo.Ophalen());
+            Reizen = new ObservableCollection<Groepsreis>(_unitOfWork.GroepsreisenRepo.Ophalen());            
             Bestemming = new ObservableCollection<Bestemming>(_unitOfWork.BestemmingenRepo.Ophalen());
             Thema = new ObservableCollection<Thema>(_unitOfWork.ThemasRepo.Ophalen());
             LeeftijdsCategorie = new ObservableCollection<LeeftijdsCategorie>(_unitOfWork.LeeftijdsCategorieenRepo.Ophalen());
-            Drinkgeld = _drinkgeld;
-            //ReisRecord. = new List<Deelnemer>();
+            DeelnemersRecord = new ObservableCollection<DeelnemerGroepsreis>(_unitOfWork.DeelnemerGroepsreisenRepo.Ophalen());
+            Deelnemers = new ObservableCollection<DeelnemerGroepsreis>(_unitOfWork.DeelnemerGroepsreisenRepo.Ophalen()).Count();
         }
 
-        public ObservableCollection<DeelnemerGroepsreis> DeelnemersReis
+        public void AantalDeelnemers()
+        {
+            foreach (var item in Reizen)
+            {
+                foreach (var item2 in DeelnemersRecord)
+                {
+                    if (item.GroepsreisId == item2.GroepsreisId)
+                    {
+                        Deelnemers++;
+                    }
+                }
+            }
+        }
+
+        public ObservableCollection<DeelnemerGroepsreis> DeelnemersRecord
         {
             get { return _DeelnemersReisRecord; }
             set
@@ -92,7 +106,7 @@ namespace Laroni_Travel.ViewModels
                 _DeelnemersReisRecord = value;
                 NotifyPropertyChanged();
             }
-        }
+        }     
 
         public ObservableCollection<LeeftijdsCategorie> LeeftijdsCategorie
         {
@@ -102,14 +116,14 @@ namespace Laroni_Travel.ViewModels
                 _leeftijdsCategorie = value;
                 NotifyPropertyChanged();
             }
-        }
-        double pres = 0.05;
+        }      
+
         public float Drinkgeld
         {
             get { return _drinkgeld; }
             set
             {
-                _drinkgeld = (float)(Prijs * pres);
+                _drinkgeld = BerekenenPrijs(Prijs);
                 NotifyPropertyChanged();
             }
         }
@@ -320,18 +334,16 @@ namespace Laroni_Travel.ViewModels
         public void Zoeken()
         {
             Foutmelding = "";
-            //if (IsGeldig())
-            //{
+            
             RefreshReizen();
             if (Reizen == null || Reizen.Count <= 0)
             {
                 Foutmelding = "Er zijn geen reizen gevonden";
             }
-            //}
-            //else
-            //{
+            else           
+            {
             Foutmelding = this.Error;
-            //}
+            }
         }
 
         public void Dispose()
@@ -345,20 +357,7 @@ namespace Laroni_Travel.ViewModels
 
             Reizen = new ObservableCollection<Groepsreis>(listReizen);
             NotifyPropertyChanged(nameof(Reizen));
-        }
-
-        public bool IsNumeriek(string input)
-        {
-            bool isNumeriek;
-            if (input.All(char.IsDigit))
-            {
-                return isNumeriek = true;
-            }
-            else
-            {
-                return isNumeriek = false;
-            }
-        }
+        }        
 
         public void OpenHomeView()
         {
@@ -409,18 +408,14 @@ namespace Laroni_Travel.ViewModels
         }
 
         public void ResettenGroepreis()
-        {
-            //if (this.IsGeldig())
-            //{
+        {            
             SelectedGroepsreis = null;
             ReizenRecordInstellen();
             Foutmelding = "";
             NotifyPropertyChanged(nameof(SelectedGroepsreis));
-            //}
-            //else
-            //{
-            //    Foutmelding = this.Error;
-            //}
+                                   
+            //Foutmelding = this.Error;
+            
         }
 
         private void FoutmeldingInstellenNaSave(int ok, string melding)
@@ -440,13 +435,10 @@ namespace Laroni_Travel.ViewModels
         {
             if (SelectedGroepsreis != null)
             {
-                if (IsGeldig())
-                {
-                    _unitOfWork.GroepsreisenRepo.Aanpassen(ReisRecord);
-                    int ok = _unitOfWork.Save();
+                _unitOfWork.GroepsreisenRepo.Aanpassen(ReisRecord);
+                int ok = _unitOfWork.Save();
 
-                    FoutmeldingInstellenNaSave(ok, "Groepsreis is niet aangepast");
-                }
+                FoutmeldingInstellenNaSave(ok, "Groepsreis is niet aangepast");
             }
             else
             {
@@ -470,12 +462,16 @@ namespace Laroni_Travel.ViewModels
 
         public void ToevoegenGroepsreis()
         {
-            if (IsGeldig())
-            {
-                _unitOfWork.GroepsreisenRepo.Toevoegen(ReisRecord);
-                int ok = _unitOfWork.Save();
-                FoutmeldingInstellenNaSave(ok, "Groepsreis is niet toegevoegd");
-            }
+            _unitOfWork.GroepsreisenRepo.Toevoegen(ReisRecord);
+            int ok = _unitOfWork.Save();
+            FoutmeldingInstellenNaSave(ok, "Groepsreis is niet toegevoegd");
+        }
+
+        public float BerekenenPrijs(float input)
+        {
+            float output = 0;
+            output = input * 0.05f;
+            return output;
         }
     }
 }
