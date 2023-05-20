@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static Laroni_Travel.ViewModels.OpleidingViewModel;
 
 namespace Laroni_Travel.View
 {

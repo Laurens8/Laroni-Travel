@@ -8,6 +8,7 @@ using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Laroni_Travel.ViewModels
@@ -55,6 +56,7 @@ namespace Laroni_Travel.ViewModels
                 var view = new InlogView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
@@ -62,11 +64,12 @@ namespace Laroni_Travel.ViewModels
         {
             Foutmelding = "";
             if (Foutmelding == "")
-            {
+            { 
                 var vm = new OpleidingViewModel();
                 var view = new OpleidingView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
@@ -79,6 +82,7 @@ namespace Laroni_Travel.ViewModels
                 var view = new PersoonView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
@@ -86,11 +90,12 @@ namespace Laroni_Travel.ViewModels
         {
             Foutmelding = "";
             if (Foutmelding == "")
-            {
+            {             
                 var vm = new ReizenViewModel();
                 var view = new ReizenView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
     }

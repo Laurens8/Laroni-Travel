@@ -354,6 +354,7 @@ namespace Laroni_Travel.ViewModels
                 var view = new HomeView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
@@ -366,6 +367,7 @@ namespace Laroni_Travel.ViewModels
                 var view = new InlogView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
@@ -378,6 +380,7 @@ namespace Laroni_Travel.ViewModels
                 var view = new OpleidingView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
@@ -390,6 +393,7 @@ namespace Laroni_Travel.ViewModels
                 var view = new ReizenView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 

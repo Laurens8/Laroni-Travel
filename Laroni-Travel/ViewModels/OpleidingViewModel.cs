@@ -5,6 +5,7 @@ using Laroni_Travel.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace Laroni_Travel.ViewModels
         private ObservableCollection<Opleiding> _opleidingen;
         private Opleiding _opleidingSelected;
         private Opleiding _opleidingRecord;
-        private ObservableCollection<Bestemming> _bestemming;
+        private ObservableCollection<OpleidingBestemming> _bestemming;
         private string _beschrijving;
         private string _straatnaam;
         private string _huisnummer;
@@ -30,14 +31,19 @@ namespace Laroni_Travel.ViewModels
         public int Deelnemers { get; set; }
         private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
         public string Foutmelding { get; set; }
-        public override string this[string columnName] => throw new NotImplementedException();
+
+        public override string this[string columnName]
+        {
+            get
+            {
+                return "";
+            }
+        }
 
         public OpleidingViewModel()
         {
-            Opleidingen = new ObservableCollection<Opleiding>(_unitOfWork.OpleidingenRepo.Ophalen());
-            Bestemming = new ObservableCollection<Bestemming>(_unitOfWork.BestemmingenRepo.Ophalen());
-            Deelnemers = new ObservableCollection<DeelnemerOpleiding>(_unitOfWork.DeelnemerOpleidingenRepo.Ophalen()).Count();
-        }     
+            OpleidingRecordInstellen();           
+        }
 
         public void Dispose()
         {
@@ -104,7 +110,7 @@ namespace Laroni_Travel.ViewModels
             }
         }
 
-        public ObservableCollection<Bestemming> Bestemming
+        public ObservableCollection<OpleidingBestemming> Bestemming
         {
             get { return _bestemming; }
             set
@@ -120,7 +126,8 @@ namespace Laroni_Travel.ViewModels
             set
             {
                 _opleidingSelected = value;
-                NotifyPropertyChanged();
+                OpleidingRecordInstellen();
+                NotifyPropertyChanged(nameof(SelectedOpleiding));
             }
         }
 
@@ -196,6 +203,7 @@ namespace Laroni_Travel.ViewModels
                 var view = new HomeView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
@@ -208,6 +216,7 @@ namespace Laroni_Travel.ViewModels
                 var view = new InlogView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
@@ -220,6 +229,7 @@ namespace Laroni_Travel.ViewModels
                 var view = new PersoonView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
@@ -227,11 +237,12 @@ namespace Laroni_Travel.ViewModels
         {
             Foutmelding = "";
             if (Foutmelding == "")
-            {
+            {                
                 var vm = new ReizenViewModel();
                 var view = new ReizenView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
@@ -253,6 +264,9 @@ namespace Laroni_Travel.ViewModels
         private void RefreshOpleidingen()
         {
             List<Opleiding> listOpleiding = (List<Opleiding>)_unitOfWork.OpleidingenRepo.Ophalen(x => x.OpleidingId == int.Parse(ID));
+            Opleidingen = new ObservableCollection<Opleiding>(_unitOfWork.OpleidingenRepo.Ophalen());
+            Bestemming = new ObservableCollection<OpleidingBestemming>(_unitOfWork.OpleidingBestemmingenRepo.Ophalen());
+            Deelnemers = new ObservableCollection<DeelnemerOpleiding>(_unitOfWork.DeelnemerOpleidingenRepo.Ophalen()).Count();
 
             Opleidingen = new ObservableCollection<Opleiding>(listOpleiding);
             NotifyPropertyChanged(nameof(Opleidingen));
@@ -260,7 +274,15 @@ namespace Laroni_Travel.ViewModels
 
         private void OpleidingRecordInstellen()
         {
-            OpleidingRecord = new Opleiding();
+            if (SelectedOpleiding != null)
+            {
+                OpleidingRecord = SelectedOpleiding;
+                NotifyPropertyChanged(nameof(SelectedOpleiding));
+            }
+            else
+            {
+                OpleidingRecord = new Opleiding();
+            }
         }
 
         private void FoutmeldingInstellenNaSave(int ok, string melding)
@@ -319,6 +341,6 @@ namespace Laroni_Travel.ViewModels
             _unitOfWork.OpleidingenRepo.Toevoegen(OpleidingRecord);
             int ok = _unitOfWork.Save();
             FoutmeldingInstellenNaSave(ok, "Opleiding is niet toegevoegd");
-        }
+        }   
     }
 }

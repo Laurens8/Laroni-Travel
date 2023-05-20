@@ -2,6 +2,7 @@
 using Laroni_Travel.Data;
 using Laroni_Travel.Models;
 using Laroni_Travel.View;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.EntityFrameworkCore;
 
 namespace Laroni_Travel.ViewModels
 {
@@ -76,12 +78,7 @@ namespace Laroni_Travel.ViewModels
 
         public ReizenViewModel()
         {
-            Reizen = new ObservableCollection<Groepsreis>(_unitOfWork.GroepsreisenRepo.Ophalen());            
-            Bestemming = new ObservableCollection<Bestemming>(_unitOfWork.BestemmingenRepo.Ophalen());
-            Thema = new ObservableCollection<Thema>(_unitOfWork.ThemasRepo.Ophalen());
-            LeeftijdsCategorie = new ObservableCollection<LeeftijdsCategorie>(_unitOfWork.LeeftijdsCategorieenRepo.Ophalen());
-            DeelnemersRecord = new ObservableCollection<DeelnemerGroepsreis>(_unitOfWork.DeelnemerGroepsreisenRepo.Ophalen());
-            Deelnemers = new ObservableCollection<DeelnemerGroepsreis>(_unitOfWork.DeelnemerGroepsreisenRepo.Ophalen()).Count();
+            ReizenRecordInstellen();
         }
 
         public void AantalDeelnemers()
@@ -123,7 +120,7 @@ namespace Laroni_Travel.ViewModels
             get { return _drinkgeld; }
             set
             {
-                _drinkgeld = BerekenenPrijs(Prijs);
+                _drinkgeld = value;
                 NotifyPropertyChanged();
             }
         }
@@ -200,10 +197,15 @@ namespace Laroni_Travel.ViewModels
 
         private void ReizenRecordInstellen()
         {
-            ReisRecord = new Groepsreis();
-            ReisRecord.Bestemming = new Bestemming();
-            ReisRecord.Thema = new Thema();
-            ReisRecord.LeeftijdsCategorieen = new LeeftijdsCategorie();
+            if (SelectedGroepsreis != null)
+            {
+                ReisRecord = SelectedGroepsreis;
+                NotifyPropertyChanged(nameof(SelectedGroepsreis));
+            }
+            else
+            {
+                ReisRecord = new Groepsreis();
+            }
         }
 
         public int GroepsreisId
@@ -282,7 +284,8 @@ namespace Laroni_Travel.ViewModels
             set
             {
                 _selectedGroepsreis = value;
-                NotifyPropertyChanged();
+                ReizenRecordInstellen();
+                NotifyPropertyChanged(nameof(SelectedGroepsreis));
             }
         }
 
@@ -353,9 +356,18 @@ namespace Laroni_Travel.ViewModels
 
         private void RefreshReizen()
         {
-            List<Groepsreis> listReizen = (List<Groepsreis>)_unitOfWork.MedischeRepo.Ophalen(x => x.DeelnemerId == int.Parse(ID));
-
-            Reizen = new ObservableCollection<Groepsreis>(listReizen);
+            //List<Groepsreis> listReizen = (List<Groepsreis>)_unitOfWork.GroepsreisenRepo.Ophalen(x => x.GroepsreisId == int.Parse(ID));
+            Reizen = new ObservableCollection<Groepsreis>(_unitOfWork.GroepsreisenRepo.Ophalen(r => r.LeeftijdsCategorieId == int.Parse(ID)));
+            Bestemming = new ObservableCollection<Bestemming>(_unitOfWork.BestemmingenRepo.Ophalen());
+            Thema = new ObservableCollection<Thema>(_unitOfWork.ThemasRepo.Ophalen());
+            LeeftijdsCategorie = new ObservableCollection<LeeftijdsCategorie>(_unitOfWork.LeeftijdsCategorieenRepo.Ophalen());
+            DeelnemersRecord = new ObservableCollection<DeelnemerGroepsreis>(_unitOfWork.DeelnemerGroepsreisenRepo.Ophalen());
+            Deelnemers = new ObservableCollection<DeelnemerGroepsreis>(_unitOfWork.DeelnemerGroepsreisenRepo.Ophalen()).Count();
+            Thema.ToString();
+            LeeftijdsCategorie.ToString();
+            Drinkgeld = Prijs * 0.5f;
+            Deelnemers.ToString();
+            //Reizen = new ObservableCollection<Groepsreis>(listReizen);
             NotifyPropertyChanged(nameof(Reizen));
         }        
 
@@ -368,6 +380,7 @@ namespace Laroni_Travel.ViewModels
                 var view = new HomeView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
@@ -380,6 +393,7 @@ namespace Laroni_Travel.ViewModels
                 var view = new InlogView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
@@ -392,6 +406,7 @@ namespace Laroni_Travel.ViewModels
                 var view = new OpleidingView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
@@ -404,6 +419,7 @@ namespace Laroni_Travel.ViewModels
                 var view = new PersoonView();
                 view.DataContext = vm;
                 view.Show();
+                App.Current.MainWindow.Close();
             }
         }
 
