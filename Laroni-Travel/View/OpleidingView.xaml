@@ -45,7 +45,7 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <TextBox
-                    Text="{Binding Beschrijving}"
+                    Text="{Binding ID}"
         materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
         VerticalAlignment="center"
         materialDesign:HintAssist.Hint="Search..."
@@ -88,7 +88,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBox
-                    Text="{Binding Beschrijving}"
+                    Text="{Binding OpleidingRecord.Beschrijving}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Beschrijving"
     AcceptsReturn="True"
