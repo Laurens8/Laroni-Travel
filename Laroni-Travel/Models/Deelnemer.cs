@@ -10,16 +10,11 @@ namespace Laroni_Travel.Models
 {
     public partial class Deelnemer
     {
-        [Required]
-        public bool Admin { get; set; }
-
-        //Navigatieproperty
-        public virtual ICollection<DeelnemerGroepsreis> DeelnemerGroepsreizen { get; set; }
-
         [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key()]
         public int DeelnemerId { get; set; }
 
-        public virtual ICollection<DeelnemerOpleiding> DeelnemerOpleidingen { get; set; }
+        [Required]
+        public bool Admin { get; set; }       
 
         [Required]
         public string Email { get; set; }
@@ -42,9 +37,7 @@ namespace Laroni_Travel.Models
         public bool HoofdMonitor { get; set; }
 
         [Required]
-        public string Huisnummer { get; set; }
-
-        public virtual ICollection<Medisch> Medische { get; set; }
+        public string Huisnummer { get; set; }       
 
         [Required]
         public bool Monitor { get; set; }
@@ -60,5 +53,10 @@ namespace Laroni_Travel.Models
 
         [Required]
         public bool Ziekenfonds { get; set; }
+
+        //Navigatieproperty
+        public virtual ICollection<DeelnemerGroepsreis> DeelnemerGroepsreizen { get; set; }
+        public virtual ICollection<DeelnemerOpleiding> DeelnemerOpleidingen { get; set; }
+        public virtual ICollection<Medisch> Medische { get; set; }
     }
 }

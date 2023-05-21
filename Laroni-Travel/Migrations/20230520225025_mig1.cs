@@ -88,19 +88,19 @@ namespace Laroni_Travel.Migrations
                 {
                     DeelnemerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Voornaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Familienaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Straatnaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Huisnummer = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Postcode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gemeente = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Geboortedatum = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Geslacht = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Ziekenfonds = table.Column<bool>(type: "bit", nullable: false),
-                    Monitor = table.Column<bool>(type: "bit", nullable: false),
-                    HoofdMonitor = table.Column<bool>(type: "bit", nullable: false),
                     Admin = table.Column<bool>(type: "bit", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Familienaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Geboortedatum = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Gemeente = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Geslacht = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HoofdMonitor = table.Column<bool>(type: "bit", nullable: false),
+                    Huisnummer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Monitor = table.Column<bool>(type: "bit", nullable: false),
+                    Postcode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Straatnaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Voornaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ziekenfonds = table.Column<bool>(type: "bit", nullable: false),
                     BestemmingId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -146,9 +146,11 @@ namespace Laroni_Travel.Migrations
                     GroepsreisId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BestemmingId = table.Column<int>(type: "int", nullable: false),
-                    ThemaId = table.Column<int>(type: "int", nullable: false),
+                    Einddatum = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LeeftijdsCategorieId = table.Column<int>(type: "int", nullable: false),
-                    Prijs = table.Column<decimal>(type: "money", nullable: false)
+                    Prijs = table.Column<decimal>(type: "money", nullable: false),
+                    Startdatum = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ThemaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

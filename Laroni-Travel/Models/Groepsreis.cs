@@ -10,25 +10,23 @@ namespace Laroni_Travel.Models
 {
     public class Groepsreis
     {
-        //Navigatieproperty
-        public Bestemming Bestemming { get; set; }
+        [Key]
+        public int GroepsreisId { get; set; }
 
         [Required]
         public int BestemmingId { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime Einddatum { get; set; }
-
-        [Key]
-        public int GroepsreisId { get; set; }
-
-        public LeeftijdsCategorie LeeftijdsCategorieen { get; set; }
+        public int ThemaId { get; set; }
 
         [Required]
         public int LeeftijdsCategorieId { get; set; }
 
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime Einddatum { get; set; }
+                    
         [Required]
         [Column(TypeName = "money")]
         public float Prijs { get; set; }
@@ -36,11 +34,11 @@ namespace Laroni_Travel.Models
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime Startdatum { get; set; }
+        public DateTime Startdatum { get; set; }            
 
+        //Navigatieproperty
+        public Bestemming Bestemming { get; set; }
+        public LeeftijdsCategorie LeeftijdsCategorieen { get; set; }
         public Thema Thema { get; set; }
-
-        [Required]
-        public int ThemaId { get; set; }
     }
 }

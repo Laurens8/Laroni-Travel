@@ -45,7 +45,7 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <TextBox
-                    Text="{Binding Voornaam}"
+                    Text="{Binding ID}"
         materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
         VerticalAlignment="center"
         materialDesign:HintAssist.Hint="Search..."
@@ -88,7 +88,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBox
-                    Text="{Binding Beschrijving}"
+                    Text="{Binding OpleidingRecord.Beschrijving}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Beschrijving"
     AcceptsReturn="True"
@@ -99,7 +99,7 @@
     Grid.Row="2" Grid.Column="0" Background="White" Margin="10" />
                 <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Datum" Grid.Row="3" Grid.Column="0" Text="{Binding Datum}" />
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Straatnaam}"
+                    Text="{Binding OpleidingRecord.Bestemming.Straatnaam}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Straatnaam"
     AcceptsReturn="True"
@@ -110,7 +110,7 @@
     Grid.Row="2" Grid.Column="1" Background="White" Margin="10" />
 
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Huisnummer}"
+                    Text="{Binding OpleidingRecord.Bestemming.Huisnummer}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Huisnummer"
     AcceptsReturn="True"
@@ -120,7 +120,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="3" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Postcode}"
+                    Text="{Binding OpleidingRecord.Bestemming.Postcode}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Postcode"
     AcceptsReturn="True"
@@ -130,7 +130,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="4" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Gemeente}"
+                    Text="{Binding OpleidingRecord.Bestemming.Gemeente}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Gemeente"
     AcceptsReturn="True"
@@ -140,7 +140,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="5" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Land}"
+                    Text="{Binding OpleidingRecord.Bestemming.Land}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Land"
     AcceptsReturn="True"
