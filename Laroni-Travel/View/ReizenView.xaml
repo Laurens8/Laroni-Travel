@@ -78,17 +78,17 @@
                     </DataGrid.Style>
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Thema.Naam}" Header="Thema" />
-                        <DataGridTextColumn Binding="{Binding LeeftijdsCategorieen.Naam}" Header="Leeftijdscategorie" />
+                        <DataGridTextColumn Binding="{Binding LeeftijdsCategorie.Naam}" Header="Leeftijdscategorie" />
                         <DataGridTextColumn Binding="{Binding Bestemming.Straatnaam}" Header="Straatnaam" />
                         <DataGridTextColumn Binding="{Binding Bestemming.Huisnummer}" Header="Huisnr." />
                         <DataGridTextColumn Binding="{Binding Bestemming.Postcode}" Header="PC" />
                         <DataGridTextColumn Binding="{Binding Bestemming.Gemeente}" Header="Gemeente" />
                         <DataGridTextColumn Binding="{Binding Bestemming.Land}" Header="Land" />
-                        <DataGridTextColumn Binding="{Binding Startdatum}" Header="Startdatum" />
-                        <DataGridTextColumn Binding="{Binding Einddatum}" Header="Einddatum" />
+                        <DataGridTextColumn Binding="{Binding StartdatumInfo}" Header="Startdatum" />
+                        <DataGridTextColumn Binding="{Binding EinddatumInfo}" Header="Einddatum" />
                         <DataGridTextColumn Binding="{Binding Prijs}" Header="Prijs" />
                         <DataGridTextColumn Binding="{Binding Drinkgeld}" Header="Drinkgeld" />
-                        <DataGridTextColumn Binding="{Binding Deelnemers}" Header="Deelnemers" />
+                        <DataGridTextColumn Binding="{Binding AantalDeelnemers}" Header="Deelnemers" />
                     </DataGrid.Columns>
                 </DataGrid>
                 <ComboBox
@@ -165,8 +165,8 @@
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
     Grid.Row="6" Grid.Column="1" Background="White" Margin="10" />
-                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Startdatum" Grid.Row="2" Grid.Column="2" Text="{Binding StartDatum}" />
-                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Einddatum" Grid.Row="3" Grid.Column="2" Text="{Binding EindDatum}" />
+                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Startdatum" Grid.Row="2" Grid.Column="2" Text="{Binding ReisRecord.StartDatum}" />
+                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Einddatum" Grid.Row="3" Grid.Column="2" Text="{Binding ReisRecord.EindDatum}" />
                 <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="2" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenGroepsreis">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FloppyDisk" Margin="0 0 10 0" />

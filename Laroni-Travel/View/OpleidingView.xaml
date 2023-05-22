@@ -78,13 +78,13 @@
                     </DataGrid.Style>
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Beschrijving}" Header="Beschrijving" />
-                        <DataGridTextColumn Binding="{Binding Datum}" Header="Datum" />
+                        <DataGridTextColumn Binding="{Binding DatumInfo}" Header="Datum" />
                         <DataGridTextColumn Binding="{Binding Bestemming.Straatnaam}" Header="Straatnaam" />
                         <DataGridTextColumn Binding="{Binding Bestemming.Huisnummer}" Header="Huisnr." />
                         <DataGridTextColumn Binding="{Binding Bestemming.Postcode}" Header="PC" />
                         <DataGridTextColumn Binding="{Binding Bestemming.Gemeente}" Header="Gemeente" />
                         <DataGridTextColumn Binding="{Binding Bestemming.Land}" Header="Land" />
-                        <DataGridTextColumn Binding="{Binding Deelnemers}" Header="Deelnemers" />
+                        <DataGridTextColumn Binding="{Binding AantalDeelnemers}" Header="Deelnemers" />
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBox

@@ -15,7 +15,13 @@ namespace Laroni_Travel.Models
         [Required]
         public string Beschrijving { get; set; }
         [Required]
-        public DateTime Datum { get; set; }
+        public DateTime Datum { get; set; }       
+
+        [Required]
+        public int AantalDeelnemers { get { return DeelnemerOpleidingen.Count(); } }
+
+        [NotMapped]
+        public string DatumInfo { get { return Datum.ToString("dd-MM-yyyy"); } }
 
         //Navigatieproperty
         public virtual ICollection<OpleidingBestemming> OpleidingBestemmingen { get; set; }

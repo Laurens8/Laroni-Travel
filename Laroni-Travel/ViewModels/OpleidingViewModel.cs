@@ -270,13 +270,13 @@ namespace Laroni_Travel.ViewModels
 
         private void RefreshOpleidingen()
         {
-            List<Opleiding> listOpleiding = (List<Opleiding>)_unitOfWork.OpleidingenRepo.Ophalen(x => x.OpleidingId == int.Parse(ID));
-            Opleidingen = new ObservableCollection<Opleiding>(_unitOfWork.OpleidingenRepo.Ophalen());
+            List<Opleiding> listOpleiding = (List<Opleiding>)_unitOfWork.OpleidingenRepo.Ophalen(x => x.OpleidingId == int.Parse(ID));    
             Bestemming = new ObservableCollection<OpleidingBestemming>(_unitOfWork.OpleidingBestemmingenRepo.Ophalen());
             Deelnemers = new ObservableCollection<DeelnemerOpleiding>(_unitOfWork.DeelnemerOpleidingenRepo.Ophalen()).Count();
 
             Opleidingen = new ObservableCollection<Opleiding>(listOpleiding);
             NotifyPropertyChanged(nameof(Opleidingen));
+            NotifyPropertyChanged(nameof(Bestemming));
         }
 
         private void OpleidingRecordInstellen()
