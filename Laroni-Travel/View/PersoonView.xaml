@@ -80,7 +80,7 @@
                         <DataGridTextColumn Binding="{Binding DeelnemerId}" Header="Id" />
                         <DataGridTextColumn Binding="{Binding Voornaam}" Header="Voornaam" />
                         <DataGridTextColumn Binding="{Binding Familienaam}" Header="Familienaam" />
-                        <DataGridTextColumn Binding="{Binding Geboortedatum}" Header="Geboren" />
+                        <DataGridTextColumn Binding="{Binding GeboortedatumInfo}" Header="Geboren" />
                         <DataGridTextColumn Binding="{Binding Geslacht}" Header="Geslacht" />
                         <DataGridTextColumn Binding="{Binding Straatnaam}" Header="Straatnaam" />
                         <DataGridTextColumn Binding="{Binding Huisnummer}" Header="Huisnr." />

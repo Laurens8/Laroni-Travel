@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Laroni_Travel.ViewModels
@@ -18,8 +19,15 @@ namespace Laroni_Travel.ViewModels
 
         public ObservableCollection<Deelnemer> Deelnemers { get; set; }
         public string Foutmelding { get; set; }
+        private Window _view;
 
         private string _email = "";
+
+        public InlogViewModel(Window view)
+        {
+            _view= view;
+            RefreshDeelnemer();
+        }
 
         public string Email
         {
@@ -44,8 +52,8 @@ namespace Laroni_Travel.ViewModels
             Zoeken();
             if (Foutmelding == "")
             {
-                var vm = new HomeViewModel();
                 var view = new HomeView();
+                var vm = new HomeViewModel(view);
                 view.DataContext = vm;
                 view.Show();
                 App.Current.MainWindow.Close();

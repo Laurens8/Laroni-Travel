@@ -18,6 +18,12 @@ namespace Laroni_Travel.ViewModels
         private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
         public string Foutmelding { get; set; }
         public override string this[string columnName] => throw new NotImplementedException();
+        private Window _view;
+
+        public HomeViewModel(Window view)
+        {
+            _view = view;
+        }
 
         public override bool CanExecute(object parameter)
         {
@@ -52,11 +58,11 @@ namespace Laroni_Travel.ViewModels
             Foutmelding = "";
             if (Foutmelding == "")
             {
-                var vm = new InlogViewModel();
                 var view = new InlogView();
+                var vm = new InlogViewModel(view);              
                 view.DataContext = vm;
                 view.Show();
-                App.Current.MainWindow.Close();
+                _view.Close();
             }
         }
 
@@ -65,11 +71,12 @@ namespace Laroni_Travel.ViewModels
             Foutmelding = "";
             if (Foutmelding == "")
             { 
-                var vm = new OpleidingViewModel();
+                
                 var view = new OpleidingView();
+                var vm = new OpleidingViewModel(view);
                 view.DataContext = vm;
                 view.Show();
-                App.Current.MainWindow.Close();
+                _view.Close();
             }
         }
 
@@ -78,11 +85,11 @@ namespace Laroni_Travel.ViewModels
             Foutmelding = "";
             if (Foutmelding == "")
             {
-                var vm = new PersoonViewModel();
                 var view = new PersoonView();
+                var vm = new PersoonViewModel(view);
                 view.DataContext = vm;
                 view.Show();
-                App.Current.MainWindow.Close();
+                _view.Close();
             }
         }
 
@@ -90,12 +97,13 @@ namespace Laroni_Travel.ViewModels
         {
             Foutmelding = "";
             if (Foutmelding == "")
-            {             
-                var vm = new ReizenViewModel();
+            {
                 var view = new ReizenView();
+                var vm = new ReizenViewModel(view);
+                
                 view.DataContext = vm;
                 view.Show();
-                App.Current.MainWindow.Close();
+                _view.Close();
             }
         }
     }

@@ -78,7 +78,7 @@
                     </DataGrid.Style>
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Thema.Naam}" Header="Thema" />
-                        <DataGridTextColumn Binding="{Binding LeeftijdsCategorie.Naam}" Header="Leeftijdscategorie" />
+                        <DataGridTextColumn Binding="{Binding LeeftijdsCategorieen.Naam}" Header="Leeftijdscategorie" />
                         <DataGridTextColumn Binding="{Binding Bestemming.Straatnaam}" Header="Straatnaam" />
                         <DataGridTextColumn Binding="{Binding Bestemming.Huisnummer}" Header="Huisnr." />
                         <DataGridTextColumn Binding="{Binding Bestemming.Postcode}" Header="PC" />

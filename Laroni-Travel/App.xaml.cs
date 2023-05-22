@@ -16,9 +16,9 @@ namespace Laroni_Travel
     public partial class App : Application
     {
         private void Application_Startup(object sender, StartupEventArgs e)
-        {
-            var vm = new InlogViewModel();
+        {            
             var view = new InlogView();
+            var vm = new InlogViewModel(view);
             view.DataContext = vm;
             view.Show();
         }

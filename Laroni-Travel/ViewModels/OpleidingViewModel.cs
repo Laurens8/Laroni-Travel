@@ -10,6 +10,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Laroni_Travel.ViewModels
@@ -26,6 +27,7 @@ namespace Laroni_Travel.ViewModels
         private string _postcode;
         private string _gemeente;
         private string _land;
+        private Window _view;
         private DateTime _datum;
         public string ID { get; set; }
         public int Deelnemers { get; set; }
@@ -40,8 +42,9 @@ namespace Laroni_Travel.ViewModels
             }
         }
 
-        public OpleidingViewModel()
+        public OpleidingViewModel(Window view)
         {
+            _view= view;
             OpleidingRecordInstellen();           
         }
 
@@ -199,11 +202,12 @@ namespace Laroni_Travel.ViewModels
             Foutmelding = "";
             if (Foutmelding == "")
             {
-                var vm = new HomeViewModel();
                 var view = new HomeView();
+                var vm = new HomeViewModel(view);
+                
                 view.DataContext = vm;
                 view.Show();
-                App.Current.MainWindow.Close();
+               _view.Close();
             }
         }
 
@@ -212,11 +216,12 @@ namespace Laroni_Travel.ViewModels
             Foutmelding = "";
             if (Foutmelding == "")
             {
-                var vm = new InlogViewModel();
+               
                 var view = new InlogView();
+                var vm = new InlogViewModel(view);
                 view.DataContext = vm;
                 view.Show();
-                App.Current.MainWindow.Close();
+                _view.Close();
             }
         }
 
@@ -225,11 +230,12 @@ namespace Laroni_Travel.ViewModels
             Foutmelding = "";
             if (Foutmelding == "")
             {
-                var vm = new PersoonViewModel();
+              
                 var view = new PersoonView();
+                var vm = new PersoonViewModel(view);
                 view.DataContext = vm;
                 view.Show();
-                App.Current.MainWindow.Close();
+                _view.Close();
             }
         }
 
@@ -238,11 +244,12 @@ namespace Laroni_Travel.ViewModels
             Foutmelding = "";
             if (Foutmelding == "")
             {                
-                var vm = new ReizenViewModel();
+               
                 var view = new ReizenView();
+                var vm = new ReizenViewModel(view);
                 view.DataContext = vm;
                 view.Show();
-                App.Current.MainWindow.Close();
+                _view.Close();
             }
         }
 
