@@ -22,6 +22,9 @@ namespace Laroni_Travel.Models
         [Required]
         public int LeeftijdsCategorieId { get; set; }
 
+        //[Required]
+        //public int DeelnemerGroepsreisId { get; set; }
+
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{dd-MM-yyyy}", ApplyFormatInEditMode = true)]
@@ -38,12 +41,18 @@ namespace Laroni_Travel.Models
 
         //Navigatieproperty
         public Bestemming Bestemming { get; set; }
-        public LeeftijdsCategorie LeeftijdsCategorieen { get; set; }
+        public LeeftijdsCategorie LeeftijdsCategorie { get; set; }
         public Thema Thema { get; set; }
+        //public ICollection<DeelnemerGroepsreis> DeelnemerGroepsreizen { get; set; }
 
         [NotMapped]
-        public float Drinkgeld { get {
-                return Prijs * 0.05f;
-            } }
+        public float Drinkgeld { get { return Prijs * 0.05f;} }
+
+        [NotMapped]
+        public string StartdatumInfo { get { return Startdatum.ToString("dd-MM-yyyy"); } }
+
+        [NotMapped]
+        public string EindddatumInfo { get { return Einddatum.ToString("dd-MM-yyyy"); } }
+
     }
 }

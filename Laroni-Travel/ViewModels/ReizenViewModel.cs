@@ -365,12 +365,9 @@ namespace Laroni_Travel.ViewModels
             Thema = new ObservableCollection<Thema>(_unitOfWork.ThemasRepo.Ophalen());
             LeeftijdsCategorie = new ObservableCollection<LeeftijdsCategorie>(_unitOfWork.LeeftijdsCategorieenRepo.Ophalen());
             DeelnemersRecord = new ObservableCollection<DeelnemerGroepsreis>(_unitOfWork.DeelnemerGroepsreisenRepo.Ophalen());
-            Deelnemers = new ObservableCollection<DeelnemerGroepsreis>(_unitOfWork.DeelnemerGroepsreisenRepo.Ophalen()).Count();
             Thema.ToString();
             LeeftijdsCategorie.ToString();
-            Drinkgeld = Prijs * 0.5f;
             Deelnemers.ToString();
-            //Reizen = new ObservableCollection<Groepsreis>(listReizen);
             NotifyPropertyChanged(nameof(Reizen));
         }        
 
