@@ -40,5 +40,10 @@ namespace Laroni_Travel.Models
         public Bestemming Bestemming { get; set; }
         public LeeftijdsCategorie LeeftijdsCategorieen { get; set; }
         public Thema Thema { get; set; }
+
+        [NotMapped]
+        public float Drinkgeld { get {
+                return Prijs * 0.05f;
+            } }
     }
 }

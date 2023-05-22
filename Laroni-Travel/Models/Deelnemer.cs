@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Laroni_Travel.Models
 {
@@ -53,6 +54,9 @@ namespace Laroni_Travel.Models
 
         [Required]
         public bool Ziekenfonds { get; set; }
+
+        [NotMapped]
+        public string GeboortedatumInfo { get { return Geboortedatum.ToString("dd-MM-yyyy"); } }
 
         //Navigatieproperty
         public virtual ICollection<DeelnemerGroepsreis> DeelnemerGroepsreizen { get; set; }
