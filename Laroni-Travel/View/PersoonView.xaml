@@ -27,6 +27,7 @@
                     <ColumnDefinition />
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
@@ -60,13 +61,20 @@
                         <TextBlock>Zoeken</TextBlock>
                     </StackPanel>
                 </Button>
+                <Label Foreground="White" Grid.Row="0" Grid.Column="4" Margin="15">
+                    <StackPanel>
+                        <TextBlock>Aangemeld:</TextBlock>
+                        <TextBlock Text="{Binding Email}" />
+                    </StackPanel>
+                </Label>
+                <Label Content="Beheer Deelnemer" Foreground="White" FontSize="25" Grid.Row="1" Grid.Column="0" Margin="10" />
                 <DataGrid ItemsSource="{Binding Deelnemers}"
                   SelectedItem="{Binding SelectedDeelnemer}"
 
                   AutoGenerateColumns="False" IsReadOnly="True"
                   AlternatingRowBackground="#BC80AB"
                   Background="LightGray"
-                  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="10">
+                  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="10">
                     <DataGrid.Style>
                         <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MaterialDesignDataGrid}">
                             <Style.Triggers>
@@ -102,7 +110,7 @@
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    Grid.Row="2" Grid.Column="0" Background="White" Margin="10" />
+    Grid.Row="3" Grid.Column="0" Background="White" Margin="10" />
                 <TextBox
                     Text="{Binding DeelnemerRecord.Familienaam}"
     VerticalAlignment="Top"
@@ -112,7 +120,7 @@
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    Grid.Row="3" Grid.Column="0" Background="White" Margin="10" />
+    Grid.Row="4" Grid.Column="0" Background="White" Margin="10" />
                 <TextBox
                     Text="{Binding DeelnemerRecord.Geslacht}"
     VerticalAlignment="Top"
@@ -122,7 +130,7 @@
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    Grid.Row="4" Grid.Column="0" Background="White" Margin="10" />
+    Grid.Row="5" Grid.Column="0" Background="White" Margin="10" />
                 <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Geboortedatum" Grid.Row="5" Grid.Column="0" SelectedDate="{Binding Geboortedatum}" />
                 <TextBox
                     Text="{Binding DeelnemerRecord.Email}"
@@ -143,7 +151,7 @@
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    Grid.Row="2" Grid.Column="1" Background="White" Margin="10" />
+    Grid.Row="3" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
                     Text="{Binding DeelnemerRecord.Huisnummer}"
     VerticalAlignment="Top"
@@ -153,7 +161,7 @@
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    Grid.Row="3" Grid.Column="1" Background="White" Margin="10" />
+    Grid.Row="4" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
                     Text="{Binding DeelnemerRecord.Postcode}"
     VerticalAlignment="Top"
@@ -163,7 +171,7 @@
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    Grid.Row="4" Grid.Column="1" Background="White" Margin="10" />
+    Grid.Row="5" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
                     Text="{Binding DeelnemerRecord.Gemeente}"
     VerticalAlignment="Top"
@@ -173,49 +181,50 @@
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    Grid.Row="5" Grid.Column="1" Background="White" Margin="10" />
+    Grid.Row="6" Grid.Column="1" Background="White" Margin="10" />
                 <CheckBox
                     IsChecked="{Binding DeelnemerRecord.Ziekenfonds}"
-        Content="Lid Ziekenfonds" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
+        Content="Lid Ziekenfonds" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
                 <CheckBox
                     IsChecked="{Binding DeelnemerRecord.Monitor}"
-        Content="Monitor" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
+        Content="Monitor" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
                 <CheckBox
                     IsChecked="{Binding DeelnemerRecord.HoofdMonitor}"
-        Content="Hoofdmonitor" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
+        Content="Hoofdmonitor" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
                 <CheckBox
                     IsChecked="{Binding DeelnemerRecord.Admin}"
-        Content="Admin" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="2" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenDeelnemer">
+        Content="Admin" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="3" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenDeelnemer">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FloppyDisk" Margin="0 0 10 0" />
                         <TextBlock>Deelnemer</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="3" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="AanpassenDeelnemer">
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="4" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="AanpassenDeelnemer">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Edit" Margin="0 0 10 0" />
                         <TextBlock>Deelnemer</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="4" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="VerwijderenDeelnemer">
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="5" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="VerwijderenDeelnemer">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Delete" Margin="0 0 10 0" />
                         <TextBlock>Deelnemer</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="5" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ResettenDeelnemer">
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="6" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ResettenDeelnemer">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Cancel" Margin="0 0 10 0" />
                         <TextBlock>Annuleren</TextBlock>
                     </StackPanel>
                 </Button>
+                <Label Content="Medische gegevens" Grid.Row="9" Grid.Column="0" Foreground="White" FontSize="25" Margin="10" />
                 <DataGrid ItemsSource="{Binding MedischLijst}"
                   SelectedItem="{Binding SelectedMedisch}"
                   AutoGenerateColumns="False" IsReadOnly="True"
                   AlternatingRowBackground="#BC80AB"
                   Background="LightGray"
-                  Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="10 30 10 10">
+                  Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Margin="10 30 10 10">
                     <DataGrid.Style>
                         <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MaterialDesignDataGrid}">
                             <Style.Triggers>
@@ -240,7 +249,7 @@
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto"
-                    Grid.Row="9" Grid.Column="0" Background="White" Margin="10" />
+                    Grid.Row="11" Grid.Column="0" Background="White" Margin="10" />
                 <TextBox
                     Text="{Binding MedischRecord.Medicatie}"
                     VerticalAlignment="Top"
@@ -250,7 +259,7 @@
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto"
-                    Grid.Row="9" Grid.Column="1" Background="White" Margin="10" />
+                    Grid.Row="11" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
                     Text="{Binding MedischRecord.Behandeling}"
                     VerticalAlignment="Top"
@@ -260,26 +269,26 @@
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto"
-                    Grid.Row="10" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="White" Margin="10" />
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="8" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenMedisch">
+                    Grid.Row="12" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="White" Margin="10" />
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="10" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenMedisch">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FloppyDisk" Margin="0 0 10 0" />
-                        <TextBlock>Ziekte</TextBlock>
+                        <TextBlock>Medisch Record</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="9" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="AanpassenMedisch">
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="11" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="AanpassenMedisch">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Edit" Margin="0 0 10 0" />
-                        <TextBlock>Ziekte</TextBlock>
+                        <TextBlock>Medisch Record</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="10" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="VerwijderenMedisch">
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="12" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="VerwijderenMedisch">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Delete" Margin="0 0 10 0" />
-                        <TextBlock>Ziekte</TextBlock>
+                        <TextBlock>Medisch Record</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="11" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ResettenMedisch">
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="13" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ResettenMedisch">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Cancel" Margin="0 0 10 0" />
                         <TextBlock>Annuleren</TextBlock>
