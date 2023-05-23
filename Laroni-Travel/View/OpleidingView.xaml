@@ -60,13 +60,14 @@
                         <TextBlock>Zoeken</TextBlock>
                     </StackPanel>
                 </Button>
+                <Label Content="Beheer Opleiding" Foreground="White" Grid.Row="1" Grid.Column="0" Margin="15" FontSize="25" />
                 <DataGrid ItemsSource="{Binding Opleidingen}"
                   SelectedItem="{Binding SelectedOpleiding}"
 
                   AutoGenerateColumns="False" IsReadOnly="True"
                   AlternatingRowBackground="#BC80AB"
                   Background="LightGray"
-                  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="10">
+                  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="10">
                     <DataGrid.Style>
                         <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MaterialDesignDataGrid}">
                             <Style.Triggers>
@@ -96,7 +97,7 @@
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    Grid.Row="2" Grid.Column="0" Background="White" Margin="10" />
+    Grid.Row="3" Grid.Column="0" Background="White" Margin="10" />
                 <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Datum" Grid.Row="3" Grid.Column="0" Text="{Binding Datum}" />
                 <TextBox
                     Text="{Binding OpleidingRecord.Bestemming.Straatnaam}"
@@ -107,7 +108,7 @@
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    Grid.Row="2" Grid.Column="1" Background="White" Margin="10" />
+    Grid.Row="3" Grid.Column="1" Background="White" Margin="10" />
 
                 <TextBox
                     Text="{Binding OpleidingRecord.Bestemming.Huisnummer}"
@@ -118,7 +119,7 @@
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    Grid.Row="3" Grid.Column="1" Background="White" Margin="10" />
+    Grid.Row="4" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
                     Text="{Binding OpleidingRecord.Bestemming.Postcode}"
     VerticalAlignment="Top"
@@ -128,7 +129,7 @@
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    Grid.Row="4" Grid.Column="1" Background="White" Margin="10" />
+    Grid.Row="5" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
                     Text="{Binding OpleidingRecord.Bestemming.Gemeente}"
     VerticalAlignment="Top"
@@ -138,7 +139,7 @@
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    Grid.Row="5" Grid.Column="1" Background="White" Margin="10" />
+    Grid.Row="6" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
                     Text="{Binding OpleidingRecord.Bestemming.Land}"
     VerticalAlignment="Top"
@@ -148,54 +149,103 @@
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    Grid.Row="6" Grid.Column="1" Background="White" Margin="10" />
+    Grid.Row="7" Grid.Column="1" Background="White" Margin="10" />
 
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="2" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenOpleiding">
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="3" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenOpleiding">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FloppyDisk" Margin="0 0 10 0" />
                         <TextBlock>Opleiding</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="3" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="AanpassenOpleiding">
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="4" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="AanpassenOpleiding">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Edit" Margin="0 0 10 0" />
                         <TextBlock>Opleiding</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="4" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="VerwijderenOpleiding">
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="5" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="VerwijderenOpleiding">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Delete" Margin="0 0 10 0" />
                         <TextBlock>Opleiding</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="5" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ResettenOpleiding">
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="6" Grid.Column="3" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ResettenOpleiding">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Cancel" Margin="0 0 10 0" />
                         <TextBlock>Annuleren</TextBlock>
                     </StackPanel>
                 </Button>
-                <ListView ItemsSource="{Binding Opleiding.DeelnemerOpleiding}" Height="175" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
+                <Label Content="Deelnemers opleiding" Foreground="White" Grid.Row="8" Grid.Column="0" Margin="15" FontSize="25" />
+                <ListView ItemsSource="{Binding Opleiding.DeelnemerOpleiding}" Height="175" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2">
                     <ListView.View>
                         <GridView>
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="Foreground" Value="white" />
+                                    <Setter Property="Margin" Value="15" />
+                                    <Setter Property="BorderBrush" Value="Transparent" />
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
                             <GridViewColumn
-        DisplayMemberBinding="{Binding DeelnemerId}"
-        Header="Deelnemer ID" />
+        DisplayMemberBinding="{Binding Deelnemers.Voornaam}"
+        Header="Voornaam" />
                             <GridViewColumn
-        DisplayMemberBinding="{Binding Naam}"
+        DisplayMemberBinding="{Binding Deelnemers.Naam}"
         Header="Naam" />
                             <GridViewColumn
-        Header="Betaald">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox
-            VerticalAlignment="Center"
-            IsChecked="{Binding IsSelected}" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+        DisplayMemberBinding="{Binding Deelnemers.Leeftijd}"
+        Header="Leeftijd" />
                         </GridView>
                     </ListView.View>
                 </ListView>
+                <TextBox
+                    Text="{Binding Deelnemer.Familienaam}"
+                    materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
+                    VerticalAlignment="center"
+                    materialDesign:HintAssist.Hint="Familienaam..."
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto" Grid.Row="9" Grid.Column="1" Foreground="Black" Background="White" Margin="15" />
+                <Button materialDesign:ButtonAssist.CornerRadius="20" Height="50" Grid.Row="9" Grid.Column="2" Margin="15" Background="#3D004E" Command="{Binding}" CommandParameter="Zoeken">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Search" Margin="0 0 10 0" />
+                        <TextBlock>Zoeken</TextBlock>
+                    </StackPanel>
+                </Button>
+                <DataGrid ItemsSource="{Binding Deelnemers}"
+                  SelectedItem="{Binding SelectedDeelnemer}"
+                  AutoGenerateColumns="False" IsReadOnly="True"
+                  AlternatingRowBackground="#BC80AB"
+                  Background="LightGray"
+                  Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" Margin="10">
+                    <DataGrid.Style>
+                        <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=Items.Count, RelativeSource={RelativeSource Self}}" Value="0">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.Style>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Deelnemer.Voornaam}" Header="Voornaam" />
+                        <DataGridTextColumn Binding="{Binding Deelnemer.Naam}" Header="Naam" />
+                        <DataGridTextColumn Binding="{Binding Deelnemer.Leeftijd}" Header="Leeftijd" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="10" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenGroepsreis">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>Toevoegen aan Opleiding</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="11" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenGroepsreis">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>Verwijderen uit Opleiding</TextBlock>
+                    </StackPanel>
+                </Button>
             </Grid>
         </ScrollViewer>
         <Grid Width="200" HorizontalAlignment="Left" Background="#060047">
