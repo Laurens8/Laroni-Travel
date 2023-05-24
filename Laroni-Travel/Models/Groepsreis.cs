@@ -52,7 +52,7 @@ namespace Laroni_Travel.Models
         public string StartdatumInfo { get { return Startdatum.ToString("dd-MM-yyyy"); } }
 
         [NotMapped]
-        public string EindddatumInfo { get { return Einddatum.ToString("dd-MM-yyyy"); } }
+        public string EinddatumInfo { get { return Einddatum.ToString("dd-MM-yyyy"); } }
 
     }
 }

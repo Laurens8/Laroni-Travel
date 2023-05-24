@@ -26,7 +26,7 @@ namespace Laroni_Travel.Models
         public string Land { get; set; }
 
         //Navigatieproperty
-        public virtual ICollection<OpleidingBestemming> OpleidingBestemmingen { get; set; }
-        public virtual ICollection<Deelnemer> Deelnemers { get; set; }
+        public ICollection<OpleidingBestemming> OpleidingBestemmingen { get; set; }
+        public ICollection<Deelnemer> Deelnemers { get; set; }
     }
 }
