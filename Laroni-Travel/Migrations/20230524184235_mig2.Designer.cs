@@ -4,6 +4,7 @@ using Laroni_Travel.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Laroni_Travel.Migrations
 {
     [DbContext(typeof(Laroni_TravelContext))]
-    partial class Laroni_TravelContextModelSnapshot : ModelSnapshot
+    [Migration("20230524184235_mig2")]
+    partial class mig2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,6 +163,9 @@ namespace Laroni_Travel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DeelnemerOpleidingId"));
 
+                    b.Property<int?>("BestemmingId")
+                        .HasColumnType("int");
+
                     b.Property<int>("DeelnemerId")
                         .HasColumnType("int");
 
@@ -168,11 +174,13 @@ namespace Laroni_Travel.Migrations
 
                     b.HasKey("DeelnemerOpleidingId");
 
+                    b.HasIndex("BestemmingId");
+
                     b.HasIndex("DeelnemerId");
 
                     b.HasIndex("OpleidingId");
 
-                    b.ToTable("DeelnemerOpleidingen");
+                    b.ToTable("DeelnemerOpleiding");
                 });
 
             modelBuilder.Entity("Laroni_Travel.Models.Groepsreis", b =>
@@ -299,7 +307,7 @@ namespace Laroni_Travel.Migrations
 
                     b.HasIndex("OpleidingId");
 
-                    b.ToTable("OpleidingBestemmingen");
+                    b.ToTable("OpleidingBestemming");
                 });
 
             modelBuilder.Entity("Laroni_Travel.Models.Rol", b =>
@@ -372,6 +380,10 @@ namespace Laroni_Travel.Migrations
 
             modelBuilder.Entity("Laroni_Travel.Models.DeelnemerOpleiding", b =>
                 {
+                    b.HasOne("Laroni_Travel.Models.Bestemming", null)
+                        .WithMany("OpleidingBestemmingen")
+                        .HasForeignKey("BestemmingId");
+
                     b.HasOne("Laroni_Travel.Models.Deelnemer", "Deelnemer")
                         .WithMany("DeelnemerOpleidingen")
                         .HasForeignKey("DeelnemerId")
@@ -430,7 +442,7 @@ namespace Laroni_Travel.Migrations
             modelBuilder.Entity("Laroni_Travel.Models.OpleidingBestemming", b =>
                 {
                     b.HasOne("Laroni_Travel.Models.Bestemming", "Bestemming")
-                        .WithMany("OpleidingBestemmingen")
+                        .WithMany()
                         .HasForeignKey("BestemmingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

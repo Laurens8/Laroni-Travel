@@ -21,6 +21,7 @@ namespace Laroni_Travel.ViewModels
         private Opleiding _opleidingSelected;
         private Opleiding _opleidingRecord;
         private ObservableCollection<OpleidingBestemming> _bestemming;
+        private ObservableCollection<DeelnemerOpleiding> _deelnemers;
         private string _beschrijving;
         private string _straatnaam;
         private string _huisnummer;
@@ -29,8 +30,7 @@ namespace Laroni_Travel.ViewModels
         private string _land;
         private Window _view;
         private DateTime _datum;
-        public string ID { get; set; }
-        public int Deelnemers { get; set; }
+        public string ID { get; set; }        
         private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
         public string Foutmelding { get; set; }
 
@@ -52,6 +52,16 @@ namespace Laroni_Travel.ViewModels
         {
             _unitOfWork.Dispose();
         }
+
+        public ObservableCollection<DeelnemerOpleiding> Deelnemers 
+        {
+            get { return _deelnemers; }
+            set { _deelnemers = value; 
+            NotifyPropertyChanged();
+            }
+        }
+           
+        
 
         public ObservableCollection<Opleiding> Opleidingen
         {
@@ -271,12 +281,12 @@ namespace Laroni_Travel.ViewModels
         private void RefreshOpleidingen()
         {
             List<Opleiding> listOpleiding = (List<Opleiding>)_unitOfWork.OpleidingenRepo.Ophalen(x => x.OpleidingId == int.Parse(ID));    
-            Bestemming = new ObservableCollection<OpleidingBestemming>(_unitOfWork.OpleidingBestemmingenRepo.Ophalen());
-            Deelnemers = new ObservableCollection<DeelnemerOpleiding>(_unitOfWork.DeelnemerOpleidingenRepo.Ophalen()).Count();
-
+            Bestemming = new ObservableCollection<OpleidingBestemming>(_unitOfWork.OpleidingBestemmingenRepo.Ophalen(b => b.Bestemming));
+            Deelnemers = new ObservableCollection<DeelnemerOpleiding>(_unitOfWork.DeelnemerOpleidingenRepo.Ophalen(d => d.Deelnemer));
             Opleidingen = new ObservableCollection<Opleiding>(listOpleiding);
             NotifyPropertyChanged(nameof(Opleidingen));
             NotifyPropertyChanged(nameof(Bestemming));
+            NotifyPropertyChanged(nameof(Deelnemers));
         }
 
         private void OpleidingRecordInstellen()

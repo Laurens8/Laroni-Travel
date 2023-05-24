@@ -24,7 +24,7 @@ namespace Laroni_Travel.Models
         public string DatumInfo { get { return Datum.ToString("dd-MM-yyyy"); } }
 
         //Navigatieproperty
-        public virtual ICollection<OpleidingBestemming> OpleidingBestemmingen { get; set; }
+        public OpleidingBestemming OpleidingBestemmingen { get; set; }
         public ICollection<DeelnemerOpleiding> DeelnemerOpleidingen { get; set; }
     }
 }

@@ -59,8 +59,8 @@ namespace Laroni_Travel.Models
         public string GeboortedatumInfo { get { return Geboortedatum.ToString("dd-MM-yyyy"); } }
 
         //Navigatieproperty
-        public virtual ICollection<DeelnemerGroepsreis> DeelnemerGroepsreizen { get; set; }
-        public virtual ICollection<DeelnemerOpleiding> DeelnemerOpleidingen { get; set; }
-        public virtual ICollection<Medisch> Medische { get; set; }
+        public ICollection<DeelnemerGroepsreis> DeelnemerGroepsreizen { get; set; }
+        public ICollection<DeelnemerOpleiding> DeelnemerOpleidingen { get; set; }
+        public ICollection<Medisch> Medische { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using Laroni_Travel.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Laroni_Travel.Migrations
 {
     [DbContext(typeof(Laroni_TravelContext))]
-    partial class Laroni_TravelContextModelSnapshot : ModelSnapshot
+    [Migration("20230524184928_mig")]
+    partial class mig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,7 +175,7 @@ namespace Laroni_Travel.Migrations
 
                     b.HasIndex("OpleidingId");
 
-                    b.ToTable("DeelnemerOpleidingen");
+                    b.ToTable("DeelnemerOpleiding");
                 });
 
             modelBuilder.Entity("Laroni_Travel.Models.Groepsreis", b =>
@@ -299,7 +302,7 @@ namespace Laroni_Travel.Migrations
 
                     b.HasIndex("OpleidingId");
 
-                    b.ToTable("OpleidingBestemmingen");
+                    b.ToTable("OpleidingBestemming");
                 });
 
             modelBuilder.Entity("Laroni_Travel.Models.Rol", b =>
