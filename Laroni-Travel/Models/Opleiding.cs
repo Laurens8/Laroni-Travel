@@ -8,22 +8,25 @@ using System.Threading.Tasks;
 
 namespace Laroni_Travel.Models
 {
-    public class Opleiding
+    public partial class Opleiding
     {
         [Key]
         public int OpleidingId { get; set; }
         [Required]
         public string Beschrijving { get; set; }
         [Required]
-        public DateTime Datum { get; set; }       
-
+        public DateTime Datum { get; set; }
         [Required]
-        public int AantalDeelnemers { get { return DeelnemerOpleidingen.Count(); } }
+        public int MaxAantalDeelenemrs { get; set; }
+ 
+        [NotMapped]
+        public string AantalDeelnemers { get { return DeelnemerOpleidingen.Count() + " / " + MaxAantalDeelenemrs; } }
 
         [NotMapped]
         public string DatumInfo { get { return Datum.ToString("dd-MM-yyyy"); } }
 
         //Navigatieproperty
+        //public ICollection<OpleidingBestemming> OpleidingBestemmingen { get; set; }
         public OpleidingBestemming OpleidingBestemmingen { get; set; }
         public ICollection<DeelnemerOpleiding> DeelnemerOpleidingen { get; set; }
     }

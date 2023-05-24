@@ -360,11 +360,11 @@ namespace Laroni_Travel.ViewModels
         private void RefreshReizen()
         {
             //List<Groepsreis> listReizen = (List<Groepsreis>)_unitOfWork.GroepsreisenRepo.Ophalen(x => x.GroepsreisId == int.Parse(ID));
-            Reizen = new ObservableCollection<Groepsreis>(_unitOfWork.GroepsreisenRepo.Ophalen(r => r.LeeftijdsCategorieId == int.Parse(ID)));
+            Reizen = new ObservableCollection<Groepsreis>(_unitOfWork.GroepsreisenRepo.Ophalen(r => r.GroepsreisId == int.Parse(ID)));
             Bestemming = new ObservableCollection<Bestemming>(_unitOfWork.BestemmingenRepo.Ophalen());
             Thema = new ObservableCollection<Thema>(_unitOfWork.ThemasRepo.Ophalen());
             LeeftijdsCategorie = new ObservableCollection<LeeftijdsCategorie>(_unitOfWork.LeeftijdsCategorieenRepo.Ophalen());
-            DeelnemersRecord = new ObservableCollection<DeelnemerGroepsreis>(_unitOfWork.DeelnemerGroepsreisenRepo.Ophalen());
+            DeelnemersRecord = new ObservableCollection<DeelnemerGroepsreis>(_unitOfWork.DeelnemerGroepsreisenRepo.Ophalen(d => d.Deelnemer));
             Thema.ToString();
             LeeftijdsCategorie.ToString();
             Deelnemers.ToString();
