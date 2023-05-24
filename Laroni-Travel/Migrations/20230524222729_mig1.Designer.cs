@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Laroni_Travel.Migrations
 {
     [DbContext(typeof(Laroni_TravelContext))]
-    [Migration("20230520225025_mig1")]
+    [Migration("20230524222729_mig1")]
     partial class mig1
     {
         /// <inheritdoc />
@@ -195,6 +195,9 @@ namespace Laroni_Travel.Migrations
                     b.Property<int>("LeeftijdsCategorieId")
                         .HasColumnType("int");
 
+                    b.Property<int>("MaxAantalDeelenemrs")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Prijs")
                         .HasColumnType("money");
 
@@ -277,6 +280,9 @@ namespace Laroni_Travel.Migrations
                     b.Property<DateTime>("Datum")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("MaxAantalDeelenemrs")
+                        .HasColumnType("int");
+
                     b.HasKey("OpleidingId");
 
                     b.ToTable("Opleidingen");
@@ -355,7 +361,7 @@ namespace Laroni_Travel.Migrations
                         .IsRequired();
 
                     b.HasOne("Laroni_Travel.Models.Groepsreis", "Groepsreis")
-                        .WithMany()
+                        .WithMany("DeelnemerGroepsreizen")
                         .HasForeignKey("GroepsreisId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -400,7 +406,7 @@ namespace Laroni_Travel.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Laroni_Travel.Models.LeeftijdsCategorie", "LeeftijdsCategorieen")
+                    b.HasOne("Laroni_Travel.Models.LeeftijdsCategorie", "LeeftijdsCategorie")
                         .WithMany()
                         .HasForeignKey("LeeftijdsCategorieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -414,7 +420,7 @@ namespace Laroni_Travel.Migrations
 
                     b.Navigation("Bestemming");
 
-                    b.Navigation("LeeftijdsCategorieen");
+                    b.Navigation("LeeftijdsCategorie");
 
                     b.Navigation("Thema");
                 });
@@ -463,6 +469,11 @@ namespace Laroni_Travel.Migrations
                     b.Navigation("DeelnemerOpleidingen");
 
                     b.Navigation("Medische");
+                });
+
+            modelBuilder.Entity("Laroni_Travel.Models.Groepsreis", b =>
+                {
+                    b.Navigation("DeelnemerGroepsreizen");
                 });
 
             modelBuilder.Entity("Laroni_Travel.Models.Opleiding", b =>

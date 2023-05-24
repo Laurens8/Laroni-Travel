@@ -55,6 +55,9 @@ namespace Laroni_Travel.Models
         [Required]
         public bool Ziekenfonds { get; set; }
 
+        //[Required]
+        //public string Wachtwoord { get; set; }
+
         [NotMapped]
         public string GeboortedatumInfo { get { return Geboortedatum.ToString("dd-MM-yyyy"); } }
 

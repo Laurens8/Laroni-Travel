@@ -49,7 +49,8 @@ namespace Laroni_Travel.Migrations
                     OpleidingId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Beschrijving = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Datum = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Datum = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MaxAantalDeelenemrs = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -146,11 +147,12 @@ namespace Laroni_Travel.Migrations
                     GroepsreisId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BestemmingId = table.Column<int>(type: "int", nullable: false),
-                    Einddatum = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ThemaId = table.Column<int>(type: "int", nullable: false),
                     LeeftijdsCategorieId = table.Column<int>(type: "int", nullable: false),
+                    Einddatum = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Prijs = table.Column<decimal>(type: "money", nullable: false),
                     Startdatum = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ThemaId = table.Column<int>(type: "int", nullable: false)
+                    MaxAantalDeelenemrs = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
