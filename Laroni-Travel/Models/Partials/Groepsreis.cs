@@ -6,19 +6,27 @@ using System.Threading.Tasks;
 
 namespace Laroni_Travel.Models
 {
-    public partial class Opleiding : Basisklasse
+    public partial class Groepsreis : Basisklasse
     {
         public override string this[string columnName]
         {
             get
             {
-                if (columnName == "Beschrijving" && string.IsNullOrWhiteSpace(Beschrijving))
+                if (columnName == "Prijs" && Prijs == null)
                 {
-                    return "Beschrijving moet ingevuld zijn";
+                    return "Prijs moet ingevuld zijn";
                 }
-                if (columnName == "Datum" && Datum == null)
+                if (columnName == "Prijs" && !IsNumeriek(Prijs))
                 {
-                    return "Datum moet ingevuld zijn";
+                    return "Prijs moet numeriek zijn";
+                }
+                if (columnName == "Startdatum" && Startdatum == null)
+                {
+                    return "Startdatum moet ingevuld zijn";
+                }
+                if (columnName == "Einddatum" && Einddatum == null)
+                {
+                    return "Einddatum moet ingevuld zijn";
                 }
                 if (columnName == "MaxAantalDeelenemrs" && MaxAantalDeelenemrs == null)
                 {
@@ -32,11 +40,11 @@ namespace Laroni_Travel.Models
             }
         }
 
-        public bool IsNumeriek(int input)
+        public bool IsNumeriek(float input)
         {
             bool isNumeriek;
             string nummer = MaxAantalDeelenemrs.ToString();
-            if (int.TryParse(nummer, out input))
+            if (float.TryParse(nummer, out input))
             {
                 return isNumeriek = true;
             }

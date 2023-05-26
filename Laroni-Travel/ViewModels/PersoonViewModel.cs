@@ -60,6 +60,52 @@ namespace Laroni_Travel.ViewModels
             MedischRecordInstellen();
         }
 
+        public override bool CanExecute(object parameter)
+        {
+            switch (parameter.ToString())
+            {
+                case "ToevoegenDeelnemer": return true;
+                case "AanpassenDeelnemer": return true;
+                case "VerwijderenDeelnemer": return true;
+                case "ToevoegenMedisch": return true;
+                case "AanpassenMedisch": return true;
+                case "VerwijderenMedisch": return true;
+                case "Zoeken": return true;
+                case "ResettenDeelnemer": return true;
+                case "ResettenMedisch": return true;
+                case "OpenOpleidingView": return true;
+                case "OpenReizenView": return true;
+                case "OpenHomeView": return true;
+                case "OpenInlogView": return true;
+            }
+            return true;
+        }
+
+        public void Dispose()
+        {
+            _unitOfWork?.Dispose();
+        }
+
+        public override void Execute(object parameter)
+        {
+            switch (parameter.ToString())
+            {
+                case "ToevoegenDeelnemer": ToevoegenDeelnemer(); break;
+                case "AanpassenDeelnemer": AanpassenDeelnemer(); break;
+                case "VerwijderenDeelnemer": VerwijderenDeelnemer(); break;
+                case "Zoeken": Zoeken(); break;
+                case "ResettenDeelnemer": ResettenDeelnemer(); break;
+                case "OpenOpleidingView": OpenOpleidingView(); break;
+                case "OpenReizenView": OpenReizenView(); break;
+                case "OpenHomeView": OpenHomeView(); break;
+                case "OpenInlogView": OpenInlogView(); break;
+                case "ToevoegenMedisch": ToevoegenMedisch(); break;
+                case "AanpassenMedisch": AanpassenMedisch(); break;
+                case "VerwijderenMedisch": VerwijderenMedisch(); break;
+                case "ResettenMedisch": ResettenMedisch(); break;
+            }
+        }
+
         public string Omschrijving
         {
             get { return _omschrijving; }
@@ -299,52 +345,6 @@ namespace Laroni_Travel.ViewModels
             else
             {
                 Foutmelding = "Selecteer een Medisch record!";
-            }
-        }
-
-        public override bool CanExecute(object parameter)
-        {
-            switch (parameter.ToString())
-            {
-                case "ToevoegenDeelnemer": return true;
-                case "AanpassenDeelnemer": return true;
-                case "VerwijderenDeelnemer": return true;
-                case "ToevoegenMedisch": return true;
-                case "AanpassenMedisch": return true;
-                case "VerwijderenMedisch": return true;
-                case "Zoeken": return true;
-                case "ResettenDeelnemer": return true;
-                case "ResettenMedisch": return true;
-                case "OpenOpleidingView": return true;
-                case "OpenReizenView": return true;
-                case "OpenHomeView": return true;
-                case "OpenInlogView": return true;
-            }
-            return true;
-        }
-
-        public void Dispose()
-        {
-            _unitOfWork?.Dispose();
-        }
-
-        public override void Execute(object parameter)
-        {
-            switch (parameter.ToString())
-            {
-                case "ToevoegenDeelnemer": ToevoegenDeelnemer(); break;
-                case "AanpassenDeelnemer": AanpassenDeelnemer(); break;
-                case "VerwijderenDeelnemer": VerwijderenDeelnemer(); break;
-                case "Zoeken": Zoeken(); break;
-                case "ResettenDeelnemer": ResettenDeelnemer(); break;
-                case "OpenPersoonView": OpenOpleidingView(); break;
-                case "OpenReizenView": OpenReizenView(); break;
-                case "OpenHomeView": OpenHomeView(); break;
-                case "OpenInlogView": OpenInlogView(); break;
-                case "ToevoegenMedisch": ToevoegenMedisch(); break;
-                case "AanpassenMedisch": AanpassenMedisch(); break;
-                case "VerwijderenMedisch": VerwijderenMedisch(); break;
-                case "ResettenMedisch": ResettenMedisch(); break;
             }
         }
 

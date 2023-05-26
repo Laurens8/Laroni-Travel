@@ -29,17 +29,19 @@ namespace Laroni_Travel.ViewModels
         private string _postcode;
         private string _gemeente;
         private string _land;
+        private string _familienaam;
         private DateTime _datum;
-        private Window _view;       
+        private int _maxAantalDeelenemrs;
+        private Window _view;
+        private Deelnemer _selectedDeelnemer;
+        private Deelnemer _deelnemerRecord;
         public string ID { get; set; }                
         public string Foutmelding { get; set; }
+        public ObservableCollection<Deelnemer> DeelnemersLijst { get; set; }
 
         public override string this[string columnName]
         {
-            get
-            {
-                return "";
-            }
+            get { return columnName; }
         }
 
         public OpleidingViewModel(Window view)
@@ -51,6 +53,47 @@ namespace Laroni_Travel.ViewModels
         public void Dispose()
         {
             _unitOfWork.Dispose();
+        }
+
+        public Deelnemer DeelnemerRecord
+        {
+            get { return _deelnemerRecord; }
+            set
+            {
+                _deelnemerRecord = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string Familienaam
+        {
+            get { return _familienaam; }
+            set
+            {
+                _familienaam = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public Deelnemer SelectedDeelnemer
+        {
+            get { return _selectedDeelnemer; }
+            set
+            {
+                _selectedDeelnemer = value;
+                DeelnemerRecordInstellen();
+                NotifyPropertyChanged();
+            }
+        }
+
+        public int MaxAantalDeelenemrs
+        {
+            get { return _maxAantalDeelenemrs; }
+            set
+            {
+                _maxAantalDeelenemrs = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public ObservableCollection<DeelnemerOpleiding> Deelnemers 
@@ -185,6 +228,7 @@ namespace Laroni_Travel.ViewModels
                 case "OpenHomeView": return true;
                 case "OpenInlogView": return true;
                 case "Zoeken": return true;
+                case "ZoekenDeelnemer": return true;
             }
             return true;
         }
@@ -202,6 +246,7 @@ namespace Laroni_Travel.ViewModels
                 case "OpenHomeView": OpenHomeView(); break;
                 case "OpenInlogView": OpenInlogView(); break;
                 case "Zoeken": Zoeken(); break;
+                case "ZoekenDeelnemer": ZoekenDeelnemer(); break;
             }
         }
 
@@ -276,28 +321,36 @@ namespace Laroni_Travel.ViewModels
             }
         }
 
+        public void ZoekenDeelnemer()
+        {
+            Foutmelding = "";
+            RefreshDeelnemer();
+            if (DeelnemersLijst == null || DeelnemersLijst.Count <= 0)
+            {
+                Foutmelding = "Er zijn geen deelnemers gevonden";
+            }
+            else
+            {
+                Foutmelding = this.Error;
+            }
+        }
+
         private void RefreshOpleidingen()
         {
             List<Opleiding> listOpleiding = (List<Opleiding>)_unitOfWork.OpleidingenRepo.Ophalen(x => x.OpleidingId == int.Parse(ID));    
             Bestemming = new ObservableCollection<OpleidingBestemming>(_unitOfWork.OpleidingBestemmingenRepo.Ophalen(b => b.Bestemming));
-            Deelnemers = new ObservableCollection<DeelnemerOpleiding>(_unitOfWork.DeelnemerOpleidingenRepo.Ophalen(d => d.Deelnemer));
+            Deelnemers = new ObservableCollection<DeelnemerOpleiding>(_unitOfWork.DeelnemerOpleidingenRepo.Ophalen(d => d.Deelnemer).Where(d => d.OpleidingId == int.Parse(ID)));
             Opleidingen = new ObservableCollection<Opleiding>(listOpleiding);            
             NotifyPropertyChanged(nameof(Opleidingen));
             NotifyPropertyChanged(nameof(Deelnemers));
             NotifyPropertyChanged(nameof(Bestemming));
         }
 
-        private void OpleidingRecordInstellen()
+        private void RefreshDeelnemer()
         {
-            if (SelectedOpleiding != null)
-            {
-                OpleidingRecord = SelectedOpleiding;
-                NotifyPropertyChanged(nameof(SelectedOpleiding));
-            }
-            else
-            {
-                OpleidingRecord = new Opleiding();
-            }
+            List<Deelnemer> listDeelnemers = _unitOfWork.DeelnemersRepo.Ophalen(x => x.Familienaam.Contains(Familienaam)).ToList();
+            DeelnemersLijst = new ObservableCollection<Deelnemer>(listDeelnemers);
+            NotifyPropertyChanged(nameof(DeelnemersLijst));
         }
 
         private void FoutmeldingInstellenNaSave(int ok, string melding)
@@ -356,6 +409,32 @@ namespace Laroni_Travel.ViewModels
             _unitOfWork.OpleidingenRepo.Toevoegen(OpleidingRecord);
             int ok = _unitOfWork.Save();
             FoutmeldingInstellenNaSave(ok, "Opleiding is niet toegevoegd");
-        }   
+        }
+
+        private void OpleidingRecordInstellen()
+        {
+            if (SelectedOpleiding != null)
+            {
+                OpleidingRecord = SelectedOpleiding;
+                NotifyPropertyChanged(nameof(SelectedOpleiding));
+            }
+            else
+            {
+                OpleidingRecord = new Opleiding();
+            }
+        }
+
+        private void DeelnemerRecordInstellen()
+        {
+            if (SelectedDeelnemer != null)
+            {
+                DeelnemerRecord = SelectedDeelnemer;
+                NotifyPropertyChanged(nameof(SelectedDeelnemer));
+            }
+            else
+            {
+                DeelnemerRecord = new Deelnemer();
+            }
+        }
     }
 }

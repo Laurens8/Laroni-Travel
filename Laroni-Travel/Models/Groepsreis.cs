@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Laroni_Travel.Models
 {
-    public class Groepsreis
+    public partial class Groepsreis
     {
         [Key]
         public int GroepsreisId { get; set; }

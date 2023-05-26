@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Laroni_Travel.Models
 {
-    public class Bestemming
+    public partial class Bestemming
     {
         [Key]
         public int BestemmingId { get; set; }
