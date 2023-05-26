@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laroni_Travel.View"
         mc:Ignorable="d"
-        Title="ReizenView" Height="600" Width="1080"
+        Title="ReizenView" Height="834" Width="1448"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -110,14 +110,14 @@
                     HorizontalAlignment="Left"
                     materialDesign:HintAssist.Hint="Leeftijdscategorieën"
                     IsEnabled="{Binding Path=IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}"
-                    SelectedItem="{Binding ReisRecord.LeeftijdsCategorieen}"
+                    SelectedItem="{Binding ReisRecord.LeeftijdsCategorie}"
                     ItemsSource="{Binding LeeftijdsCategorie}"
                     SelectedValue="{Binding ReisRecord.LeeftijdsCategorieId, ValidatesOnDataErrors=True}"
                     SelectedValuePath="Id"
                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     Grid.Row="4" Grid.Column="0" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Straatnaam}"
+                    Text="{Binding ReisRecord.Bestemming.Straatnaam, ValidatesOnDataErrors=True}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Straatnaam"
                     AcceptsReturn="True"
@@ -127,7 +127,7 @@
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="3" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Huisnummer}"
+                    Text="{Binding ReisRecord.Bestemming.Huisnummer, ValidatesOnDataErrors=True}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Huisnummer"
                     AcceptsReturn="True"
@@ -137,7 +137,7 @@
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="4" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Postcode}"
+                    Text="{Binding ReisRecord.Bestemming.Postcode, ValidatesOnDataErrors=True}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Postcode"
                     AcceptsReturn="True"
@@ -147,7 +147,7 @@
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="5" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Gemeente}"
+                    Text="{Binding ReisRecord.Bestemming.Gemeente, ValidatesOnDataErrors=True}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Gemeente"
                     AcceptsReturn="True"
@@ -157,7 +157,7 @@
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="6" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Land}"
+                    Text="{Binding ReisRecord.Bestemming.Land, ValidatesOnDataErrors=True}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Land"
                     AcceptsReturn="True"
@@ -166,8 +166,18 @@
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="7" Grid.Column="1" Background="White" Margin="10" />
-                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Startdatum" Grid.Row="3" Grid.Column="2" Text="{Binding ReisRecord.StartDatum}" />
-                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Einddatum" Grid.Row="4" Grid.Column="2" Text="{Binding ReisRecord.EindDatum}" />
+                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Startdatum" Grid.Row="3" Grid.Column="2" Text="{Binding ReisRecord.Startdatum, ValidatesOnDataErrors=True}" />
+                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Einddatum" Grid.Row="4" Grid.Column="2" Text="{Binding ReisRecord.Einddatum, ValidatesOnDataErrors=True}" />
+                <TextBox
+                    Text="{Binding ReisRecord.MaxAantalDeelenemrs, ValidatesOnDataErrors=True}"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Max. Aantal Deelnemers"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="5" Grid.Column="2" Background="White" Margin="10" />
                 <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="3" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenGroepsreis">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FloppyDisk" Margin="0 0 10 0" />
@@ -193,7 +203,7 @@
                     </StackPanel>
                 </Button>
                 <Label Content="Deelnemers reis" Margin="15" Foreground="White" FontSize="25" Grid.Row="8" Grid.Column="0" />
-                <ListView ItemsSource="{Binding Reizen.Deelnemers}" Grid.Row="9" Grid.Column="0" Margin="15">
+                <ListView ItemsSource="{Binding DeelnemersRecord}" Grid.Row="9" Grid.Column="0" Margin="15">
                     <ListView.View>
                         <GridView>
                             <GridView.ColumnHeaderContainerStyle>
@@ -205,7 +215,7 @@
                                 </Style>
                             </GridView.ColumnHeaderContainerStyle>
                             <GridViewColumn DisplayMemberBinding="{Binding DeelnemerId}" Header="Deelnemer ID" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Naam}" Header="Naam" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Deelnemer.Familienaam}" Header="Naam" />
                             <GridViewColumn Header="Betaald">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -217,7 +227,7 @@
                     </ListView.View>
                 </ListView>
                 <TextBox
-                    Text="{Binding Deelnemer.Familienaam}"
+                    Text="{Binding Familienaam}"
                     materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
                     VerticalAlignment="center"
                     materialDesign:HintAssist.Hint="Familienaam..."
@@ -226,13 +236,13 @@
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto" Grid.Row="9" Grid.Column="1" Foreground="Black" Background="White" Margin="15" />
-                <Button materialDesign:ButtonAssist.CornerRadius="20" Height="50" Grid.Row="9" Grid.Column="2" Margin="15" Background="#3D004E" Command="{Binding}" CommandParameter="Zoeken">
+                <Button materialDesign:ButtonAssist.CornerRadius="20" Height="50" Grid.Row="9" Grid.Column="2" Margin="15" Background="#3D004E" Command="{Binding}" CommandParameter="ZoekenDeelnemer">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Search" Margin="0 0 10 0" />
                         <TextBlock>Zoeken</TextBlock>
                     </StackPanel>
                 </Button>
-                <DataGrid ItemsSource="{Binding Deelnemers}"
+                <DataGrid ItemsSource="{Binding DeelnemersLijst}"
                   SelectedItem="{Binding SelectedDeelnemer}"
                   AutoGenerateColumns="False" IsReadOnly="True"
                   AlternatingRowBackground="#BC80AB"
@@ -248,9 +258,9 @@
                         </Style>
                     </DataGrid.Style>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Deelnemer.Voornaam}" Header="Voornaam" />
-                        <DataGridTextColumn Binding="{Binding Deelnemer.Naam}" Header="Naam" />
-                        <DataGridTextColumn Binding="{Binding Deelnemer.Leeftijd}" Header="Leeftijd" />
+                        <DataGridTextColumn Binding="{Binding Voornaam}" Header="Voornaam" />
+                        <DataGridTextColumn Binding="{Binding Familienaam}" Header="Naam" />
+                        <DataGridTextColumn Binding="{Binding GeboortedatumInfo}" Header="Leeftijd" />
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="10" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenGroepsreis">

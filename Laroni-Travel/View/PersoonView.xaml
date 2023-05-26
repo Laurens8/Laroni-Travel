@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Laroni_Travel.View"
         mc:Ignorable="d"
         Title="PersoonView" Height="600" Width="1080"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:local1="clr-namespace:Laroni_Travel.Models"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -64,7 +64,7 @@
                 <Label Foreground="White" Grid.Row="0" Grid.Column="4" Margin="15">
                     <StackPanel>
                         <TextBlock>Aangemeld:</TextBlock>
-                        <TextBlock Text="{Binding Email}" />
+                        <TextBlock Text="{Binding InlogEmail}" />
                     </StackPanel>
                 </Label>
                 <Label Content="Beheer Deelnemer" Foreground="White" FontSize="25" Grid.Row="1" Grid.Column="0" Margin="10" />
@@ -102,7 +102,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Voornaam}"
+                    Text="{Binding DeelnemerRecord.Voornaam, ValidatesOnDataErrors=True}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Voornaam"
     AcceptsReturn="True"
@@ -112,7 +112,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="3" Grid.Column="0" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Familienaam}"
+                    Text="{Binding DeelnemerRecord.Familienaam, ValidatesOnDataErrors=True}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Familienaam"
     AcceptsReturn="True"
@@ -122,7 +122,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="4" Grid.Column="0" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Geslacht}"
+                    Text="{Binding DeelnemerRecord.Geslacht, ValidatesOnDataErrors=True}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Geslacht"
     AcceptsReturn="True"
@@ -130,10 +130,10 @@
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    Grid.Row="5" Grid.Column="0" Background="White" Margin="10" />
-                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Geboortedatum" Grid.Row="5" Grid.Column="0" SelectedDate="{Binding Geboortedatum}" />
+    Grid.Row="5" Grid.Column="0" Background="white" Margin="10" />
+                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Geboortedatum" Grid.Row="6" Grid.Column="0" SelectedDate="{Binding Geboortedatum, ValidatesOnDataErrors=True}" />
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Email}"
+                    Text="{Binding DeelnemerRecord.Email, ValidatesOnDataErrors=True}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Email"
     AcceptsReturn="True"
@@ -141,19 +141,19 @@
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
-    Grid.Row="6" Grid.Column="0" Background="White" Margin="10" />
+    Grid.Row="7" Grid.Column="0" Background="White" Margin="10" />
+
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Straatnaam}"
+                    Text="{Binding DeelnemerRecord.Straatnaam, ValidatesOnDataErrors=True}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Straatnaam"
     AcceptsReturn="True"
-    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
     Grid.Row="3" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Huisnummer}"
+                    Text="{Binding DeelnemerRecord.Huisnummer, ValidatesOnDataErrors=True}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Huisnummer"
     AcceptsReturn="True"
@@ -163,7 +163,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="4" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Postcode}"
+                    Text="{Binding DeelnemerRecord.Postcode, ValidatesOnDataErrors=True}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Postcode"
     AcceptsReturn="True"
@@ -173,7 +173,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="5" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Gemeente}"
+                    Text="{Binding DeelnemerRecord.Gemeente, ValidatesOnDataErrors=True}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Gemeente"
     AcceptsReturn="True"
@@ -241,7 +241,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBox
-                    Text="{Binding MedischRecord.Omschrijving}"
+                    Text="{Binding MedischRecord.Omschrijving, ValidatesOnDataErrors=True}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Aandoening"
                     AcceptsReturn="True"
@@ -251,7 +251,7 @@
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="11" Grid.Column="0" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding MedischRecord.Medicatie}"
+                    Text="{Binding MedischRecord.Medicatie, ValidatesOnDataErrors=True}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Medicatie"
                     AcceptsReturn="True"
@@ -261,7 +261,7 @@
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="11" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding MedischRecord.Behandeling}"
+                    Text="{Binding MedischRecord.Behandeling, ValidatesOnDataErrors=True}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Behandeling"
                     AcceptsReturn="True"
