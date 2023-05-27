@@ -87,6 +87,14 @@ namespace Laroni_Travel.Models
                 {
                     return "Huisnummer moet een nummer zijn";
                 }
+                if (columnName == "Wachtwoord" && string.IsNullOrWhiteSpace(Wachtwoord))
+                {
+                    return "Wachtwoord moet ingevuld zijn";
+                }
+                if (columnName == "Wachtwoord" && Wachtwoord.Length < 8)
+                {
+                    return "Wachtwoord moet minstens 8 tekens lang zijn";
+                }
                 return "";
             }
         }

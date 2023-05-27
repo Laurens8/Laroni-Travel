@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laroni_Travel.View"
         mc:Ignorable="d"
-         Title="OpleidingView" Height="802" Width="1708"
+         Title="OpleidingView"
+        WindowState="Maximized"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -23,6 +24,7 @@
         <ScrollViewer VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="Auto" Padding="200 0 0 0" Margin="0,-10,0,10">
             <Grid Margin="200 0 0 0">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -60,6 +62,12 @@
                         <TextBlock>Zoeken</TextBlock>
                     </StackPanel>
                 </Button>
+                <Label Foreground="White" Grid.Row="0" Grid.Column="4" Margin="15">
+                    <StackPanel>
+                        <TextBlock>Aangemeld:</TextBlock>
+                        <TextBlock Text="{Binding InlogEmail}" />
+                    </StackPanel>
+                </Label>
                 <Label Content="Beheer Opleiding" Foreground="White" Grid.Row="1" Grid.Column="0" Margin="15" FontSize="25" />
                 <DataGrid ItemsSource="{Binding Opleidingen}"
                   SelectedItem="{Binding SelectedOpleiding}"
@@ -151,7 +159,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="7" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding OpleidingRecord.MaxAantalDeelenemrs, ValidatesOnDataErrors=True}"
+                    Text="{Binding OpleidingRecord.MaxAantalDeelnemers, ValidatesOnDataErrors=True}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Max. Aantal Deelnemers"
                     AcceptsReturn="True"
@@ -185,7 +193,7 @@
                     </StackPanel>
                 </Button>
                 <Label Content="Deelnemers opleiding" Foreground="White" Grid.Row="8" Grid.Column="0" Margin="15" FontSize="25" />
-                <ListView ItemsSource="{Binding Deelnemers}" Grid.Row="9" Grid.Column="0" Margin="15">
+                <ListView ItemsSource="{Binding Deelnemers}" Foreground="white" Grid.Row="9" Grid.Column="0" Margin="15">
                     <ListView.View>
                         <GridView>
                             <GridView.ColumnHeaderContainerStyle>
@@ -198,13 +206,6 @@
                             </GridView.ColumnHeaderContainerStyle>
                             <GridViewColumn DisplayMemberBinding="{Binding DeelnemerId}" Header="Deelnemer ID" />
                             <GridViewColumn DisplayMemberBinding="{Binding Deelnemer.Familienaam}" Header="Naam" />
-                            <GridViewColumn Header="Betaald">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsBetaald}" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>

@@ -40,10 +40,10 @@ namespace Laroni_Travel.Models
                 {
                     return "Huisnummer moet numeriek zijn";
                 }
-                if (columnName == "Postcode" && !IsNumeriek(Postcode))
-                {
-                    return "Postcode moet numeriek zijn";
-                }
+                //if (columnName == "Postcode" && !IsNumeriek(Postcode))
+                //{
+                //    return "Postcode moet numeriek zijn";
+                //}
                 return "";
             }
         }

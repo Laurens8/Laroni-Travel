@@ -17,10 +17,10 @@ namespace Laroni_Travel.Models
         [Required]
         public DateTime Datum { get; set; }
         [Required]
-        public int MaxAantalDeelenemrs { get; set; }
+        public int MaxAantalDeelnemers { get; set; }
  
         [NotMapped]
-        public string AantalDeelnemers { get { return DeelnemerOpleidingen.Count() + " / " + MaxAantalDeelenemrs; } }
+        public string AantalDeelnemers { get { return DeelnemerOpleidingen.Count() + " / " + MaxAantalDeelnemers; } }
 
         [NotMapped]
         public string DatumInfo { get { return Datum.ToString("dd-MM-yyyy"); } }

@@ -28,11 +28,11 @@ namespace Laroni_Travel.Models
                 {
                     return "Einddatum moet ingevuld zijn";
                 }
-                if (columnName == "MaxAantalDeelenemrs" && MaxAantalDeelenemrs == null)
+                if (columnName == "MaxAantalDeelenemrs" && MaxAantalDeelnemers == null)
                 {
                     return "MaxAantalDeelenemrs moet ingevuld zijn";
                 }
-                if (columnName == "MaxAantalDeelenemrs" && !IsNumeriek(MaxAantalDeelenemrs))
+                if (columnName == "MaxAantalDeelenemrs" && !IsNumeriek(MaxAantalDeelnemers))
                 {
                     return "MaxAantalDeelenemrs moet numeriek zijn";
                 }
@@ -43,7 +43,7 @@ namespace Laroni_Travel.Models
         public bool IsNumeriek(float input)
         {
             bool isNumeriek;
-            string nummer = MaxAantalDeelenemrs.ToString();
+            string nummer = MaxAantalDeelnemers.ToString();
             if (float.TryParse(nummer, out input))
             {
                 return isNumeriek = true;

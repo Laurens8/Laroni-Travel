@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laroni_Travel.View"
         mc:Ignorable="d"
-        Title="ReizenView" Height="834" Width="1448"
+        Title="ReizenView"
+        WindowState="Maximized"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -23,6 +24,7 @@
         <ScrollViewer VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="Auto" Padding="200 0 0 0" Margin="0,-10,0,10">
             <Grid Margin="200 0 0 0">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -60,7 +62,14 @@
                         <TextBlock>Zoeken</TextBlock>
                     </StackPanel>
                 </Button>
+                <Label Foreground="White" Grid.Row="0" Grid.Column="4" Margin="15">
+                    <StackPanel>
+                        <TextBlock>Aangemeld:</TextBlock>
+                        <TextBlock Text="{Binding InlogEmail}" />
+                    </StackPanel>
+                </Label>
                 <Label Content="Beheer Reizen" Margin="15" Foreground="White" FontSize="25" Grid.Row="1" Grid.Column="0" />
+                <Label Content="{Binding Foutmelding}" Grid.Row="1" Grid.Column="2" Margin="10" Foreground="Red" FontSize="15" />
                 <DataGrid ItemsSource="{Binding Reizen}"
                   SelectedItem="{Binding SelectedGroepsreis}"
 
@@ -169,7 +178,7 @@
                 <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Startdatum" Grid.Row="3" Grid.Column="2" Text="{Binding ReisRecord.Startdatum, ValidatesOnDataErrors=True}" />
                 <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Einddatum" Grid.Row="4" Grid.Column="2" Text="{Binding ReisRecord.Einddatum, ValidatesOnDataErrors=True}" />
                 <TextBox
-                    Text="{Binding ReisRecord.MaxAantalDeelenemrs, ValidatesOnDataErrors=True}"
+                    Text="{Binding ReisRecord.MaxAantalDeelnemers, ValidatesOnDataErrors=True}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Max. Aantal Deelnemers"
                     AcceptsReturn="True"
@@ -203,9 +212,10 @@
                     </StackPanel>
                 </Button>
                 <Label Content="Deelnemers reis" Margin="15" Foreground="White" FontSize="25" Grid.Row="8" Grid.Column="0" />
-                <ListView ItemsSource="{Binding DeelnemersRecord}" Grid.Row="9" Grid.Column="0" Margin="15">
+                <ListView ItemsSource="{Binding DeelnemersRecord}" Foreground="White" Grid.Row="9" Grid.Column="0" Margin="15">
                     <ListView.View>
                         <GridView>
+
                             <GridView.ColumnHeaderContainerStyle>
                                 <Style TargetType="{x:Type GridViewColumnHeader}">
                                     <Setter Property="Background" Value="#3D004E" />
@@ -216,10 +226,14 @@
                             </GridView.ColumnHeaderContainerStyle>
                             <GridViewColumn DisplayMemberBinding="{Binding DeelnemerId}" Header="Deelnemer ID" />
                             <GridViewColumn DisplayMemberBinding="{Binding Deelnemer.Familienaam}" Header="Naam" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Deelnemer.Monitor}" Header="Monitor" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Deelnemer.HoofdMonitor}" Header="Hoofdmonitor" />
                             <GridViewColumn Header="Betaald">
                                 <GridViewColumn.CellTemplate>
+
                                     <DataTemplate>
-                                        <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsBetaald}" />
+                                        <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsBetaald}">
+                                        </CheckBox>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

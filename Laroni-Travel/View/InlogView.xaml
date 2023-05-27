@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laroni_Travel.View"
         mc:Ignorable="d"
-        Title="InlogView" Height="600
-        " Width="1080" Foreground="White"
+        Title="InlogView" Foreground="White"
+        WindowState="Maximized"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -39,7 +39,7 @@
         <Image VerticalAlignment="Top" HorizontalAlignment="Center" Width="300" Height="300" Source="Image\Laroni-Travel.png" Grid.Row="2" Grid.Column="0" Grid.RowSpan="4" Margin="10" />
         <Label Content="Aanmelden" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="15" FontSize="32" Foreground="White" />
         <TextBox
-        Text="{Binding Email}"
+        Text="{Binding Email, ValidatesOnDataErrors=True}"
         materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
         VerticalAlignment="center"
         materialDesign:HintAssist.Hint="Emailadres"
@@ -63,7 +63,7 @@
         Content="Onthoud wachtwoord"
         Grid.Column="1" Grid.Row="4" Margin="15" VerticalAlignment="Top" Foreground="White" />
         <Button Content="Wachtwoord vergeten ?" Grid.Row="4" Grid.Column="2" VerticalAlignment="Top" Margin="15" Style="{StaticResource MaterialDesignFlatDarkButton}"
-  ToolTip="MaterialDesignFlatButton" Foreground="White" />
-        <Button materialDesign:ButtonAssist.CornerRadius="20" Height="50" Content="Aanmelden" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="15" Background="#3D004E" Command="{Binding}" CommandParameter="OpenHomeView"/>
+  ToolTip="MaterialDesignFlatButton" Foreground="White" Command="{Binding}" CommandParameter="OpenWachtwoordVergetenView" />
+        <Button materialDesign:ButtonAssist.CornerRadius="20" Height="50" Content="Aanmelden" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="15" Background="#3D004E" Command="{Binding}" CommandParameter="OpenHomeView" />
     </Grid>
 </Window>

@@ -71,7 +71,7 @@ namespace Laroni_Travel.ViewModels
         private int _maxAantalDeelenemrs;
         private string _familienaam;
         public string ID { get; set; }
-        public string Foutmelding { get; set; }
+        private string _foutmelding;
         private Deelnemer _deelnemerRecord;
         private Deelnemer _selectedDeelnemer;
         private Groepsreis _selectedGroepsreis;
@@ -82,14 +82,36 @@ namespace Laroni_Travel.ViewModels
         private ObservableCollection<Bestemming> _bestemming;
         public ObservableCollection<Deelnemer> DeelnemersLijst { get; set; }
         public int Deelnemers { get; set; }
+        private string _inlogEmail;
         private Window _view;
         private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
 
-        public ReizenViewModel(Window view)
-        {
+        public ReizenViewModel(Window view, string email)
+        {            
+            InlogEmail = email;
             _view = view;
             ReizenRecordInstellen();
-        } 
+        }
+
+        public string Foutmelding
+        {
+            get { return _foutmelding; }
+            set
+            {
+                _foutmelding = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string InlogEmail
+        {
+            get { return _inlogEmail; }
+            set
+            {
+                _inlogEmail = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public string Familienaam
         {
@@ -363,11 +385,7 @@ namespace Laroni_Travel.ViewModels
             if (Reizen == null || Reizen.Count <= 0)
             {
                 Foutmelding = "Er zijn geen reizen gevonden";
-            }
-            else           
-            {
-            Foutmelding = this.Error;
-            }
+            }            
         }
 
         public void ZoekenDeelnemer()
@@ -377,11 +395,7 @@ namespace Laroni_Travel.ViewModels
             if (DeelnemersLijst == null || DeelnemersLijst.Count <= 0)
             {
                 Foutmelding = "Er zijn geen deelnemers gevonden";
-            }
-            else
-            {
-                Foutmelding = this.Error;
-            }
+            }            
         }
 
         public void Dispose()
@@ -399,7 +413,8 @@ namespace Laroni_Travel.ViewModels
             Thema.ToString();
             LeeftijdsCategorie.ToString();
             Deelnemers.ToString();
-            NotifyPropertyChanged(nameof(Reizen));           
+            NotifyPropertyChanged(nameof(Reizen));
+            Foutmelding = "";
         }
 
         private void RefreshDeelnemer()
@@ -415,7 +430,7 @@ namespace Laroni_Travel.ViewModels
             if (Foutmelding == "")
             {
                 var view = new HomeView();
-                var vm = new HomeViewModel(view);
+                var vm = new HomeViewModel(view, InlogEmail);
                 
                 view.DataContext = vm;
                 view.Show();
@@ -429,7 +444,7 @@ namespace Laroni_Travel.ViewModels
             if (Foutmelding == "")
             {
                 var view = new InlogView();
-                var vm = new InlogViewModel(view);
+                var vm = new InlogViewModel(view, "");
               
                 view.DataContext = vm;
                 view.Show();
@@ -443,7 +458,7 @@ namespace Laroni_Travel.ViewModels
             if (Foutmelding == "")
             {
                 var view = new OpleidingView();
-                var vm = new OpleidingViewModel(view);
+                var vm = new OpleidingViewModel(view, InlogEmail);
                 
                 view.DataContext = vm;
                 view.Show();
@@ -457,7 +472,7 @@ namespace Laroni_Travel.ViewModels
             if (Foutmelding == "")
             {
                 var view = new PersoonView();
-                var vm = new PersoonViewModel(view);
+                var vm = new PersoonViewModel(view, InlogEmail);
                 
                 view.DataContext = vm;
                 view.Show();
@@ -466,14 +481,19 @@ namespace Laroni_Travel.ViewModels
         }
 
         public void ResettenGroepreis()
-        {            
-            SelectedGroepsreis = null;
-            ReizenRecordInstellen();
-            Foutmelding = "";
-            NotifyPropertyChanged(nameof(SelectedGroepsreis));
-                                   
-            //Foutmelding = this.Error;
-            
+        {
+            if (SelectedGroepsreis != null)
+            {
+                SelectedGroepsreis = null;
+                ReizenRecordInstellen();
+                Foutmelding = "";
+                NotifyPropertyChanged(nameof(SelectedGroepsreis));
+            }
+            else
+            {
+                Foutmelding = "Selecteer een reis!";
+            }
+                 
         }
 
         private void FoutmeldingInstellenNaSave(int ok, string melding)
@@ -520,9 +540,17 @@ namespace Laroni_Travel.ViewModels
 
         public void ToevoegenGroepsreis()
         {
-            _unitOfWork.GroepsreisenRepo.Toevoegen(ReisRecord);
-            int ok = _unitOfWork.Save();
-            FoutmeldingInstellenNaSave(ok, "Groepsreis is niet toegevoegd");
+            try
+            {
+                _unitOfWork.GroepsreisenRepo.Toevoegen(ReisRecord);
+                int ok = _unitOfWork.Save();
+                FoutmeldingInstellenNaSave(ok, "Groepsreis is niet toegevoegd");
+            }
+            catch (Exception)
+            {
+                Foutmelding = "Groepsreis is niet toegevoegd";
+            }
+            
         }
 
         private void ReizenRecordInstellen()

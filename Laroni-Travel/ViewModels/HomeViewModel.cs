@@ -16,13 +16,46 @@ namespace Laroni_Travel.ViewModels
     public class HomeViewModel : BaseViewmodel, IDisposable, ICommand
     {
         private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
-        public string Foutmelding { get; set; }
         public override string this[string columnName] => throw new NotImplementedException();
         private Window _view;
+        private string _inlogEmail;
+        private string _email;
+        private string _foutmelding;
 
-        public HomeViewModel(Window view)
-        {
+        public HomeViewModel(Window view, string email)
+        {           
+            InlogEmail = email;            
             _view = view;
+        }
+
+        public string Foutmelding
+        {
+            get { return _foutmelding; }
+            set
+            {
+                _foutmelding = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                _email = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string InlogEmail
+        {
+            get { return _inlogEmail; }
+            set
+            {
+                _inlogEmail = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public override bool CanExecute(object parameter)
@@ -59,7 +92,7 @@ namespace Laroni_Travel.ViewModels
             if (Foutmelding == "")
             {
                 var view = new InlogView();
-                var vm = new InlogViewModel(view);              
+                var vm = new InlogViewModel(view, InlogEmail);              
                 view.DataContext = vm;
                 view.Show();
                 _view.Close();
@@ -73,7 +106,7 @@ namespace Laroni_Travel.ViewModels
             { 
                 
                 var view = new OpleidingView();
-                var vm = new OpleidingViewModel(view);
+                var vm = new OpleidingViewModel(view, InlogEmail);
                 view.DataContext = vm;
                 view.Show();
                 _view.Close();
@@ -86,7 +119,7 @@ namespace Laroni_Travel.ViewModels
             if (Foutmelding == "")
             {
                 var view = new PersoonView();
-                var vm = new PersoonViewModel(view);
+                var vm = new PersoonViewModel(view, InlogEmail);
                 view.DataContext = vm;
                 view.Show();
                 _view.Close();
@@ -99,7 +132,7 @@ namespace Laroni_Travel.ViewModels
             if (Foutmelding == "")
             {
                 var view = new ReizenView();
-                var vm = new ReizenViewModel(view);
+                var vm = new ReizenViewModel(view, InlogEmail);
                 
                 view.DataContext = vm;
                 view.Show();

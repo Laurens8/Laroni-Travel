@@ -35,8 +35,9 @@ namespace Laroni_Travel.ViewModels
         private Window _view;
         private Deelnemer _selectedDeelnemer;
         private Deelnemer _deelnemerRecord;
-        public string ID { get; set; }                
-        public string Foutmelding { get; set; }
+        public string ID { get; set; }
+        private string _inlogEmail;
+        private string _foutmelding;
         public ObservableCollection<Deelnemer> DeelnemersLijst { get; set; }
 
         public override string this[string columnName]
@@ -44,15 +45,36 @@ namespace Laroni_Travel.ViewModels
             get { return columnName; }
         }
 
-        public OpleidingViewModel(Window view)
+        public OpleidingViewModel(Window view, string email)
         {
-            _view= view;
+            InlogEmail = email;
+            _view = view;
             OpleidingRecordInstellen();           
         }
 
         public void Dispose()
         {
             _unitOfWork.Dispose();
+        }
+
+        public string Foutmelding
+        {
+            get { return _foutmelding; }
+            set
+            {
+                _foutmelding = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string InlogEmail
+        {
+            get { return _inlogEmail; }
+            set
+            {
+                _inlogEmail = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public Deelnemer DeelnemerRecord
@@ -256,7 +278,7 @@ namespace Laroni_Travel.ViewModels
             if (Foutmelding == "")
             {
                 var view = new HomeView();
-                var vm = new HomeViewModel(view);
+                var vm = new HomeViewModel(view, InlogEmail);
                 
                 view.DataContext = vm;
                 view.Show();
@@ -271,7 +293,7 @@ namespace Laroni_Travel.ViewModels
             {
                
                 var view = new InlogView();
-                var vm = new InlogViewModel(view);
+                var vm = new InlogViewModel(view, "");
                 view.DataContext = vm;
                 view.Show();
                 _view.Close();
@@ -285,7 +307,7 @@ namespace Laroni_Travel.ViewModels
             {
               
                 var view = new PersoonView();
-                var vm = new PersoonViewModel(view);
+                var vm = new PersoonViewModel(view, InlogEmail);
                 view.DataContext = vm;
                 view.Show();
                 _view.Close();
@@ -299,7 +321,7 @@ namespace Laroni_Travel.ViewModels
             {                
                
                 var view = new ReizenView();
-                var vm = new ReizenViewModel(view);
+                var vm = new ReizenViewModel(view, InlogEmail);
                 view.DataContext = vm;
                 view.Show();
                 _view.Close();
@@ -315,10 +337,6 @@ namespace Laroni_Travel.ViewModels
             {
                 Foutmelding = "Er zijn geen Opleidingen gevonden";
             }
-            else
-            {
-                Foutmelding = this.Error;
-            }
         }
 
         public void ZoekenDeelnemer()
@@ -328,10 +346,6 @@ namespace Laroni_Travel.ViewModels
             if (DeelnemersLijst == null || DeelnemersLijst.Count <= 0)
             {
                 Foutmelding = "Er zijn geen deelnemers gevonden";
-            }
-            else
-            {
-                Foutmelding = this.Error;
             }
         }
 
@@ -344,13 +358,21 @@ namespace Laroni_Travel.ViewModels
             NotifyPropertyChanged(nameof(Opleidingen));
             NotifyPropertyChanged(nameof(Deelnemers));
             NotifyPropertyChanged(nameof(Bestemming));
+            Foutmelding = "";
         }
 
         private void RefreshDeelnemer()
         {
-            List<Deelnemer> listDeelnemers = _unitOfWork.DeelnemersRepo.Ophalen(x => x.Familienaam.Contains(Familienaam)).ToList();
-            DeelnemersLijst = new ObservableCollection<Deelnemer>(listDeelnemers);
-            NotifyPropertyChanged(nameof(DeelnemersLijst));
+            try
+            {
+                List<Deelnemer> listDeelnemers = _unitOfWork.DeelnemersRepo.Ophalen(x => x.Familienaam.Contains(Familienaam)).ToList();
+                DeelnemersLijst = new ObservableCollection<Deelnemer>(listDeelnemers);
+                NotifyPropertyChanged(nameof(DeelnemersLijst));
+            }
+            catch (Exception)
+            {
+                Foutmelding = "Er zijn geen deelnemers gevonden";
+            }            
         }
 
         private void FoutmeldingInstellenNaSave(int ok, string melding)
@@ -368,11 +390,18 @@ namespace Laroni_Travel.ViewModels
 
         public void ResettenOpleiding()
         {
-            SelectedOpleiding = null;
-            OpleidingRecordInstellen();
-            Foutmelding = "";
-            NotifyPropertyChanged(nameof(SelectedOpleiding));
-            //Foutmelding = this.Error;
+            if (SelectedOpleiding != null)
+            {
+                SelectedOpleiding = null;
+                OpleidingRecordInstellen();
+                Foutmelding = "";
+                NotifyPropertyChanged(nameof(SelectedOpleiding));
+            }
+            else
+            {
+                Foutmelding = "Selecteer een Opleiding!";
+            }
+            
         }
 
         public void AanpassenOpleiding()
@@ -406,9 +435,17 @@ namespace Laroni_Travel.ViewModels
 
         public void ToevoegenOpleiding()
         {
-            _unitOfWork.OpleidingenRepo.Toevoegen(OpleidingRecord);
-            int ok = _unitOfWork.Save();
-            FoutmeldingInstellenNaSave(ok, "Opleiding is niet toegevoegd");
+            try
+            {
+                _unitOfWork.OpleidingenRepo.Toevoegen(OpleidingRecord);
+                int ok = _unitOfWork.Save();
+                FoutmeldingInstellenNaSave(ok, "Opleiding is niet toegevoegd");
+            }
+            catch (Exception)
+            {
+                Foutmelding = "Opleiding is niet toegevoegd";
+            }
+            
         }
 
         private void OpleidingRecordInstellen()
