@@ -5,8 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laroni_Travel.View"
         mc:Ignorable="d"
-        Title="WachtwoordVergetenView" Height="450" Width="800">
+        Title="WachtwoordVergetenView"
+        WindowState="Maximized"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
-        
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                <GradientStop Color="#060047" />
+                <GradientStop Color="#B3005E" Offset="1" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label Content="Wachtwoord Wijzigen" Foreground="white" Grid.Column="0" Grid.Row="0"  FontSize="25" Margin="15 15 0 0" FontWeight="Bold" />
+        <Label Content="Met een sterk wachtwoord voorkom je dat anderen toegang krijgen tot je account" Foreground="white" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="15 0 15 0" />
+        <Label Content="{Binding Foutmelding}" Grid.Row="0" Grid.Column="2" Margin="10" Foreground="Red" FontSize="15" />
+
+        <Label Content="Emailadres" Foreground="white" Grid.Column="0" Grid.Row="2" Margin="15 15 15 0" />
+        <TextBox
+        Text="{Binding Email, ValidatesOnDataErrors=True}"
+        materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
+        VerticalAlignment="center"
+        materialDesign:HintAssist.Hint="Emailadres"
+        AcceptsReturn="True"
+        IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
+        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+        TextWrapping="Wrap"
+        VerticalScrollBarVisibility="Auto" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15 0 15 15" />
+        <Label Content="Wachtwoord" Foreground="white" Grid.Column="0" Grid.Row="4" Margin="15 15 15 0" />
+        <TextBox
+        Text="{Binding Wachtwoord, ValidatesOnDataErrors=True}"
+        materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
+        VerticalAlignment="center"
+        materialDesign:HintAssist.Hint="Wachtwoord"
+            materialDesign:HintAssist.HelperText="Minimaal 8tekens, 1 hoofdletter en 1 cijfer"
+        AcceptsReturn="True"
+        IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
+        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+        TextWrapping="Wrap"
+        VerticalScrollBarVisibility="Auto" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15 0 15 15" />
+        <Label Content="Emailadres" Foreground="white" Grid.Column="0" Grid.Row="6" Margin="15 15 15 0" />
+        <TextBox
+        Text="{Binding WachtwoordBevestigen, ValidatesOnDataErrors=True}"
+        materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
+        VerticalAlignment="center"
+        materialDesign:HintAssist.Hint="Bevestig Wachtwoord"
+        AcceptsReturn="True"
+        IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
+        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+        TextWrapping="Wrap"
+        VerticalScrollBarVisibility="Auto" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15 0 15 15" />
+        <Button materialDesign:ButtonAssist.CornerRadius="20" Height="40" Content="Opslaan" Grid.Row="8" Grid.Column="0" Margin="15" Background="#3D004E" Command="{Binding}" CommandParameter="WachtwoordOpslaan" />
+        <Button materialDesign:ButtonAssist.CornerRadius="20" Height="40" Content="Terug" Grid.Row="8" Grid.Column="1" Margin="15" Background="#3D004E" Command="{Binding}" CommandParameter="OpenInlogView" />
     </Grid>
 </Window>

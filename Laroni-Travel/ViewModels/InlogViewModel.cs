@@ -17,17 +17,27 @@ namespace Laroni_Travel.ViewModels
     {
         private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
 
-        public ObservableCollection<Deelnemer> Deelnemers { get; set; }
-        public string Foutmelding { get; set; }
+        public ObservableCollection<Deelnemer> Deelnemers { get; set; }        
         private Window _view;
+        private string _email;
+        private string _foutmelding;
 
-        private string _email = "";
-
-        public InlogViewModel(Window view)
+        public InlogViewModel(Window view, string email)
         {
+            Email = email;
             _view= view;
             RefreshDeelnemer();
         }
+
+        public string Foutmelding 
+        {
+            get { return _foutmelding; }
+            set
+            {
+                _foutmelding = value;
+                NotifyPropertyChanged();
+            }
+        }   
 
         public string Email
         {
@@ -41,19 +51,16 @@ namespace Laroni_Travel.ViewModels
 
         public override string this[string columnName]
         {
-            get
-            {               
-                return "";
-            }
+            get { return columnName; }
         }
 
         public void OpenHomeView()
         {
             Zoeken();
             if (Foutmelding == "")
-            {
+            {          
                 var view = new HomeView();
-                var vm = new HomeViewModel(view);
+                var vm = new HomeViewModel(view, Email);
                 view.DataContext = vm;
                 view.Show();
                 App.Current.MainWindow.Close();
@@ -63,7 +70,7 @@ namespace Laroni_Travel.ViewModels
         public void Zoeken()
         {
             Foutmelding = "";
-            if (IsGeldig())
+            if (true)
             {
                 RefreshDeelnemer();
                 if (Deelnemers == null || Deelnemers.Count <= 0)
@@ -81,8 +88,16 @@ namespace Laroni_Travel.ViewModels
         {
             string email = Email;
             List<Deelnemer> listDeelnemers = _unitOfWork.DeelnemersRepo.Ophalen(x => x.Email == Email).ToList();
-
             Deelnemers = new ObservableCollection<Deelnemer>(listDeelnemers);
+        }
+
+        public void OpenWachtwoordVergetenView()
+        {                      
+            var view = new WachtwoordVergetenView();
+            var vm = new WachtwoordVergetenViewModel(view);
+            view.DataContext = vm;
+            view.Show();
+            _view.Close();
         }
 
         public override bool CanExecute(object parameter)
@@ -90,6 +105,7 @@ namespace Laroni_Travel.ViewModels
             switch (parameter.ToString())
             {
                 case "OpenHomeView": return true;
+                case "OpenWachtwoordVergetenView": return true;
             }
             return true;
         }
@@ -98,7 +114,8 @@ namespace Laroni_Travel.ViewModels
         {
             switch (parameter.ToString())
             {
-                case "OpenHomeView": OpenHomeView(); break;                   
+                case "OpenHomeView": OpenHomeView(); break;
+                case "OpenWachtwoordVergetenView": OpenWachtwoordVergetenView(); break;
             }            
         }
 

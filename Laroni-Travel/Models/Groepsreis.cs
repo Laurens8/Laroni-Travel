@@ -37,7 +37,7 @@ namespace Laroni_Travel.Models
         public DateTime Startdatum { get; set; }
 
         [Required]
-        public int MaxAantalDeelenemrs { get; set; }
+        public int MaxAantalDeelnemers { get; set; }
 
         //Navigatieproperty
         public Bestemming Bestemming { get; set; }
@@ -55,6 +55,6 @@ namespace Laroni_Travel.Models
         public string EinddatumInfo { get { return Einddatum.ToString("dd-MM-yyyy"); } }
 
         [NotMapped]
-        public string AantalDeelnemers { get { return DeelnemerGroepsreizen.Count() + " / " + MaxAantalDeelenemrs; } }
+        public string AantalDeelnemers { get { return DeelnemerGroepsreizen.Count() + " / " + MaxAantalDeelnemers; } }
     }
 }

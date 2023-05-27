@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laroni_Travel.View"
         mc:Ignorable="d"
-        Title="PersoonView" Height="600" Width="1080"
+        Title="PersoonView"
+        WindowState="Maximized"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:local1="clr-namespace:Laroni_Travel.Models"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -68,6 +69,7 @@
                     </StackPanel>
                 </Label>
                 <Label Content="Beheer Deelnemer" Foreground="White" FontSize="25" Grid.Row="1" Grid.Column="0" Margin="10" />
+                <Label Content="{Binding Foutmelding}" Grid.Row="1" Grid.Column="2" Margin="10" Foreground="Red" FontSize="15" />
                 <DataGrid ItemsSource="{Binding Deelnemers}"
                   SelectedItem="{Binding SelectedDeelnemer}"
 

@@ -18,6 +18,8 @@ namespace Laroni_Travel.Models
         public int GroepsreisId { get; set; }
         [Required]
         public int RolId { get; set; }
+        [Required]
+        public bool Betaald { get; set; }
 
         //Navigatieproperty
         public Deelnemer Deelnemer { get; set; }
