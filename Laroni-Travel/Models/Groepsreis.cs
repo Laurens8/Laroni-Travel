@@ -55,6 +55,19 @@ namespace Laroni_Travel.Models
         public string EinddatumInfo { get { return Einddatum.ToString("dd-MM-yyyy"); } }
 
         [NotMapped]
-        public string AantalDeelnemers { get { return DeelnemerGroepsreizen.Count() + " / " + MaxAantalDeelnemers; } }
+        public string? AantalDeelnemers
+        {
+            get 
+            { 
+                if (DeelnemerGroepsreizen == null)
+                { 
+                    return "0 / " + MaxAantalDeelnemers.ToString();
+                } 
+                else 
+                { 
+                    return DeelnemerGroepsreizen.Count().ToString() + " / " + MaxAantalDeelnemers.ToString();
+                } 
+            }           
+        }
     }
 }

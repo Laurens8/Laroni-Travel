@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -55,8 +57,7 @@ namespace Laroni_Travel.Models
         [Required]
         public bool Ziekenfonds { get; set; }
 
-        [Required]
-        public string Wachtwoord { get; set; }
+        public string? Wachtwoord { get; set; }
 
         [NotMapped]
         public int Leeftijd { get { return DateTime.Now.Year - Geboortedatum.Year; } }

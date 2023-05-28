@@ -48,6 +48,11 @@ namespace Laroni_Travel.Models
             }
         }
 
+        public override string ToString()
+        {
+            return Naam;
+        }
+
         public bool IsNumeriek(string input)
         {
             bool isNumeriek;
