@@ -23,10 +23,12 @@ namespace Laroni_Travel.Data
         public DbSet<OpleidingBestemming> OpleidingBestemmingen { get; set; }
         public DbSet<Rol> Rolen { get; set; }
         public DbSet<Thema> Themas { get; set; }
-        
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            {
-                optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=Laroni-Travel;Trusted_Connection=True;");
-            }   
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=Laroni-Travel;Trusted_Connection=True;");
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
+
     }
 }

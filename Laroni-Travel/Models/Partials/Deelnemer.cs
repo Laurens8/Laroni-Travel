@@ -67,7 +67,7 @@ namespace Laroni_Travel.Models
                 {
                     return "Gemeente moet ingevuld zijn";
                 }
-                if (columnName == "Geboortedatum" && Geboortedatum == null)
+                if (columnName == "Geboortedatum" && Geboortedatum.Year == 0)
                 {
                     return "Geboortedatum moet ingevuld zijn";
                 }
@@ -75,26 +75,30 @@ namespace Laroni_Travel.Models
                 {
                     return "Geslacht moet ingevuld zijn";
                 }
+                if (columnName == "Geslacht" && !Geslacht.Contains("M") && !Geslacht.Contains("V"))
+                {
+                    return "Geslacht moet 'M' of 'V' zijn";
+                }
                 if (columnName == "Email" && !ValidateEmail(Email))
                 {
                     return "Email moet een geldig email adres zijn";
                 }
-                if (columnName == "Postcode" && !IsNumeriek(Postcode))
-                {
-                    return "Postcode moet een nummer zijn";
-                }
-                if (columnName == "Huisnummer" && !IsNumeriek(Huisnummer))
-                {
-                    return "Huisnummer moet een nummer zijn";
-                }
-                if (columnName == "Wachtwoord" && string.IsNullOrWhiteSpace(Wachtwoord))
-                {
-                    return "Wachtwoord moet ingevuld zijn";
-                }
-                if (columnName == "Wachtwoord" && Wachtwoord.Length < 8)
-                {
-                    return "Wachtwoord moet minstens 8 tekens lang zijn";
-                }
+                //if (columnName == "Postcode" && !IsNumeriek(Postcode))
+                //{
+                //    return "Postcode moet een nummer zijn";
+                //}
+                //if (columnName == "Huisnummer" && !IsNumeriek(Huisnummer))
+                //{
+                //    return "Huisnummer moet een nummer zijn";
+                //}              
+                //if (columnName == "Wachtwoord" && string.IsNullOrWhiteSpace(Wachtwoord))
+                //{
+                //    return "Wachtwoord moet ingevuld zijn";
+                //}
+                //if (columnName == "Wachtwoord" && Wachtwoord.Length < 8)
+                //{
+                //    return "Wachtwoord moet minstens 8 tekens lang zijn";
+                //}
                 return "";
             }
         }

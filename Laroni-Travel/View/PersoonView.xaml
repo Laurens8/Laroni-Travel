@@ -133,7 +133,7 @@
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
     Grid.Row="5" Grid.Column="0" Background="white" Margin="10" />
-                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Geboortedatum" Grid.Row="6" Grid.Column="0" SelectedDate="{Binding Geboortedatum, ValidatesOnDataErrors=True}" />
+                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Geboortedatum" Grid.Row="6" Grid.Column="0" SelectedDate="{Binding Geboortedatum}" />
                 <TextBox
                     Text="{Binding DeelnemerRecord.Email, ValidatesOnDataErrors=True}"
     VerticalAlignment="Top"
