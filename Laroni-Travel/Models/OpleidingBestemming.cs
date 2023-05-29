@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Laroni_Travel.Models
 {
-    public class OpleidingBestemming
+    public partial class OpleidingBestemming
     {
         [Key]
         public int OpleidingBestemmingId { get; set; }
@@ -16,6 +16,27 @@ namespace Laroni_Travel.Models
         public int OpleidingId { get; set; }
         [Required]
         public int BestemmingId { get; set; }
+
+        [NotMapped]
+        public string BestemmingNaam 
+        {
+            get
+            {
+                if (Bestemming != null)
+                {
+                    return Bestemming.Naam;
+                }
+                else
+                {
+                    return "";
+                };           
+            }
+        }
+
+        public override string ToString()
+        {
+            return BestemmingNaam;
+        }
 
         //Navigatieproperty
         public Opleiding Opleiding { get; set; }

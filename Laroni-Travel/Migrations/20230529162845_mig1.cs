@@ -50,7 +50,7 @@ namespace Laroni_Travel.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Beschrijving = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Datum = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MaxAantalDeelenemrs = table.Column<int>(type: "int", nullable: false)
+                    MaxAantalDeelnemers = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -102,6 +102,7 @@ namespace Laroni_Travel.Migrations
                     Straatnaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Voornaam = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Ziekenfonds = table.Column<bool>(type: "bit", nullable: false),
+                    Wachtwoord = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BestemmingId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -152,7 +153,7 @@ namespace Laroni_Travel.Migrations
                     Einddatum = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Prijs = table.Column<decimal>(type: "money", nullable: false),
                     Startdatum = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MaxAantalDeelenemrs = table.Column<int>(type: "int", nullable: false)
+                    MaxAantalDeelnemers = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -233,7 +234,8 @@ namespace Laroni_Travel.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DeelnemerId = table.Column<int>(type: "int", nullable: false),
                     GroepsreisId = table.Column<int>(type: "int", nullable: false),
-                    RolId = table.Column<int>(type: "int", nullable: false)
+                    RolId = table.Column<int>(type: "int", nullable: false),
+                    Betaald = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -316,7 +318,8 @@ namespace Laroni_Travel.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_OpleidingBestemmingen_OpleidingId",
                 table: "OpleidingBestemmingen",
-                column: "OpleidingId");
+                column: "OpleidingId",
+                unique: true);
         }
 
         /// <inheritdoc />

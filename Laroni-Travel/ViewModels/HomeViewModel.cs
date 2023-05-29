@@ -1,8 +1,10 @@
 ﻿using dal.Data.UnitOfWork;
 using Laroni_Travel.Data;
+using Laroni_Travel.Models;
 using Laroni_Travel.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
@@ -21,11 +23,25 @@ namespace Laroni_Travel.ViewModels
         private string _inlogEmail;
         private string _email;
         private string _foutmelding;
+        public ObservableCollection<OpleidingBestemming> Bestemmingen { get; set; }
+        public ObservableCollection<DeelnemerOpleiding> DeelnemersOpleiding { get; set; }
+        public ObservableCollection<Opleiding> Opleidingen { get; set; }
+        public ObservableCollection<Deelnemer> AantalDeelnemers { get; set; }
+        public ObservableCollection<Groepsreis> AantalReizen { get; set; }
 
         public HomeViewModel(Window view, string email)
-        {           
-            InlogEmail = email;            
+        {
+            InlogEmail = email;
             _view = view;
+
+            AantalReizen = new ObservableCollection<Groepsreis>(_unitOfWork.GroepsreisenRepo.Ophalen(r => r.DeelnemerGroepsreizen));
+            Opleidingen = new ObservableCollection<Opleiding>(_unitOfWork.OpleidingenRepo.Ophalen().Where(o => o.Datum.Month == DateTime.Now.Month + 1));
+            Bestemmingen = new ObservableCollection<OpleidingBestemming>(_unitOfWork.OpleidingBestemmingenRepo.Ophalen());
+            DeelnemersOpleiding = new ObservableCollection<DeelnemerOpleiding>(_unitOfWork.DeelnemerOpleidingenRepo.Ophalen());
+            AantalDeelnemers = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen(d => d.DeelnemerGroepsreizen));
+            Opleidingen.ToString();
+            AantalDeelnemers.ToString();
+            AantalReizen.ToString();
         }
 
         public string Foutmelding

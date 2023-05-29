@@ -18,12 +18,25 @@ namespace Laroni_Travel.Models
         public DateTime Datum { get; set; }
         [Required]
         public int MaxAantalDeelnemers { get; set; }
- 
-        [NotMapped]
-        public string AantalDeelnemers { get { return DeelnemerOpleidingen.Count() + " / " + MaxAantalDeelnemers; } }
 
         [NotMapped]
-        public string DatumInfo { get { return Datum.ToString("dd-MM-yyyy"); } }
+        public string? AantalDeelnemers
+        {
+            get
+            {
+                if (DeelnemerOpleidingen == null)
+                {
+                    return "0 / " + MaxAantalDeelnemers.ToString();
+                }
+                else
+                {
+                    return DeelnemerOpleidingen.Count().ToString() + " / " + MaxAantalDeelnemers.ToString();
+                }
+            }
+        }
+
+        [NotMapped]
+        public string DatumInfo { get { return Datum.ToString("dd-MM-yyyy"); } }       
 
         //Navigatieproperty
         //public ICollection<OpleidingBestemming> OpleidingBestemmingen { get; set; }
