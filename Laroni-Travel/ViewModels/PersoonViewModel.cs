@@ -348,7 +348,7 @@ namespace Laroni_Travel.ViewModels
             InlogEmail = email;
             _view = view;
             Geboortedatum = DateTime.Now;
-            //DeelnemerRecordInstellen();
+            DeelnemerRecordInstellen();
         }        
 
         public void OpenHomeView()

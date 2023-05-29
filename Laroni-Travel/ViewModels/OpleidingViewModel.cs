@@ -21,8 +21,10 @@ namespace Laroni_Travel.ViewModels
         private ObservableCollection<Opleiding> _opleidingen;
         private ObservableCollection<OpleidingBestemming> _bestemming;
         private ObservableCollection<DeelnemerOpleiding> _deelnemers;
+        private ObservableCollection<OpleidingBestemming> _bestemmingen;
         private Opleiding _opleidingSelected;
-        private Opleiding _opleidingRecord;        
+        private Opleiding _opleidingRecord;
+        private Bestemming _selectedBestemming;
         private string _beschrijving;
         private string _straatnaam;
         private string _huisnummer;
@@ -35,6 +37,8 @@ namespace Laroni_Travel.ViewModels
         private Window _view;
         private Deelnemer _selectedDeelnemer;
         private Deelnemer _deelnemerRecord;
+        private Bestemming _bestemmingRecord;
+        private DeelnemerOpleiding _selectedDeelnemerOpleiding;
         public string ID { get; set; }
         private string _inlogEmail;
         private string _foutmelding;
@@ -49,12 +53,56 @@ namespace Laroni_Travel.ViewModels
         {
             InlogEmail = email;
             _view = view;
-            OpleidingRecordInstellen();           
+            OpleidingRecordInstellen();
+            BestemmingRecordInstellen();
+            Bestemmingen = new ObservableCollection<OpleidingBestemming>(_unitOfWork.OpleidingBestemmingenRepo.Ophalen(b => b.Bestemming));
+            Bestemmingen.ToString();
         }
 
         public void Dispose()
         {
             _unitOfWork.Dispose();
+        }
+
+        public DeelnemerOpleiding SelectedDeelnemerOpleiding
+        {
+            get { return _selectedDeelnemerOpleiding; }
+            set
+            {
+                _selectedDeelnemerOpleiding = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<OpleidingBestemming> Bestemmingen
+        {
+            get { return _bestemmingen; }
+            set
+            {
+                _bestemmingen = value;                
+                NotifyPropertyChanged();
+            }
+        }
+
+        public Bestemming BestemmingRecord
+        {
+            get { return _bestemmingRecord; }
+            set
+            {
+                _bestemmingRecord = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public Bestemming SelectedBestemming
+        {
+            get { return _selectedBestemming; }
+            set
+            {
+                _selectedBestemming = value;
+                BestemmingRecordInstellen();
+                NotifyPropertyChanged();
+            }
         }
 
         public string Foutmelding
@@ -251,6 +299,8 @@ namespace Laroni_Travel.ViewModels
                 case "OpenInlogView": return true;
                 case "Zoeken": return true;
                 case "ZoekenDeelnemer": return true;
+                case "ToevoegenDeelnemerOpleiding": return true;
+                case "VerwijderenDeelnemerOpleiding": return true;
             }
             return true;
         }
@@ -269,6 +319,8 @@ namespace Laroni_Travel.ViewModels
                 case "OpenInlogView": OpenInlogView(); break;
                 case "Zoeken": Zoeken(); break;
                 case "ZoekenDeelnemer": ZoekenDeelnemer(); break;
+                case "ToevoegenDeelnemerOpleiding": ToevoegenDeelnemerOpleiding(); break;
+                case "VerwijderenDeelnemerOpleiding": VerwijderenDeelnemerOpleiding(); break;
             }
         }
 
@@ -351,10 +403,18 @@ namespace Laroni_Travel.ViewModels
 
         private void RefreshOpleidingen()
         {
-            List<Opleiding> listOpleiding = (List<Opleiding>)_unitOfWork.OpleidingenRepo.Ophalen(x => x.OpleidingId == int.Parse(ID));    
-            Bestemming = new ObservableCollection<OpleidingBestemming>(_unitOfWork.OpleidingBestemmingenRepo.Ophalen(b => b.Bestemming));
-            Deelnemers = new ObservableCollection<DeelnemerOpleiding>(_unitOfWork.DeelnemerOpleidingenRepo.Ophalen(d => d.Deelnemer).Where(d => d.OpleidingId == int.Parse(ID)));
-            Opleidingen = new ObservableCollection<Opleiding>(listOpleiding);            
+            if (ID != null && ID != "")
+            {
+                Opleidingen = new ObservableCollection<Opleiding>(_unitOfWork.OpleidingenRepo.Ophalen(o => o.OpleidingBestemmingen).Where(x => x.OpleidingId == int.Parse(ID)));
+                Bestemming = new ObservableCollection<OpleidingBestemming>(_unitOfWork.OpleidingBestemmingenRepo.Ophalen(b => b.Bestemming));
+                Deelnemers = new ObservableCollection<DeelnemerOpleiding>(_unitOfWork.DeelnemerOpleidingenRepo.Ophalen(d => d.Deelnemer).Where(d => d.OpleidingId == int.Parse(ID)));
+            }
+            else
+            {
+                Opleidingen = new ObservableCollection<Opleiding>(_unitOfWork.OpleidingenRepo.Ophalen(o => o.OpleidingBestemmingen));
+                Bestemming = new ObservableCollection<OpleidingBestemming>(_unitOfWork.OpleidingBestemmingenRepo.Ophalen(b => b.Bestemming));
+                Deelnemers = new ObservableCollection<DeelnemerOpleiding>(_unitOfWork.DeelnemerOpleidingenRepo.Ophalen(d => d.Deelnemer));
+            }           
             NotifyPropertyChanged(nameof(Opleidingen));
             NotifyPropertyChanged(nameof(Deelnemers));
             NotifyPropertyChanged(nameof(Bestemming));
@@ -362,17 +422,9 @@ namespace Laroni_Travel.ViewModels
         }
 
         private void RefreshDeelnemer()
-        {
-            try
-            {
-                List<Deelnemer> listDeelnemers = _unitOfWork.DeelnemersRepo.Ophalen(x => x.Familienaam.Contains(Familienaam)).ToList();
-                DeelnemersLijst = new ObservableCollection<Deelnemer>(listDeelnemers);
-                NotifyPropertyChanged(nameof(DeelnemersLijst));
-            }
-            catch (Exception)
-            {
-                Foutmelding = "Er zijn geen deelnemers gevonden";
-            }            
+        {           
+                DeelnemersLijst = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen(x => x.Familienaam.Contains(Familienaam)));
+                NotifyPropertyChanged(nameof(DeelnemersLijst));                      
         }
 
         private void FoutmeldingInstellenNaSave(int ok, string melding)
@@ -389,19 +441,11 @@ namespace Laroni_Travel.ViewModels
         }
 
         public void ResettenOpleiding()
-        {
-            if (SelectedOpleiding != null)
-            {
+        {            
                 SelectedOpleiding = null;
                 OpleidingRecordInstellen();
                 Foutmelding = "";
-                NotifyPropertyChanged(nameof(SelectedOpleiding));
-            }
-            else
-            {
-                Foutmelding = "Selecteer een Opleiding!";
-            }
-            
+                NotifyPropertyChanged(nameof(SelectedOpleiding));                      
         }
 
         public void AanpassenOpleiding()
@@ -435,17 +479,19 @@ namespace Laroni_Travel.ViewModels
 
         public void ToevoegenOpleiding()
         {
-            try
+            if (OpleidingRecord != null)
             {
-                _unitOfWork.OpleidingenRepo.Toevoegen(OpleidingRecord);
-                int ok = _unitOfWork.Save();
-                FoutmeldingInstellenNaSave(ok, "Opleiding is niet toegevoegd");
-            }
-            catch (Exception)
+                if (OpleidingRecord.IsGeldig())
+                {                  
+                    _unitOfWork.OpleidingenRepo.Toevoegen(OpleidingRecord);
+                    int ok = _unitOfWork.Save();
+                    FoutmeldingInstellenNaSave(ok, "Opleiding is niet toegevoegd");
+                }
+            }           
+            else
             {
-                Foutmelding = "Opleiding is niet toegevoegd";
-            }
-            
+                Foutmelding = "Selecteer een opleiding";
+            }                
         }
 
         private void OpleidingRecordInstellen()
@@ -471,6 +517,83 @@ namespace Laroni_Travel.ViewModels
             else
             {
                 DeelnemerRecord = new Deelnemer();
+            }
+        }
+
+        private void BestemmingRecordInstellen()
+        {
+            if (SelectedBestemming != null)
+            {
+                BestemmingRecord = SelectedBestemming;
+                NotifyPropertyChanged(nameof(SelectedBestemming));
+            }
+            else
+            {
+                BestemmingRecord = new Bestemming();
+            }
+        }
+
+        public void VerwijderenDeelnemerOpleiding()
+        {
+            if (SelectedDeelnemerOpleiding != null)
+            {
+                _unitOfWork.DeelnemerOpleidingenRepo.Verwijderen(SelectedDeelnemerOpleiding.DeelnemerOpleidingId);
+                int ok = _unitOfWork.Save();
+                FoutmeldingInstellenNaSave(ok, "Deelnemer is niet verwijderd uit opleiding");
+            }
+            else
+            {
+                Foutmelding = "Selecteer een deelnemer om te verwijderen uit opleiding";
+            }
+        }
+
+        public void ToevoegenDeelnemerOpleiding()
+        {
+            if (DeelnemerRecord != null)
+            {
+                if (OpleidingRecord != null)
+                {
+                    if (DeelnemerRecord.IsGeldig())
+                    {  
+                        DeelnemerOpleiding deelnemerOpleiding = new DeelnemerOpleiding();
+                        deelnemerOpleiding.Deelnemer = DeelnemerRecord;
+
+                        if (ID != null)
+                        {
+                            deelnemerOpleiding.OpleidingId = int.Parse(ID);
+                        }
+                        else
+                        {
+                            deelnemerOpleiding.OpleidingId = OpleidingRecord.OpleidingId;
+                        }
+
+                        foreach (var item in Deelnemers)
+                        {
+                            if (item.DeelnemerId == SelectedDeelnemer.DeelnemerId)
+                            {
+                                Foutmelding = "Deelnemer is al bij opleiding toegevoegd";
+                            }
+                            else
+                            {
+                                Foutmelding = "";
+                            }
+                        }
+                        if (Foutmelding == "")
+                        {
+                            _unitOfWork.DeelnemerOpleidingenRepo.Toevoegen(deelnemerOpleiding);
+                            int ok = _unitOfWork.Save();
+                            FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
+                        }
+                    }
+                }
+                else
+                {
+                    Foutmelding = "Selecteer een opleiding om een deelnemer aan toe te voegen";
+                }
+            }
+            else
+            {
+                Foutmelding = "Selecteer een deelnemer";
             }
         }
     }

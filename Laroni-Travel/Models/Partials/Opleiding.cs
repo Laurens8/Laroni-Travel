@@ -16,7 +16,7 @@ namespace Laroni_Travel.Models
                 {
                     return "Beschrijving moet ingevuld zijn";
                 }
-                if (columnName == "Datum" && Datum == null)
+                if (columnName == "Datum" && Datum.Year == 0)
                 {
                     return "Datum moet ingevuld zijn";
                 }
@@ -44,6 +44,11 @@ namespace Laroni_Travel.Models
             {
                 return isNumeriek = false;
             }
+        }
+
+        public override string ToString()
+        {
+            return "Op " + DatumInfo + " is er een " + Beschrijving + " opleiding gepland";
         }
     }
 }

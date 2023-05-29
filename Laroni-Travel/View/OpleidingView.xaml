@@ -69,6 +69,7 @@
                     </StackPanel>
                 </Label>
                 <Label Content="Beheer Opleiding" Foreground="White" Grid.Row="1" Grid.Column="0" Margin="15" FontSize="25" />
+                <Label Content="{Binding Foutmelding}" Grid.Row="1" Grid.Column="2" Margin="10" Foreground="Red" FontSize="15" />
                 <DataGrid ItemsSource="{Binding Opleidingen}"
                   SelectedItem="{Binding SelectedOpleiding}"
 
@@ -86,6 +87,7 @@
                         </Style>
                     </DataGrid.Style>
                     <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding OpleidingId}" Header="Id" />
                         <DataGridTextColumn Binding="{Binding Beschrijving}" Header="Beschrijving" />
                         <DataGridTextColumn Binding="{Binding DatumInfo}" Header="Datum" />
                         <DataGridTextColumn Binding="{Binding OpleidingBestemmingen.Bestemming.Straatnaam}" Header="Straatnaam" />
@@ -106,7 +108,21 @@
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
     Grid.Row="3" Grid.Column="0" Background="White" Margin="10" />
-                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Datum" Grid.Row="3" Grid.Column="0" Text="{Binding Datum, ValidatesOnDataErrors=True}" />
+                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Datum" Grid.Row="3" Grid.Column="0" Text="{Binding OpleidingRecord.DatumInfo}" />
+
+                <ComboBox
+                    Width="250"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    materialDesign:HintAssist.Hint="Bestemming"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}"
+                    SelectedItem="{Binding OpleidingRecord.OpleidingBestemmingen}"
+                    ItemsSource="{Binding Bestemmingen}"
+                    SelectedValue="{Binding OpleidingRecord}"
+                    SelectedValuePath="Id"
+                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    Grid.Row="4" Grid.Column="0" Background="White" Margin="10" />
+
                 <TextBox
                     Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Straatnaam, ValidatesOnDataErrors=True}"
     VerticalAlignment="Top"
@@ -168,6 +184,18 @@
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="3" Grid.Column="2" Background="White" Margin="10" />
+
+                <TextBox
+                    Text="{Binding OpleidingRecord.Beschrijving, ValidatesOnDataErrors=True}"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Beschrijving"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="4" Grid.Column="2" Background="White" Margin="10" />
+                
                 <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="3" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenOpleiding">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FloppyDisk" Margin="0 0 10 0" />
@@ -193,7 +221,7 @@
                     </StackPanel>
                 </Button>
                 <Label Content="Deelnemers opleiding" Foreground="White" Grid.Row="8" Grid.Column="0" Margin="15" FontSize="25" />
-                <ListView ItemsSource="{Binding Deelnemers}" Foreground="white" Grid.Row="9" Grid.Column="0" Margin="15">
+                <ListView ItemsSource="{Binding Deelnemers}" Foreground="white" Grid.Row="9" Grid.Column="0" Margin="15" SelectedItem="{Binding SelectedDeelnemerOpleiding}">
                     <ListView.View>
                         <GridView>
                             <GridView.ColumnHeaderContainerStyle>
@@ -246,12 +274,12 @@
                         <DataGridTextColumn Binding="{Binding GeboortedatumInfo}" Header="Leeftijd" />
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="10" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenGroepsreis">
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="10" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenDeelnemerOpleiding">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock>Toevoegen aan opleiding</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="11" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenGroepsreis">
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="11" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="VerwijderenDeelnemerOpleiding">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock>Verwijderen uit opleiding</TextBlock>
                     </StackPanel>

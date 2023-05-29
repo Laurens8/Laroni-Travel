@@ -53,5 +53,10 @@ namespace Laroni_Travel.Models
                 return isNumeriek = false;
             }
         }
+
+        public override string ToString()
+        {
+            return "Er zijn " + DeelnemerGroepsreizen.Count() + " aantal leden ingeschreven in totaal";
+        }
     }
 }
