@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -120,8 +121,6 @@ namespace Laroni_Travel.ViewModels
                     item.Wachtwoord = Wachtwoord;
                     _unitOfWork.DeelnemersRepo.Aanpassen(item);
                     _unitOfWork.Save();
-                    Wachtwoord = "";
-                    WachtwoordBevestigen = "";
                     OpenInlogView();
                 }
             }

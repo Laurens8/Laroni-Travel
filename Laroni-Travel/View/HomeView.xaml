@@ -21,6 +21,61 @@
                 <GradientStop Color="#B3005E" Offset="1" />
             </LinearGradientBrush>
         </Grid.Background>
+        <ScrollViewer VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="Auto" Padding="200 0 0 0" Margin="0,-10,0,10">
+            <Grid Margin="200 0 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Column="1" Grid.Row="0" Header="Aankomende monitor-opleidingen" FontSize="30" Margin="20" Background="#3D004E" Foreground="White">
+                    <ListBox ItemsSource="{Binding Opleidingen}" />
+                </GroupBox>
+                <GroupBox Grid.Column="0" Grid.Row="1" Header="Aantal Deelnemers" FontSize="30" Margin="20" Background="#3D004E" Foreground="White">
+                    <Label Content="{Binding AantalDeelnemers}" />
+                </GroupBox>
+                <GroupBox Grid.Column="1" Grid.Row="1" Header="Aantal Reizen" FontSize="30" Margin="20" Background="#3D004E" Foreground="White">
+                    <Label Content="{Binding AantalReizen}" />
+                </GroupBox>
+                <Grid Margin="20">
+                    <Grid.Resources>
+                        <Style
+      x:Key="CustomCalendarDayButton"
+      TargetType="CalendarDayButton"
+      BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
+                            <Setter
+        Property="materialDesign:CalendarAssist.SelectionColor"
+        Value="#B2F39B" />
+                            <Setter
+        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+        Value="Black" />
+                        </Style>
+                        <Style
+      x:Key="CustomCalendarButton"
+      TargetType="CalendarButton"
+      BasedOn="{StaticResource MaterialDesignCalendarButton}">
+                            <Setter
+        Property="materialDesign:CalendarAssist.SelectionColor"
+        Value="#B2F39B" />
+                            <Setter
+        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+        Value="Black" />
+                        </Style>
+                    </Grid.Resources>
+                    <Calendar
+    materialDesign:CalendarAssist.HeaderBackground="#B3005E"
+    materialDesign:CalendarAssist.HeaderForeground="Black"
+    Background="#3D004E"
+    CalendarButtonStyle="{StaticResource CustomCalendarButton}"
+    CalendarDayButtonStyle="{StaticResource CustomCalendarDayButton}"
+    Foreground="White" />
+                </Grid>
+            </Grid>
+        </ScrollViewer>
         <Grid Width="200" HorizontalAlignment="Left" Background="#060047">
             <StackPanel>
                 <Grid Height="150" VerticalAlignment="Top">

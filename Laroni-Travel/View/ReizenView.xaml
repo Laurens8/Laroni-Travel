@@ -125,6 +125,18 @@
                     SelectedValuePath="Id"
                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     Grid.Row="4" Grid.Column="0" Background="White" Margin="10" />
+                <ComboBox
+                    Width="250"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    materialDesign:HintAssist.Hint="Bestemming"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=OutlinedComboBoxEnabledCheckBox}"
+                    SelectedItem="{Binding ReisRecord.Bestemming}"
+                    ItemsSource="{Binding Bestemming}"
+                    SelectedValue="{Binding ReisRecord.LeeftijdsCategorieId, ValidatesOnDataErrors=True}"
+                    SelectedValuePath="Id"
+                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                    Grid.Row="5" Grid.Column="0" Background="White" Margin="10" />
                 <TextBox
                     Text="{Binding ReisRecord.Bestemming.Straatnaam, ValidatesOnDataErrors=True}"
                     VerticalAlignment="Top"
@@ -187,6 +199,29 @@
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="5" Grid.Column="2" Background="White" Margin="10" />
+
+                <TextBox
+                    Text="{Binding ReisRecord.Bestemming.Naam, ValidatesOnDataErrors=True}"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Naam"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="6" Grid.Column="2" Background="White" Margin="10" />
+
+                <TextBox
+                    Text="{Binding ReisRecord.Prijs, ValidatesOnDataErrors=True}"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Prijs"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="7" Grid.Column="2" Background="White" Margin="10" />
+
                 <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="3" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenGroepsreis">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FloppyDisk" Margin="0 0 10 0" />
@@ -212,7 +247,7 @@
                     </StackPanel>
                 </Button>
                 <Label Content="Deelnemers reis" Margin="15" Foreground="White" FontSize="25" Grid.Row="8" Grid.Column="0" />
-                <ListView ItemsSource="{Binding DeelnemersRecord}" Foreground="White" Grid.Row="9" Grid.Column="0" Margin="15">
+                <ListView ItemsSource="{Binding DeelnemersRecord}" Foreground="White" Grid.Row="9" Grid.Column="0" Margin="15" SelectedItem="{Binding SelectedDeelnemerReis}">
                     <ListView.View>
                         <GridView>
 
@@ -232,7 +267,7 @@
                                 <GridViewColumn.CellTemplate>
 
                                     <DataTemplate>
-                                        <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsBetaald}">
+                                        <CheckBox VerticalAlignment="Center" IsChecked="{Binding Betaald}">
                                         </CheckBox>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -277,12 +312,12 @@
                         <DataGridTextColumn Binding="{Binding GeboortedatumInfo}" Header="Leeftijd" />
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="10" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenGroepsreis">
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="10" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenDeelnemerReis">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock>Toevoegen aan Reis</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="11" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenGroepsreis">
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="11" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="VerwijderenDeelnemerReis">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock>Verwijderen uit Reis</TextBlock>
                     </StackPanel>

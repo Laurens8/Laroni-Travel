@@ -12,12 +12,14 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Laroni_Travel.ViewModels
 {
     public class PersoonViewModel : BaseViewmodel, IDisposable, ICommand
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
         private string _omschrijving;
         private string _medicatie;
         private string _behandeling;
@@ -38,48 +40,19 @@ namespace Laroni_Travel.ViewModels
         private Medisch _selectedMedisch;
         private string _straatnaam;
         private Window _view;
+        private string _inlogEmail;
+        private string _voornaam;
+        private bool _ziekenfonds;
+        private string _foutmelding;
+        private string _geboortedatumInfo;
         public string ID { get; set; }
         public ObservableCollection<Deelnemer> Deelnemers { get; set; }
         public ObservableCollection<Medisch> MedischLijst { get; set; }
-        private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
-        private string _inlogEmail;
-        private string _voornaam = "";
-        private bool _ziekenfonds;
-        private string _foutmelding;
 
-        public string InlogEmail
-        {
-            get { return _inlogEmail; }
-            set
-            {
-                _inlogEmail = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public override string this[string columnName] 
+        public override string this[string columnName]
         {
             get { return columnName; }
         }
-
-        public PersoonViewModel(Window view, string email)
-        {          
-            InlogEmail = email;
-            _view = view;
-            Geboortedatum = DateTime.Now;
-            Voornaam = "";
-        }
-
-        public string Foutmelding
-        {
-            get { return _foutmelding; }
-            set
-            {
-                _foutmelding = value;
-                NotifyPropertyChanged();
-            }
-        }
-
 
         public override bool CanExecute(object parameter)
         {
@@ -124,6 +97,36 @@ namespace Laroni_Travel.ViewModels
                 case "AanpassenMedisch": AanpassenMedisch(); break;
                 case "VerwijderenMedisch": VerwijderenMedisch(); break;
                 case "ResettenMedisch": ResettenMedisch(); break;
+            }
+        }
+
+        public string GeboortedatumInfo
+        {
+            get { return _geboortedatumInfo; }
+            set
+            {
+                _geboortedatumInfo = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string InlogEmail
+        {
+            get { return _inlogEmail; }
+            set
+            {
+                _inlogEmail = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string Foutmelding
+        {
+            get { return _foutmelding; }
+            set
+            {
+                _foutmelding = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -222,7 +225,7 @@ namespace Laroni_Travel.ViewModels
             get { return _geboortedatum; }
             set
             {
-                _geboortedatum = value.Date;               
+                _geboortedatum = value.Date;
                 NotifyPropertyChanged();
             }
         }
@@ -292,7 +295,7 @@ namespace Laroni_Travel.ViewModels
             get { return _selectedDeelnemer; }
             set
             {
-                _selectedDeelnemer = value;              
+                _selectedDeelnemer = value;
                 DeelnemerRecordInstellen();
                 RefreshMedisch();
                 NotifyPropertyChanged("SelectedDeelnemer");
@@ -338,15 +341,98 @@ namespace Laroni_Travel.ViewModels
                 _ziekenfonds = value;
                 NotifyPropertyChanged();
             }
-        }     
+        }
 
+        public PersoonViewModel(Window view, string email)
+        {
+            InlogEmail = email;
+            _view = view;
+            Geboortedatum = DateTime.Now;
+            //DeelnemerRecordInstellen();
+        }        
+
+        public void OpenHomeView()
+        {
+            Foutmelding = "";
+            if (Foutmelding == "")
+            {
+                var view = new HomeView();
+                var vm = new HomeViewModel(view, InlogEmail);
+
+                view.DataContext = vm;
+                view.Show();
+                _view.Close();
+            }
+        }
+
+        public void OpenInlogView()
+        {
+            Foutmelding = "";
+            if (Foutmelding == "")
+            {
+                var view = new InlogView();
+                var vm = new InlogViewModel(view, "");
+
+                view.DataContext = vm;
+                view.Show();
+                _view.Close();
+            }
+        }
+
+        public void OpenOpleidingView()
+        {
+            Foutmelding = "";
+            if (Foutmelding == "")
+            {
+
+                var view = new OpleidingView();
+                var vm = new OpleidingViewModel(view, InlogEmail);
+                view.DataContext = vm;
+                view.Show();
+                _view.Close();
+            }
+        }
+
+        public void OpenReizenView()
+        {
+            Foutmelding = "";
+            if (Foutmelding == "")
+            {
+
+                var view = new ReizenView();
+                var vm = new ReizenViewModel(view, InlogEmail);
+                view.DataContext = vm;
+                view.Show();
+                _view.Close();
+            }
+        }
+
+        public void ResettenDeelnemer()
+        {
+            SelectedDeelnemer = null;
+            DeelnemerRecordInstellen();
+            Foutmelding = "";
+            NotifyPropertyChanged(nameof(SelectedDeelnemer));
+        }
+
+        public void ResettenMedisch()
+        {
+            SelectedMedisch = null;
+            MedischRecordInstellen();
+            Foutmelding = "";
+            NotifyPropertyChanged(nameof(SelectedMedisch));
+        }
+       
         public void AanpassenDeelnemer()
         {
             if (SelectedDeelnemer != null)
             {
-                _unitOfWork.DeelnemersRepo.Aanpassen(DeelnemerRecord);
-                int ok = _unitOfWork.Save();
-                FoutmeldingInstellenNaSave(ok, "Deelnemer is niet aangepast");
+                if (SelectedDeelnemer.IsGeldig())
+                {
+                    _unitOfWork.DeelnemersRepo.Aanpassen(DeelnemerRecord);
+                    int ok = _unitOfWork.Save();
+                    FoutmeldingInstellenNaSave(ok, "Deelnemer is niet aangepast");
+                }
             }
             else
             {
@@ -368,113 +454,46 @@ namespace Laroni_Travel.ViewModels
             }
         }
 
-        public void OpenHomeView()
-        {
-            Foutmelding = "";
-            if (Foutmelding == "")
-            {
-                var view = new HomeView();
-                var vm = new HomeViewModel(view, InlogEmail);
-               
-                view.DataContext = vm;
-                view.Show();
-                _view.Close();
-            }
-        }
-
-        public void OpenInlogView()
-        {
-            Foutmelding = "";
-            if (Foutmelding == "")
-            {
-                var view = new InlogView();
-                var vm = new InlogViewModel(view, "");
-               
-                view.DataContext = vm;
-                view.Show();
-                _view.Close();
-            }
-        }
-
-        public void OpenOpleidingView()
-        {
-            Foutmelding = "";
-            if (Foutmelding == "")
-            {
-              
-                var view = new OpleidingView();
-                var vm = new OpleidingViewModel(view, InlogEmail);
-                view.DataContext = vm;
-                view.Show();
-                _view.Close();
-            }
-        }
-
-        public void OpenReizenView()
-        {
-            Foutmelding = "";
-            if (Foutmelding == "")
-            {
-              
-                var view = new ReizenView();
-                var vm = new ReizenViewModel(view, InlogEmail);
-                view.DataContext = vm;
-                view.Show();
-                _view.Close();
-            }
-        }
-
-        public void ResettenDeelnemer()
-        {           
-            SelectedDeelnemer = null;
-            DeelnemerRecordInstellen();
-            Foutmelding = "";
-            NotifyPropertyChanged(nameof(SelectedDeelnemer));           
-        }
-
-        public void ResettenMedisch()
-        {
-            SelectedMedisch = null;
-            MedischRecordInstellen();
-            Foutmelding = "";
-            NotifyPropertyChanged(nameof(SelectedMedisch));
-        }
-
         public void ToevoegenDeelnemer()
         {
-            try
+            if (DeelnemerRecord != null)
             {
-                Foutmelding = "";
-                _unitOfWork.DeelnemersRepo.Toevoegen(DeelnemerRecord);
-                int ok = _unitOfWork.Save();
-                Deelnemers = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen());
-                NotifyPropertyChanged(nameof(Deelnemers));
-                FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
+                if (DeelnemerRecord.IsGeldig())
+                {
+                    Foutmelding = "";
+                    _unitOfWork.DeelnemersRepo.Toevoegen(DeelnemerRecord);
+                    int ok = _unitOfWork.Save();
+                    Deelnemers = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen());
+                    NotifyPropertyChanged(nameof(Deelnemers));
+                    FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
+                }
             }
-            catch (Exception)
+            else
             {
-               Foutmelding = "Deelnemer is niet toegevoegd";
-            }            
-                           
+                Foutmelding = "Deelnemer is niet toegevoegd";
+            }
         }
 
         public void ToevoegenMedisch()
         {
-            try
+            if (SelectedDeelnemer != null)
             {
-                Foutmelding = "";
-                _unitOfWork.MedischeRepo.Toevoegen(MedischRecord);
-                int ok = _unitOfWork.Save();
-                MedischLijst = new ObservableCollection<Medisch>(_unitOfWork.MedischeRepo.Ophalen());
-                NotifyPropertyChanged(nameof(SelectedDeelnemer));
-                FoutmeldingInstellenNaSave(ok, "Medice record is niet toegevoegd");
+                if (MedischRecord.IsGeldig())
+                {
+                    Foutmelding = "";
+                    MedischRecord.DeelnemerId = SelectedDeelnemer.DeelnemerId;
+                    _unitOfWork.MedischeRepo.Toevoegen(MedischRecord);
+                    int ok = _unitOfWork.Save();
+                    MedischLijst = new ObservableCollection<Medisch>(_unitOfWork.MedischeRepo.Ophalen());
+                    NotifyPropertyChanged(nameof(SelectedDeelnemer));
+                    FoutmeldingInstellenNaSave(ok, "Medisch record is niet toegevoegd");
+                }
             }
-            catch (Exception)
+            else
             {
-                Foutmelding = "Medice record is niet toegevoegd";
+                Foutmelding = "Selecteer een Deelnemer!";
             }
-           
-        }               
+        }
 
         public void VerwijderenDeelnemer()
         {
@@ -498,24 +517,23 @@ namespace Laroni_Travel.ViewModels
             if (SelectedMedisch != null)
             {
                 Foutmelding = "";
-                _unitOfWork.MedischeRepo.Verwijderen(SelectedMedisch.DeelnemerId);
+                _unitOfWork.MedischeRepo.Verwijderen(SelectedMedisch.MedischId);
                 int ok = _unitOfWork.Save();
                 MedischLijst = new ObservableCollection<Medisch>(_unitOfWork.MedischeRepo.Ophalen());
                 NotifyPropertyChanged(nameof(MedischLijst));
-                FoutmeldingInstellenNaSave(ok, "Medice record is niet verwijderd");
+                FoutmeldingInstellenNaSave(ok, "Medisch record is niet verwijderd");
             }
             else
             {
-                Foutmelding = "Eerst Medice record selecteren";
+                Foutmelding = "Medisch record selecteren";
             }
         }
 
         public void Zoeken()
         {
-            Foutmelding = "";                                     
             RefreshDeelnemer();
             RefreshMedisch();
-            Foutmelding = "";            
+            Foutmelding = "";
         }
 
         private void DeelnemerRecordInstellen()
@@ -573,7 +591,7 @@ namespace Laroni_Travel.ViewModels
             {
                 Foutmelding = "Er zijn geen Deelnemer gevonden horende bij " + Voornaam;
             }
-            
+
         }
 
         private void RefreshMedisch()
@@ -584,16 +602,16 @@ namespace Laroni_Travel.ViewModels
                 if (SelectedDeelnemer != null)
                 {
                     ID = SelectedDeelnemer.DeelnemerId.ToString();
-                }                              
-                    List<Medisch> listMedisch = (List<Medisch>)_unitOfWork.MedischeRepo.Ophalen(x => x.DeelnemerId == int.Parse(ID));
-                    MedischLijst = new ObservableCollection<Medisch>(listMedisch);
-                    NotifyPropertyChanged(nameof(MedischLijst));                              
+                }
+                List<Medisch> listMedisch = (List<Medisch>)_unitOfWork.MedischeRepo.Ophalen(x => x.DeelnemerId == int.Parse(ID));
+                MedischLijst = new ObservableCollection<Medisch>(listMedisch);
+                NotifyPropertyChanged(nameof(MedischLijst));
             }
             catch (Exception)
             {
                 Foutmelding = "Er zijn geen medisch records gevonden horende bij " + Voornaam + " " + Familienaam;
             }
-           
+
         }
     }
 }

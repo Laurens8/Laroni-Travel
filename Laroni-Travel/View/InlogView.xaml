@@ -38,8 +38,9 @@
         <Label Content="Welkom bij" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Grid.Row="1" Grid.Column="0" Margin="10" />
         <Image VerticalAlignment="Top" HorizontalAlignment="Center" Width="300" Height="300" Source="Image\Laroni-Travel.png" Grid.Row="2" Grid.Column="0" Grid.RowSpan="4" Margin="10" />
         <Label Content="Aanmelden" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="15" FontSize="32" Foreground="White" />
+        <Label Content="{Binding Foutmelding}" Grid.Row="1" Grid.Column="2" Margin="10" Foreground="Red" FontSize="15" />
         <TextBox
-        Text="{Binding Email, ValidatesOnDataErrors=True}"
+        Text="{Binding Email}"
         materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
         VerticalAlignment="center"
         materialDesign:HintAssist.Hint="Emailadres"
@@ -51,7 +52,7 @@
         <PasswordBox
             materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
         VerticalAlignment="Center"
-        Password="Laroni-Travel"
+        Password=""
         materialDesign:HintAssist.Hint="Wachtwoord"
         materialDesign:TextFieldAssist.HasClearButton="True"
         IsEnabled="{Binding ElementName=RevealPasswordOutlinedEnabled, Path=IsChecked}"
