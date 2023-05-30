@@ -49,15 +49,17 @@
         Style="{StaticResource MaterialDesignOutlinedTextBox}"
         TextWrapping="Wrap"
         VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15" />
-        <PasswordBox
-            materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
-        VerticalAlignment="Center"
-        Password=""
+
+        <TextBox
+        Text="{Binding Wachtwoord}"
+        materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
+        VerticalAlignment="center"
         materialDesign:HintAssist.Hint="Wachtwoord"
-        materialDesign:TextFieldAssist.HasClearButton="True"
-        IsEnabled="{Binding ElementName=RevealPasswordOutlinedEnabled, Path=IsChecked}"
-        Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}"
-        Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Background="White" Foreground="Black" Margin="15" />
+        AcceptsReturn="True"
+        IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
+        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+        TextWrapping="Wrap"
+        VerticalScrollBarVisibility="Auto" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15" />
 
         <CheckBox
         x:Name="MaterialDesignOutlinedPasswordBoxEnabledComboBox"

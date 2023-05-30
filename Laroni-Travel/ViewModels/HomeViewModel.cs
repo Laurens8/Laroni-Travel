@@ -38,9 +38,9 @@ namespace Laroni_Travel.ViewModels
             Opleidingen = new ObservableCollection<Opleiding>(_unitOfWork.OpleidingenRepo.Ophalen().Where(o => o.Datum.Month == DateTime.Now.Month + 1));
             Bestemmingen = new ObservableCollection<OpleidingBestemming>(_unitOfWork.OpleidingBestemmingenRepo.Ophalen());
             DeelnemersOpleiding = new ObservableCollection<DeelnemerOpleiding>(_unitOfWork.DeelnemerOpleidingenRepo.Ophalen());
-            AantalDeelnemers = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen(d => d.DeelnemerGroepsreizen));
+            AantalDeelnemers = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen());
             Opleidingen.ToString();
-            AantalDeelnemers.ToString();
+            //AantalDeelnemers.ToString();
             AantalReizen.ToString();
         }
 

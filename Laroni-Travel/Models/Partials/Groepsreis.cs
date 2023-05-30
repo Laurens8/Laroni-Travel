@@ -40,11 +40,11 @@ namespace Laroni_Travel.Models
             }
         }
 
-        public bool IsNumeriek(float input)
+        public bool IsNumeriek(double input)
         {
             bool isNumeriek;
             string nummer = MaxAantalDeelnemers.ToString();
-            if (float.TryParse(nummer, out input))
+            if (double.TryParse(nummer, out input))
             {
                 return isNumeriek = true;
             }
@@ -54,9 +54,9 @@ namespace Laroni_Travel.Models
             }
         }
 
-        public override string ToString()
-        {
-            return "Er zijn " + DeelnemerGroepsreizen.Count() + " aantal leden ingeschreven in totaal";
-        }
+        //public override string ToString()
+        //{
+        //    return "Er zijn " + DeelnemerGroepsreizen.Count() + " aantal leden ingeschreven in totaal";
+        //}
     }
 }
