@@ -140,7 +140,7 @@
                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
                     Grid.Row="5" Grid.Column="0" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Straatnaam, ValidatesOnDataErrors=True}"
+                    Text="{Binding ReisRecord.Bestemming.Straatnaam}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Straatnaam"
                     AcceptsReturn="True"
@@ -150,7 +150,7 @@
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="3" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Huisnummer, ValidatesOnDataErrors=True}"
+                    Text="{Binding ReisRecord.Bestemming.Huisnummer}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Huisnummer"
                     AcceptsReturn="True"
@@ -160,7 +160,7 @@
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="4" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Postcode, ValidatesOnDataErrors=True}"
+                    Text="{Binding ReisRecord.Bestemming.Postcode}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Postcode"
                     AcceptsReturn="True"
@@ -170,7 +170,7 @@
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="5" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Gemeente, ValidatesOnDataErrors=True}"
+                    Text="{Binding ReisRecord.Bestemming.Gemeente}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Gemeente"
                     AcceptsReturn="True"
@@ -180,7 +180,7 @@
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="6" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Land, ValidatesOnDataErrors=True}"
+                    Text="{Binding ReisRecord.Bestemming.Land}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Land"
                     AcceptsReturn="True"
@@ -189,10 +189,10 @@
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="7" Grid.Column="1" Background="White" Margin="10" />
-                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Startdatum" Grid.Row="3" Grid.Column="2" Text="{Binding ReisRecord.Startdatum, ValidatesOnDataErrors=True}" />
-                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Einddatum" Grid.Row="4" Grid.Column="2" Text="{Binding ReisRecord.Einddatum, ValidatesOnDataErrors=True}" />
+                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Startdatum" Grid.Row="3" Grid.Column="2" Text="{Binding ReisRecord.Startdatum}" />
+                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Einddatum" Grid.Row="4" Grid.Column="2" Text="{Binding ReisRecord.Einddatum}" />
                 <TextBox
-                    Text="{Binding ReisRecord.MaxAantalDeelnemers, ValidatesOnDataErrors=True}"
+                    Text="{Binding ReisRecord.MaxAantalDeelnemers}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Max. Aantal Deelnemers"
                     AcceptsReturn="True"
@@ -203,7 +203,7 @@
                     Grid.Row="5" Grid.Column="2" Background="White" Margin="10" />
 
                 <TextBox
-                    Text="{Binding ReisRecord.Bestemming.Naam, ValidatesOnDataErrors=True}"
+                    Text="{Binding ReisRecord.Bestemming.Naam}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Naam"
                     AcceptsReturn="True"
@@ -214,7 +214,7 @@
                     Grid.Row="6" Grid.Column="2" Background="White" Margin="10" />
 
                 <TextBox
-                    Text="{Binding ReisRecord.Prijs, ValidatesOnDataErrors=True}"
+                    Text="{Binding ReisRecord.Prijs}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Prijs"
                     AcceptsReturn="True"
@@ -249,7 +249,7 @@
                     </StackPanel>
                 </Button>
                 <Label Content="Deelnemers reis" Margin="15" Foreground="White" FontSize="25" Grid.Row="8" Grid.Column="0" />
-                <ListView ItemsSource="{Binding DeelnemersRecord}" Foreground="White" Grid.Row="9" Grid.Column="0" Margin="15" SelectedItem="{Binding SelectedDeelnemerOpleiding}">
+                <ListView ItemsSource="{Binding DeelnemersRecord}" Foreground="White" Grid.Row="9" Grid.Column="0" Margin="15" SelectedItem="{Binding SelectedDeelnemerReis}">
                     <ListView.View>
                         <GridView>
 

@@ -87,10 +87,10 @@ namespace Laroni_Travel.Models
                 //{
                 //    return "Postcode moet een nummer zijn";
                 //}
-                //if (columnName == "Huisnummer" && !IsNumeriek(Huisnummer))
-                //{
-                //    return "Huisnummer moet een nummer zijn";
-                //}              
+                if (columnName == "Huisnummer" && !IsNumeriek(Huisnummer))
+                {
+                    return "Huisnummer moet een nummer zijn";
+                }
                 //if (columnName == "Wachtwoord" && string.IsNullOrWhiteSpace(Wachtwoord))
                 //{
                 //    return "Wachtwoord moet ingevuld zijn";

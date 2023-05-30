@@ -298,7 +298,7 @@ namespace Laroni_Travel.ViewModels
                 _selectedDeelnemer = value;
                 DeelnemerRecordInstellen();
                 RefreshMedisch();
-                NotifyPropertyChanged("SelectedDeelnemer");
+                NotifyPropertyChanged("SelectedDeelnemer");              
             }
         }
 
@@ -447,6 +447,7 @@ namespace Laroni_Travel.ViewModels
                 _unitOfWork.MedischeRepo.Aanpassen(MedischRecord);
                 int ok = _unitOfWork.Save();
                 FoutmeldingInstellenNaSave(ok, "Medisch record is niet aangepast");
+                MedischLijst = new ObservableCollection<Medisch>(_unitOfWork.MedischeRepo.Ophalen());
             }
             else
             {
@@ -456,6 +457,7 @@ namespace Laroni_Travel.ViewModels
 
         public void ToevoegenDeelnemer()
         {
+            DeelnemerRecord = DeelnemerRecord;
             if (DeelnemerRecord != null)
             {
                 if (DeelnemerRecord.IsGeldig())
@@ -467,10 +469,14 @@ namespace Laroni_Travel.ViewModels
                     NotifyPropertyChanged(nameof(Deelnemers));
                     FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
                 }
+                else
+                {
+                    Foutmelding = DeelnemerRecord.Error;
+                }
             }
             else
             {
-                Foutmelding = "Deelnemer is niet toegevoegd";
+                Foutmelding = "";
             }
         }
 
@@ -481,7 +487,7 @@ namespace Laroni_Travel.ViewModels
                 if (MedischRecord.IsGeldig())
                 {
                     Foutmelding = "";
-                    MedischRecord.DeelnemerId = SelectedDeelnemer.DeelnemerId;
+                    MedischRecord.DeelnemerId = SelectedDeelnemer.DeelnemerId;           
                     _unitOfWork.MedischeRepo.Toevoegen(MedischRecord);
                     int ok = _unitOfWork.Save();
                     MedischLijst = new ObservableCollection<Medisch>(_unitOfWork.MedischeRepo.Ophalen());

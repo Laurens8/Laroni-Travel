@@ -124,7 +124,7 @@
                     Grid.Row="4" Grid.Column="0" Background="White" Margin="10" />
 
                 <TextBox
-                    Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Straatnaam, ValidatesOnDataErrors=True}"
+                    Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Straatnaam}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Straatnaam"
     AcceptsReturn="True"
@@ -135,7 +135,7 @@
     Grid.Row="3" Grid.Column="1" Background="White" Margin="10" />
 
                 <TextBox
-                    Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Huisnummer, ValidatesOnDataErrors=True}"
+                    Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Huisnummer}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Huisnummer"
     AcceptsReturn="True"
@@ -145,7 +145,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="4" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Postcode, ValidatesOnDataErrors=True}"
+                    Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Postcode}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Postcode"
     AcceptsReturn="True"
@@ -155,7 +155,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="5" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Gemeente, ValidatesOnDataErrors=True}"
+                    Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Gemeente}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Gemeente"
     AcceptsReturn="True"
@@ -165,7 +165,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="6" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Land, ValidatesOnDataErrors=True}"
+                    Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Land}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Land"
     AcceptsReturn="True"
@@ -175,7 +175,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="7" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding OpleidingRecord.MaxAantalDeelnemers, ValidatesOnDataErrors=True}"
+                    Text="{Binding OpleidingRecord.MaxAantalDeelnemers}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Max. Aantal Deelnemers"
                     AcceptsReturn="True"
@@ -186,7 +186,7 @@
                     Grid.Row="3" Grid.Column="2" Background="White" Margin="10" />
 
                 <TextBox
-                    Text="{Binding OpleidingRecord.Beschrijving, ValidatesOnDataErrors=True}"
+                    Text="{Binding OpleidingRecord.Beschrijving}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Beschrijving"
                     AcceptsReturn="True"

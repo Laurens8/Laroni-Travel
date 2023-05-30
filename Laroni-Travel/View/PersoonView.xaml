@@ -104,7 +104,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Voornaam, ValidatesOnDataErrors=True}"
+                    Text="{Binding DeelnemerRecord.Voornaam}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Voornaam"
     AcceptsReturn="True"
@@ -114,7 +114,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="3" Grid.Column="0" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Familienaam, ValidatesOnDataErrors=True}"
+                    Text="{Binding DeelnemerRecord.Familienaam}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Familienaam"
     AcceptsReturn="True"
@@ -124,7 +124,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="4" Grid.Column="0" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Geslacht, ValidatesOnDataErrors=True}"
+                    Text="{Binding DeelnemerRecord.Geslacht}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Geslacht"
     AcceptsReturn="True"
@@ -135,7 +135,7 @@
     Grid.Row="5" Grid.Column="0" Background="white" Margin="10" />
                 <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Geboortedatum" Grid.Row="6" Grid.Column="0" SelectedDate="{Binding Geboortedatum}" />
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Email, ValidatesOnDataErrors=True}"
+                    Text="{Binding DeelnemerRecord.Email}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Email"
     AcceptsReturn="True"
@@ -146,7 +146,7 @@
     Grid.Row="7" Grid.Column="0" Background="White" Margin="10" />
 
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Straatnaam, ValidatesOnDataErrors=True}"
+                    Text="{Binding DeelnemerRecord.Straatnaam}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Straatnaam"
     AcceptsReturn="True"
@@ -155,7 +155,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="3" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Huisnummer, ValidatesOnDataErrors=True}"
+                    Text="{Binding DeelnemerRecord.Huisnummer}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Huisnummer"
     AcceptsReturn="True"
@@ -165,7 +165,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="4" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Postcode, ValidatesOnDataErrors=True}"
+                    Text="{Binding DeelnemerRecord.Postcode}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Postcode"
     AcceptsReturn="True"
@@ -175,7 +175,7 @@
     VerticalScrollBarVisibility="Auto"
     Grid.Row="5" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding DeelnemerRecord.Gemeente, ValidatesOnDataErrors=True}"
+                    Text="{Binding DeelnemerRecord.Gemeente}"
     VerticalAlignment="Top"
     materialDesign:HintAssist.Hint="Gemeente"
     AcceptsReturn="True"
@@ -243,7 +243,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBox
-                    Text="{Binding MedischRecord.Omschrijving, ValidatesOnDataErrors=True}"
+                    Text="{Binding MedischRecord.Omschrijving}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Aandoening"
                     AcceptsReturn="True"
@@ -253,7 +253,7 @@
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="11" Grid.Column="0" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding MedischRecord.Medicatie, ValidatesOnDataErrors=True}"
+                    Text="{Binding MedischRecord.Medicatie}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Medicatie"
                     AcceptsReturn="True"
@@ -263,7 +263,7 @@
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="11" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
-                    Text="{Binding MedischRecord.Behandeling, ValidatesOnDataErrors=True}"
+                    Text="{Binding MedischRecord.Behandeling}"
                     VerticalAlignment="Top"
                     materialDesign:HintAssist.Hint="Behandeling"
                     AcceptsReturn="True"
