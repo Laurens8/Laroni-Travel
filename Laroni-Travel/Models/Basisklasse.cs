@@ -22,7 +22,7 @@ namespace Laroni_Travel.Models
             {
                 string foutmeldingen = "";
 
-                foreach (var item in this.GetType().GetProperties()) //reflection
+                foreach (var item in this.GetType().GetProperties())
                 {
                     if (item.CanRead)
                     {

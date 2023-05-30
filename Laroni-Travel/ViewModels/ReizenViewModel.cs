@@ -478,7 +478,7 @@ namespace Laroni_Travel.ViewModels
             else
             {
                 Reizen = new ObservableCollection<Groepsreis>(_unitOfWork.GroepsreisenRepo.Ophalen());
-                DeelnemersRecord = new ObservableCollection<DeelnemerGroepsreis>(_unitOfWork.DeelnemerGroepsreisenRepo.Ophalen());
+               // DeelnemersRecord = new ObservableCollection<DeelnemerGroepsreis>(_unitOfWork.DeelnemerGroepsreisenRepo.Ophalen());
                 Betaald = new ObservableCollection<DeelnemerGroepsreis>(_unitOfWork.DeelnemerGroepsreisenRepo.Ophalen());
             }
             Bestemming = new ObservableCollection<Bestemming>(_unitOfWork.BestemmingenRepo.Ophalen());
@@ -622,6 +622,10 @@ namespace Laroni_Travel.ViewModels
                             FoutmeldingInstellenNaSave(ok, "Groepsreis is niet toegevoegd");
                             RefreshReizen();
                         }
+                        else
+                        {
+                            Foutmelding = ReisRecord.Error;
+                        }
                     }
                     else
                     {
@@ -632,7 +636,7 @@ namespace Laroni_Travel.ViewModels
                 {
                     Foutmelding = "Selecteer een thema";
                 }
-                         
+
             }
             else
             {
@@ -650,7 +654,7 @@ namespace Laroni_Travel.ViewModels
                     {
                         DeelnemerGroepsreis dgr = new DeelnemerGroepsreis();
                         dgr.DeelnemerId = SelectedDeelnemer.DeelnemerId;
-                        if (ID != null)
+                        if (ID != "" && ID != null)
                         {
                             dgr.GroepsreisId = int.Parse(ID);
                         }
@@ -670,25 +674,31 @@ namespace Laroni_Travel.ViewModels
                         {
                             dgr.RolId = 1;
                         }
-                        
-                        foreach (var item in DeelnemersRecord)
+                        if (DeelnemersRecord == null)
                         {
-                            if (item.DeelnemerId == SelectedDeelnemer.DeelnemerId)
-                            {
-                                Foutmelding = "Deelnemer is al bij reis toegevoegd";
-                            }
-                            else
-                            {
-                                Foutmelding = "";
-                            }
+                            DeelnemersRecord = new ObservableCollection<DeelnemerGroepsreis>(_unitOfWork.DeelnemerGroepsreisenRepo.Ophalen(x => x.GroepsreisId == dgr.GroepsreisId));
                         }
-                        if (Foutmelding == "")
+                        else
                         {
-                            _unitOfWork.DeelnemerGroepsreisenRepo.Toevoegen(dgr);
-                            int ok = _unitOfWork.Save();
-                            FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
-                        }                                                                                                                 
-                    }
+                            foreach (var item in DeelnemersRecord)
+                            {
+                                if (item.DeelnemerId == SelectedDeelnemer.DeelnemerId)
+                                {
+                                    Foutmelding = "Deelnemer is al bij reis toegevoegd";
+                                }
+                                else
+                                {
+                                    Foutmelding = "";
+                                }
+                            }
+                            if (Foutmelding == "")
+                            {
+                                _unitOfWork.DeelnemerGroepsreisenRepo.Toevoegen(dgr);
+                                int ok = _unitOfWork.Save();
+                                FoutmeldingInstellenNaSave(ok, "Deelnemer is niet toegevoegd");
+                            }
+                        }                                                                                                                              
+                    }                 
                 }
                 else
                 {
