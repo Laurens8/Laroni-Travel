@@ -1,5 +1,8 @@
-﻿using System;
+﻿using dal.Data.UnitOfWork;
+using Laroni_Travel.Data;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -10,6 +13,7 @@ namespace Laroni_Travel.Models
 {
     public partial class Groepsreis
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
         [Key]
         public int GroepsreisId { get; set; }
 
@@ -69,5 +73,14 @@ namespace Laroni_Travel.Models
                 } 
             }           
         }
+
+        [NotMapped]
+        public float PrijsZf { get { return Prijs * 0.9f; } }
+
+        [NotMapped]
+        public ObservableCollection<Groepsreis> AantalReizen { get { return new ObservableCollection<Groepsreis>(_unitOfWork.GroepsreisenRepo.Ophalen()); } }
+
+        [NotMapped]
+        public string TotaalReizen { get { return "Er zijn totaal " + AantalReizen.Count().ToString() + " aantal reizen geboekt"; } }
     }
 }

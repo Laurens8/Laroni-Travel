@@ -33,12 +33,7 @@ namespace Laroni_Travel.Models
             {
                 return email = false;
             }
-        }
-
-        public override string ToString()
-        {
-            return DeelnemerGroepsreizen.Count.ToString();
-        }
+        }       
 
         public override string this[string columnName]
         {

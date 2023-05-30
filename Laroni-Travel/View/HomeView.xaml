@@ -36,10 +36,10 @@
                     <ListBox ItemsSource="{Binding Opleidingen}" Foreground="White" FontSize="20" />
                 </GroupBox>
                 <GroupBox Grid.Column="0" Grid.Row="1" Header="Aantal Deelnemers" FontSize="30" Margin="20" Background="#3D004E" Foreground="White">
-                    <Label Content="{Binding AantalDeelnemers}" Foreground="White" FontSize="20" />
+                    <Label Content="{Binding AantalDeelnemers[0].totaaldeelnemers}" Foreground="White" FontSize="20" />
                 </GroupBox>
                 <GroupBox Grid.Column="1" Grid.Row="1" Header="Aantal Reizen" FontSize="30" Margin="20" Background="#3D004E" Foreground="White">
-                    <Label Content="{Binding AantalReizen}" Foreground="White" FontSize="20" />
+                    <Label Content="{Binding AantalReizen[0].TotaalReizen}" Foreground="White" FontSize="20" />
                 </GroupBox>
                 <Grid Margin="20">
                     <Grid.Resources>

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using dal.Data.UnitOfWork;
+using Laroni_Travel.Data;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,6 +16,7 @@ namespace Laroni_Travel.Models
 {
     public partial class Deelnemer
     {
+        private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
         [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key()]
         public int DeelnemerId { get; set; }
 
@@ -64,6 +68,12 @@ namespace Laroni_Travel.Models
 
         [NotMapped]
         public string GeboortedatumInfo { get { return Geboortedatum.ToString("dd-MM-yyyy"); } }
+
+        [NotMapped]
+        public ObservableCollection<Deelnemer> AantalDeelnemers { get { return new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen()); } }
+
+        [NotMapped]
+        public string totaaldeelnemers { get { return "Er zijn totaal " + AantalDeelnemers.Count().ToString()+ " deelnemers ingeschreven in de reisbureau"; } }
 
         //Navigatieproperty
         public ICollection<DeelnemerGroepsreis> DeelnemerGroepsreizen { get; set; }

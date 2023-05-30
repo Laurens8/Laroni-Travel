@@ -57,6 +57,7 @@ namespace Laroni_Travel.ViewModels
             }
         }
         private float _drinkgeld;
+        private float _prijsZf;
         private string _naam;
         private string _straatnaam;
         private string _huisnummer;
@@ -103,6 +104,16 @@ namespace Laroni_Travel.ViewModels
             LeeftijdsCategorie = new ObservableCollection<LeeftijdsCategorie>(_unitOfWork.LeeftijdsCategorieenRepo.Ophalen());
             Bestemming = new ObservableCollection<Bestemming>(_unitOfWork.BestemmingenRepo.Ophalen());
             Bestemming.ToString();
+        }
+
+        public float PrijsZf
+        {
+            get { return _prijsZf; }
+            set
+            {
+                _prijsZf = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public DeelnemerGroepsreis SelectedDeelnemerReis

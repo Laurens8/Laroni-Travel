@@ -69,7 +69,7 @@
                     </StackPanel>
                 </Label>
                 <Label Content="Beheer Reizen" Margin="15" Foreground="White" FontSize="25" Grid.Row="1" Grid.Column="0" />
-                <Label Content="{Binding Foutmelding}" Grid.Row="1" Grid.Column="2" Margin="10" Foreground="Red" FontSize="15" />
+                <Label Content="{Binding Foutmelding}" Grid.Row="8" Grid.Column="3" Margin="10" Foreground="Red" FontSize="15" />
                 <DataGrid ItemsSource="{Binding Reizen}"
                   SelectedItem="{Binding SelectedGroepsreis}"
 
@@ -87,6 +87,7 @@
                         </Style>
                     </DataGrid.Style>
                     <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding GroepsreisId}" Header="Id" />
                         <DataGridTextColumn Binding="{Binding Thema.Naam}" Header="Thema" />
                         <DataGridTextColumn Binding="{Binding LeeftijdsCategorie.Naam}" Header="Leeftijdscategorie" />
                         <DataGridTextColumn Binding="{Binding Bestemming.Straatnaam}" Header="Straatnaam" />
@@ -97,6 +98,7 @@
                         <DataGridTextColumn Binding="{Binding StartdatumInfo}" Header="Startdatum" />
                         <DataGridTextColumn Binding="{Binding EinddatumInfo}" Header="Einddatum" />
                         <DataGridTextColumn Binding="{Binding Prijs}" Header="Prijs" />
+                        <DataGridTextColumn Binding="{Binding PrijsZf}" Header="Zf prijs" />
                         <DataGridTextColumn Binding="{Binding Drinkgeld}" Header="Drinkgeld" />
                         <DataGridTextColumn Binding="{Binding AantalDeelnemers}" Header="Deelnemers" />
                     </DataGrid.Columns>

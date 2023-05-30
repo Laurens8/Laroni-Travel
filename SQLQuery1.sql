@@ -90,7 +90,7 @@ VALUES
 ('Themapark');
 
 INSERT INTO Opleidingen
-(Beschrijving, Datum, MaxAantalDeelenemrs) 
+(Beschrijving, Datum, MaxAantalDeelnemers) 
 VALUES 
 ('Monitor', '2023-06-12', 10),
 ('Monitor', '2023-06-15', 10),
@@ -141,28 +141,28 @@ INSERT INTO OpleidingBestemmingen
 (OpleidingId, BestemmingId)
 VALUES
 (1,1),
-(1,2),
-(1,3),
-(1,4),
-(1,5),
-(2,1),
 (2,2),
-(2,3),
-(2,4),
-(2,5),
-(3,1),
-(3,2),
 (3,3),
-(3,4),
-(3,5),
-(4,1),
-(4,2),
-(4,3),
 (4,4),
-(4,5);
+(5,5),
+(6,1),
+(7,2),
+(8,3),
+(9,4),
+(10,5),
+(11,1),
+(12,2),
+(13,3),
+(14,4),
+(15,5),
+(16,1),
+(17,2),
+(18,3),
+(19,4),
+(20,5);
 
 INSERT INTO Groepsreisen
-(BestemmingId, ThemaId, LeeftijdscategorieId, Prijs, Startdatum, Einddatum, MaxAantalDeelenemrs)
+(BestemmingId, ThemaId, LeeftijdscategorieId, Prijs, Startdatum, Einddatum, MaxAantalDeelnemers)
 VALUES 
 (1, 1, 1, 425.50,'2023-06-01', '2023-06-30', 10),
 (2, 2, 2, 210.00,'2023-06-20', '2023-07-10', 20),
@@ -185,24 +185,24 @@ VALUES
 (4, 2, 4, 225.00,'2023-07-1', '2023-08-30', 12),
 (5, 3, 5, 375.25,'2023-06-1', '2023-06-30', 16);
 
-INSERT INTO DeelnemerGroepsreisen (DeelnemerId, GroepsreisId, RolId)
+INSERT INTO DeelnemerGroepsreisen (DeelnemerId, GroepsreisId, RolId, Betaald)
 VALUES 
-(1, 1, 3),
-(2, 1, 2),
-(3, 1, 1),
-(4, 1, 1),
-(5, 1, 1),
-(6, 2, 2),
-(7, 2, 1),
-(8, 2, 1),
-(9, 3, 3),
-(10, 3, 1),
-(11, 3, 1),
-(12, 3, 1),
-(13, 4, 2),
-(14, 4, 1),
-(15, 4, 1),
-(16, 5, 1),
-(17, 5, 1),
-(18, 5, 1),
-(19, 5, 2);
+(1, 1, 3, 'true'),
+(2, 1, 2, 'true'),
+(3, 1, 1, 'False'),
+(4, 1, 1, 'False'),
+(5, 1, 1, 'true'),
+(6, 2, 2, 'False'),
+(7, 2, 1, 'False'),
+(8, 2, 1, 'true'),
+(9, 3, 3, 'False'),
+(10, 3, 1, 'true'),
+(11, 3, 1, 'true'),
+(12, 3, 1, 'False'),
+(13, 4, 2, 'true'),
+(14, 4, 1, 'False'),
+(15, 4, 1, 'False'),
+(16, 5, 1, 'true'),
+(17, 5, 1, 'False'),
+(18, 5, 1, 'true'),
+(19, 5, 2, 'False');

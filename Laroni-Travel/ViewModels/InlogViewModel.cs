@@ -2,11 +2,14 @@
 using Laroni_Travel.Data;
 using Laroni_Travel.Models;
 using Laroni_Travel.View;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security;
+using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -66,28 +69,18 @@ namespace Laroni_Travel.ViewModels
 
         public void OpenHomeView()
         {
-            Zoeken();           
-            if (Foutmelding == null || Foutmelding == "")
+            RefreshDeelnemer();
+            if (ValidateWachtwoord())
             {          
                 var view = new HomeView();
                 var vm = new HomeViewModel(view, Email);
                 view.DataContext = vm;
                 view.Show();
-                App.Current.MainWindow.Close();
-            }
-        }
-
-        public void Zoeken()
-        {
-            RefreshDeelnemer();
-            //ValidateWachtwoord();
-            if (Deelnemers == null || Deelnemers.Count <= 0)
-            {
-                Foutmelding = "Er is geen Deelnemer gevonden met de emailadress " + Email;
+                _view.Close();
             }
             else
             {
-                Foutmelding = "";
+                Foutmelding = "Het wachtwoord of emailadres is niet correct";
             }
         }
 
@@ -95,26 +88,20 @@ namespace Laroni_Travel.ViewModels
         {
             if (Email != string.Empty)
             {
-                string email = Email;
-                List<Deelnemer> listDeelnemers = _unitOfWork.DeelnemersRepo.Ophalen(x => x.Email == Email).ToList();
-                Deelnemers = new ObservableCollection<Deelnemer>(listDeelnemers);
-            }
-            else
-            {
-                Foutmelding = "Email moet ingevuld zijn";
+                Deelnemers = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen(x => x.Email == Email));
             }
         }
 
-        private void ValidateWachtwoord()
+        private bool ValidateWachtwoord()
         {
-            if (Deelnemers.Count != 0)
+            if (string.IsNullOrEmpty(Wachtwoord) || Deelnemers.Count == 0)
             {
-                if (Deelnemers[0].Wachtwoord != Wachtwoord)
-                {
-                    Foutmelding = "Het wachtwoord is niet correct";
-                }
+                return false;
             }
+            bool isValid = ValidatePassword(Wachtwoord, Deelnemers[0].Wachtwoord);
+            return isValid;
         }
+
 
         public void OpenWachtwoordVergetenView()
         {                      
@@ -147,6 +134,32 @@ namespace Laroni_Travel.ViewModels
         public void Dispose()
         {
             _unitOfWork?.Dispose();
+        }
+
+        public const int SALT_SIZE = 24;
+        public const int HASH_SIZE = 24;
+        public const int ITERATIONS = 100000;
+
+        public bool ValidatePassword(string inputPassword, string storedHashedPassword)
+        {
+            byte[] storedHashBytes = Convert.FromBase64String(storedHashedPassword);
+
+            byte[] salt = new byte[SALT_SIZE];
+            Array.Copy(storedHashBytes, 0, salt, 0, SALT_SIZE);
+
+            Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(inputPassword, salt, ITERATIONS);
+            byte[] inputHashBytes = pbkdf2.GetBytes(HASH_SIZE);
+
+            byte[] inputHashWithSaltBytes = new byte[SALT_SIZE + HASH_SIZE];
+            Array.Copy(salt, 0, inputHashWithSaltBytes, 0, SALT_SIZE);
+            Array.Copy(inputHashBytes, 0, inputHashWithSaltBytes, SALT_SIZE, HASH_SIZE);
+
+            bool passwordsMatch = storedHashBytes.SequenceEqual(inputHashWithSaltBytes);
+           
+            string hashString = Convert.ToBase64String(inputHashWithSaltBytes);
+            byte[] sredHashBytes = Convert.FromBase64String(hashString);
+
+            return passwordsMatch;
         }
     }
 }

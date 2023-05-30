@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,7 +28,7 @@ namespace Laroni_Travel.ViewModels
         public WachtwoordVergetenViewModel(Window view)
         {
             _view = view;
-        }
+        }       
 
         public override string this[string columnName]
         {
@@ -38,7 +39,7 @@ namespace Laroni_Travel.ViewModels
         {
             switch (parameter.ToString())
             {
-                case "OpenInlogView": return true;
+                case "Opslaan": return true;
                 case "OpenWachtwoordVergetenView": return true;
             }
             return true;
@@ -48,6 +49,7 @@ namespace Laroni_Travel.ViewModels
         {
             switch (parameter.ToString())
             {
+                case "Opslaan": Opslaan(); break;
                 case "OpenInlogView": OpenInlogView(); break;
             }
         }
@@ -93,59 +95,114 @@ namespace Laroni_Travel.ViewModels
         }
 
         public void OpenInlogView()
-        {
-            Foutmelding = "";
-            if (Foutmelding == "")
-            {
+        {           
                 var view = new InlogView();
                 var vm = new InlogViewModel(view, "");
-
                 view.DataContext = vm;
                 view.Show();
-                _view.Close();
-            }
+                _view.Close();            
         }
 
         public void Opslaan()
         {
-            Foutmelding = "";
-            if (Wachtwoord != WachtwoordBevestigen)
+            if (string.IsNullOrWhiteSpace(Wachtwoord))
             {
-                Foutmelding = "Wachtwoorden komen niet overeen";
+                Foutmelding = "Wachtwoord moet ingevuld zijn";
             }
-            if (Foutmelding == "")
+            else if (string.IsNullOrWhiteSpace(Email))
             {
-                RefreshDeelnemer();
-                foreach (var item in Deelnemers)
-                {
-                    item.Wachtwoord = Wachtwoord;
-                    _unitOfWork.DeelnemersRepo.Aanpassen(item);
-                    _unitOfWork.Save();
-                    OpenInlogView();
+                Foutmelding = "Email moet ingevuld zijn";
+            }
+            else
+            {
+                if (WachtwoordCheck())
+                {                    
+                    if (EmailCheck())
+                    {
+                        Deelnemers = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen(x => x.Email == Email));
+                        if (Deelnemers.Count != 0)
+                        {
+                            foreach (var item in Deelnemers)
+                            {
+                                item.Wachtwoord = CreateHash(Wachtwoord);
+                                _unitOfWork.DeelnemersRepo.Aanpassen(item);
+                                _unitOfWork.Save();
+                            }
+                            OpenInlogView();
+                        }
+                    }
+                    else
+                    {
+                        Foutmelding = "Email is niet correct";
+                    }
                 }
-            }
+            }                
         }
 
-        private void RefreshDeelnemer()
+        private bool WachtwoordCheck()
         {
-            string email = Email;
-            List<Deelnemer> listDeelnemers = _unitOfWork.DeelnemersRepo.Ophalen(x => x.Email == Email).ToList();
-            foreach (var item in listDeelnemers)
+            bool check = false;
+            if (Wachtwoord != null)
             {
-                if (item.Email == Email)
+                if (Wachtwoord.Length < 8)
                 {
-                    Deelnemers = new ObservableCollection<Deelnemer>(listDeelnemers);
+                    Foutmelding = "Wachtwoord moet minstens 8 tekens bevatten";
+                }
+                else if (Wachtwoord != WachtwoordBevestigen)
+                {
+                    Foutmelding = "Wachtwoorden komen niet overeen";
                 }
                 else
                 {
-                    Foutmelding = "Email of wachtwoord is niet correct";
+                    check = true;
                 }
-            }           
+            }            
+            return check;
+        }
+
+        private bool EmailCheck()
+        {
+            bool check = false;
+            List<Deelnemer> listDeelnemers = _unitOfWork.DeelnemersRepo.Ophalen(x => x.Email == Email).ToList();
+            if (listDeelnemers.Count() != 0)
+            {
+                check= true;
+            }
+            else
+            {
+                check= false;
+            }
+            return check;
         }
 
         public void Dispose()
         {
             _unitOfWork?.Dispose();
+        }
+
+        public const int SALT_SIZE = 24;
+        public const int HASH_SIZE = 24;
+        public const int ITERATIONS = 100000;
+
+        public static string CreateHash(string input)
+        {
+            using (RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider())
+            {
+                byte[] salt = new byte[SALT_SIZE];
+                provider.GetBytes(salt);
+
+                using (Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(input, salt, ITERATIONS))
+                {
+                    byte[] hash = pbkdf2.GetBytes(HASH_SIZE);
+
+                    byte[] hashWithSalt = new byte[SALT_SIZE + HASH_SIZE];
+                    Buffer.BlockCopy(salt, 0, hashWithSalt, 0, SALT_SIZE);
+                    Buffer.BlockCopy(hash, 0, hashWithSalt, SALT_SIZE, HASH_SIZE);
+
+                    string hashString = Convert.ToBase64String(hashWithSalt);
+                    return hashString;
+                }
+            }
         }
     }
 }
