@@ -56,22 +56,67 @@ namespace Laroni_Travel.ViewModels
 
         public override bool CanExecute(object parameter)
         {
-            switch (parameter.ToString())
+            if (SelectedDeelnemer == null)
             {
-                case "ToevoegenDeelnemer": return true;
-                case "AanpassenDeelnemer": return true;
-                case "VerwijderenDeelnemer": return true;
-                case "ToevoegenMedisch": return true;
-                case "AanpassenMedisch": return true;
-                case "VerwijderenMedisch": return true;
-                case "Zoeken": return true;
-                case "ResettenDeelnemer": return true;
-                case "ResettenMedisch": return true;
-                case "OpenOpleidingView": return true;
-                case "OpenReizenView": return true;
-                case "OpenHomeView": return true;
-                case "OpenInlogView": return true;
+                switch (parameter.ToString())
+                {
+                    case "ToevoegenDeelnemer": return true;
+                    case "AanpassenDeelnemer": return false;
+                    case "VerwijderenDeelnemer": return false;
+                    case "ToevoegenMedisch": return false;
+                    case "AanpassenMedisch": return false;
+                    case "VerwijderenMedisch": return false;
+                    case "Zoeken": return true;
+                    case "ResettenDeelnemer": return true;
+                    case "ResettenMedisch": return true;
+                    case "OpenOpleidingView": return true;
+                    case "OpenReizenView": return true;
+                    case "OpenHomeView": return true;
+                    case "OpenInlogView": return true;
+                }
             }
+            else
+            {
+                if (SelectedMedisch == null && SelectedDeelnemer != null)
+                {
+                    switch (parameter.ToString())
+                    {
+                        case "ToevoegenDeelnemer": return false;
+                        case "AanpassenDeelnemer": return true;
+                        case "VerwijderenDeelnemer": return true;
+                        case "ToevoegenMedisch": return true;
+                        case "AanpassenMedisch": return false;
+                        case "VerwijderenMedisch": return false;
+                        case "Zoeken": return true;
+                        case "ResettenDeelnemer": return true;
+                        case "ResettenMedisch": return true;
+                        case "OpenOpleidingView": return true;
+                        case "OpenReizenView": return true;
+                        case "OpenHomeView": return true;
+                        case "OpenInlogView": return true;
+                    }
+                }
+                else
+                {
+                    switch (parameter.ToString())
+                    {
+                        case "ToevoegenDeelnemer": return false;
+                        case "AanpassenDeelnemer": return true;
+                        case "VerwijderenDeelnemer": return true;
+                        case "ToevoegenMedisch": return false;
+                        case "AanpassenMedisch": return true;
+                        case "VerwijderenMedisch": return true;
+                        case "Zoeken": return true;
+                        case "ResettenDeelnemer": return true;
+                        case "ResettenMedisch": return true;
+                        case "OpenOpleidingView": return true;
+                        case "OpenReizenView": return true;
+                        case "OpenHomeView": return true;
+                        case "OpenInlogView": return true;
+                    }
+                }                
+            }            
+            
             return true;
         }
 
@@ -349,6 +394,7 @@ namespace Laroni_Travel.ViewModels
             _view = view;
             Geboortedatum = DateTime.Now;
             DeelnemerRecordInstellen();
+            MedischRecordInstellen();
         }        
 
         public void OpenHomeView()
@@ -493,6 +539,10 @@ namespace Laroni_Travel.ViewModels
                     MedischLijst = new ObservableCollection<Medisch>(_unitOfWork.MedischeRepo.Ophalen());
                     NotifyPropertyChanged(nameof(SelectedDeelnemer));
                     FoutmeldingInstellenNaSave(ok, "Medisch record is niet toegevoegd");
+                }
+                else
+                {
+                    Foutmelding = MedischRecord.Error;
                 }
             }
             else

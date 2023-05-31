@@ -287,21 +287,43 @@ namespace Laroni_Travel.ViewModels
 
         public override bool CanExecute(object parameter)
         {
-            switch (parameter.ToString())
+            if (SelectedOpleiding == null)
             {
-                case "ToevoegenOpleiding": return true;
-                case "AanpassenOpleiding": return true;
-                case "VerwijderenOpleiding": return true;
-                case "ResettenOpleiding": return true;
-                case "OpenPersonenView": return true;
-                case "OpenReizenView": return true;
-                case "OpenHomeView": return true;
-                case "OpenInlogView": return true;
-                case "Zoeken": return true;
-                case "ZoekenDeelnemer": return true;
-                case "ToevoegenDeelnemerOpleiding": return true;
-                case "VerwijderenDeelnemerOpleiding": return true;
+                switch (parameter.ToString())
+                {
+                    case "ToevoegenOpleiding": return true;
+                    case "AanpassenOpleiding": return false;
+                    case "VerwijderenOpleiding": return false;
+                    case "ResettenOpleiding": return true;
+                    case "OpenPersonenView": return true;
+                    case "OpenReizenView": return true;
+                    case "OpenHomeView": return true;
+                    case "OpenInlogView": return true;
+                    case "Zoeken": return true;
+                    case "ZoekenDeelnemer": return true;
+                    case "ToevoegenDeelnemerOpleiding": return false;
+                    case "VerwijderenDeelnemerOpleiding": return true;
+                }
             }
+            else
+            {
+                switch (parameter.ToString())
+                {
+                    case "ToevoegenOpleiding": return false;
+                    case "AanpassenOpleiding": return true;
+                    case "VerwijderenOpleiding": return true;
+                    case "ResettenOpleiding": return true;
+                    case "OpenPersonenView": return true;
+                    case "OpenReizenView": return true;
+                    case "OpenHomeView": return true;
+                    case "OpenInlogView": return true;
+                    case "Zoeken": return true;
+                    case "ZoekenDeelnemer": return true;
+                    case "ToevoegenDeelnemerOpleiding": return true;
+                    case "VerwijderenDeelnemerOpleiding": return true;
+                }
+            }
+            
             return true;
         }
 
@@ -486,6 +508,12 @@ namespace Laroni_Travel.ViewModels
                     _unitOfWork.OpleidingenRepo.Toevoegen(OpleidingRecord);
                     int ok = _unitOfWork.Save();
                     FoutmeldingInstellenNaSave(ok, "Opleiding is niet toegevoegd");
+                    Opleidingen = new ObservableCollection<Opleiding>(_unitOfWork.OpleidingenRepo.Ophalen());
+                    int i = Opleidingen.Count();
+                    ID = i.ToString();
+                    NotifyPropertyChanged(nameof(ID));
+                    Opleidingen = new ObservableCollection<Opleiding>(_unitOfWork.OpleidingenRepo.Ophalen(o => o.OpleidingBestemmingen).Where(o => o.OpleidingId == int.Parse(ID)));
+                    NotifyPropertyChanged(nameof(Opleidingen));
                 }
                 else
                 {
@@ -585,8 +613,21 @@ namespace Laroni_Travel.ViewModels
                                 else
                                 {
                                     Foutmelding = "";
-                                }
+                                }                                
                             }
+                            if (Foutmelding == "")
+                            {
+                                OpleidingRecord = SelectedOpleiding;
+                                NotifyPropertyChanged(nameof(OpleidingRecord));
+                                if (Deelnemers.Count() >= OpleidingRecord.MaxAantalDeelnemers)
+                                {
+                                    Foutmelding = "Max aantal deelnemers bereikt";
+                                }
+                                else
+                                {
+                                    Foutmelding = "";
+                                }
+                            }                         
                             if (Foutmelding == "")
                             {
                                 _unitOfWork.DeelnemerOpleidingenRepo.Toevoegen(deelnemerOpleiding);
