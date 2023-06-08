@@ -65,7 +65,7 @@
         Style="{StaticResource MaterialDesignOutlinedTextBox}"
         TextWrapping="Wrap"
         VerticalScrollBarVisibility="Auto" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15 0 15 15" />
-        <Label Content="Emailadres" Foreground="white" Grid.Column="0" Grid.Row="6" Margin="15 15 15 0" />
+        <Label Content="Wachtwoord Vergeten" Foreground="white" Grid.Column="0" Grid.Row="6" Margin="15 15 15 0" />
         <TextBox
         Text="{Binding WachtwoordBevestigen}"
         materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
