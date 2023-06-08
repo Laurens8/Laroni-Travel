@@ -56,10 +56,10 @@
         Style="{StaticResource MaterialDesignOutlinedTextBox}"
         TextWrapping="Wrap"
         VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15" />
-                <Button materialDesign:ButtonAssist.CornerRadius="20" Height="50" Grid.Row="0" Grid.Column="2" Margin="15" Background="#3D004E" Command="{Binding}" CommandParameter="Zoeken">
+                <Button materialDesign:ButtonAssist.CornerRadius="20" Height="50" Grid.Row="0" Grid.Column="2" Margin="15" Background="#CBA0AE" Command="{Binding}" CommandParameter="Zoeken">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Search" Margin="0 0 10 0" />
-                        <TextBlock>Zoeken</TextBlock>
+                        <materialDesign:PackIcon Kind="Search" Margin="0 0 10 0" Foreground="#3D004E" />
+                        <TextBlock Foreground="#3D004E">Zoeken</TextBlock>
                     </StackPanel>
                 </Button>
                 <Label Foreground="White" Grid.Row="0" Grid.Column="4" Margin="15">
