@@ -47,7 +47,7 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <TextBox
-                    Text="{Binding Voornaam}"
+                    Text="{Binding Voornaam, ValidatesOnDataErrors=True}"
         materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
         VerticalAlignment="center"
         materialDesign:HintAssist.Hint="Search..."
@@ -87,7 +87,6 @@
                         </Style>
                     </DataGrid.Style>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding DeelnemerId}" Header="Id" />
                         <DataGridTextColumn Binding="{Binding Voornaam}" Header="Voornaam" />
                         <DataGridTextColumn Binding="{Binding Familienaam}" Header="Familienaam" />
                         <DataGridTextColumn Binding="{Binding GeboortedatumInfo}" Header="Geboren" />
@@ -184,6 +183,16 @@
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
     Grid.Row="6" Grid.Column="1" Background="White" Margin="10" />
+                <TextBox
+                    Text="{Binding DeelnemerRecord.Wachtwoord}"
+    VerticalAlignment="Top"
+    materialDesign:HintAssist.Hint="Wachtwoord"
+    AcceptsReturn="True"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto"
+    Grid.Row="7" Grid.Column="1" Background="White" Margin="10" />
                 <CheckBox
                     IsChecked="{Binding DeelnemerRecord.Ziekenfonds}"
         Content="Lid Ziekenfonds" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Margin="15" Foreground="White" />
