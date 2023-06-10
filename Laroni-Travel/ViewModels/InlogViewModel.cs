@@ -71,12 +71,19 @@ namespace Laroni_Travel.ViewModels
         {
             RefreshDeelnemer();
             if (ValidateWachtwoord())
-            {          
-                var view = new HomeView();
-                var vm = new HomeViewModel(view, Email);
-                view.DataContext = vm;
-                view.Show();
-                _view.Close();
+            {
+                if (Deelnemers[0].Admin == true)
+                {
+                    var view = new HomeView();
+                    var vm = new HomeViewModel(view, Email);
+                    view.DataContext = vm;
+                    view.Show();
+                    _view.Close();
+                }
+                else
+                {
+                    Foutmelding = "Deze gebruiker heeft geen admin rechten";
+                }
             }
             else
             {
@@ -136,30 +143,39 @@ namespace Laroni_Travel.ViewModels
             _unitOfWork?.Dispose();
         }
 
+        //Voor wachtwoord hash en salt
         public const int SALT_SIZE = 24;
         public const int HASH_SIZE = 24;
         public const int ITERATIONS = 100000;
 
         public bool ValidatePassword(string inputPassword, string storedHashedPassword)
         {
-            byte[] storedHashBytes = Convert.FromBase64String(storedHashedPassword);
+            if (storedHashedPassword != null)
+            {
+                byte[] storedHashBytes = Convert.FromBase64String(storedHashedPassword);
 
-            byte[] salt = new byte[SALT_SIZE];
-            Array.Copy(storedHashBytes, 0, salt, 0, SALT_SIZE);
+                byte[] salt = new byte[SALT_SIZE];
+                Array.Copy(storedHashBytes, 0, salt, 0, SALT_SIZE);
 
-            Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(inputPassword, salt, ITERATIONS);
-            byte[] inputHashBytes = pbkdf2.GetBytes(HASH_SIZE);
+                Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(inputPassword, salt, ITERATIONS);
+                byte[] inputHashBytes = pbkdf2.GetBytes(HASH_SIZE);
 
-            byte[] inputHashWithSaltBytes = new byte[SALT_SIZE + HASH_SIZE];
-            Array.Copy(salt, 0, inputHashWithSaltBytes, 0, SALT_SIZE);
-            Array.Copy(inputHashBytes, 0, inputHashWithSaltBytes, SALT_SIZE, HASH_SIZE);
+                byte[] inputHashWithSaltBytes = new byte[SALT_SIZE + HASH_SIZE];
+                Array.Copy(salt, 0, inputHashWithSaltBytes, 0, SALT_SIZE);
+                Array.Copy(inputHashBytes, 0, inputHashWithSaltBytes, SALT_SIZE, HASH_SIZE);
 
-            bool passwordsMatch = storedHashBytes.SequenceEqual(inputHashWithSaltBytes);
-           
-            string hashString = Convert.ToBase64String(inputHashWithSaltBytes);
-            byte[] sredHashBytes = Convert.FromBase64String(hashString);
+                bool passwordsMatch = storedHashBytes.SequenceEqual(inputHashWithSaltBytes);
 
-            return passwordsMatch;
+                string hashString = Convert.ToBase64String(inputHashWithSaltBytes);
+                byte[] sredHashBytes = Convert.FromBase64String(hashString);
+
+                return passwordsMatch;
+            }
+            else
+            {
+                Foutmelding = "Wachtwoord moet inguvuld zijn";
+            }
+            return false;
         }
     }
 }

@@ -42,12 +42,7 @@ namespace Laroni_Travel.ViewModels
         public string ID { get; set; }
         private string _inlogEmail;
         private string _foutmelding;
-        public ObservableCollection<Deelnemer> DeelnemersLijst { get; set; }
-
-        public override string this[string columnName]
-        {
-            get { return columnName; }
-        }
+        public ObservableCollection<Deelnemer> DeelnemersLijst { get; set; }     
 
         public OpleidingViewModel(Window view, string email)
         {
@@ -285,6 +280,11 @@ namespace Laroni_Travel.ViewModels
             }
         }
 
+        public override string this[string columnName]
+        {
+            get { return columnName; }
+        }
+
         public override bool CanExecute(object parameter)
         {
             if (SelectedOpleiding == null)
@@ -435,7 +435,6 @@ namespace Laroni_Travel.ViewModels
             {
                 Opleidingen = new ObservableCollection<Opleiding>(_unitOfWork.OpleidingenRepo.Ophalen(o => o.OpleidingBestemmingen));
                 Bestemming = new ObservableCollection<OpleidingBestemming>(_unitOfWork.OpleidingBestemmingenRepo.Ophalen(b => b.Bestemming));
-                //Deelnemers = new ObservableCollection<DeelnemerOpleiding>(_unitOfWork.DeelnemerOpleidingenRepo.Ophalen(d => d.Deelnemer));
             }           
             NotifyPropertyChanged(nameof(Opleidingen));
             NotifyPropertyChanged(nameof(Deelnemers));

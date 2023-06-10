@@ -1,7 +1,7 @@
 ﻿INSERT INTO Deelnemers
 (Voornaam, Familienaam, Email,Geboortedatum, Geslacht, Straatnaam, Huisnummer, Gemeente, Postcode, Ziekenfonds, Monitor, Hoofdmonitor, Admin) 
 VALUES
-('Emma', 'Maes', 'Emma@email.com','2003-03-08', 'V', 'Kerkstraat', '12', 'Antwerpen', '2000', 1, 0, 0, 0),
+('Emma', 'Maes', 'Emma@email.com','2003-03-08', 'V', 'Kerkstraat', '12', 'Antwerpen', '2000', 1, 0, 0, 1),
 ('Liam', 'Peeters', 'Liam@email.com','2002-06-25', 'M', 'Stationsstraat', '45', 'Gent', '9000', 0, 0, 1, 0),
 ('Olivia', 'Jacobs', 'Olivia@email.com','2004-09-14', 'V', 'Leuvensesteenweg', '32', 'Brussel', '1000', 1, 0, 0, 0),
 ('Noah', 'Dubois', 'Noah@email.com','2003-12-18', 'M', 'Avenue des Arts', '78', 'Brugge', '8000', 0, 1, 0, 0),

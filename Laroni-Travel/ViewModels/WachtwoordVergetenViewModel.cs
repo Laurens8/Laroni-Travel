@@ -180,6 +180,7 @@ namespace Laroni_Travel.ViewModels
             _unitOfWork?.Dispose();
         }
 
+        //Voor wachtwoord hash en salt
         public const int SALT_SIZE = 24;
         public const int HASH_SIZE = 24;
         public const int ITERATIONS = 100000;

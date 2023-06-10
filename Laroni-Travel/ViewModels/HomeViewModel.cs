@@ -40,7 +40,6 @@ namespace Laroni_Travel.ViewModels
             DeelnemersOpleiding = new ObservableCollection<DeelnemerOpleiding>(_unitOfWork.DeelnemerOpleidingenRepo.Ophalen());
             AantalDeelnemers = new ObservableCollection<Deelnemer>(_unitOfWork.DeelnemersRepo.Ophalen());
             Opleidingen.ToString();
-            //AantalDeelnemers.ToString();
             AantalReizen.ToString();
         }
 

@@ -251,7 +251,7 @@
                 </Button>
                 <Separator Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="5" Margin="0 15 0 15" BorderBrush="White" BorderThickness="5" />
                 <Label Content="Deelnemers reis" Margin="15" Foreground="White" FontSize="25" Grid.Row="9" Grid.Column="0" />
-                <ListView ItemsSource="{Binding DeelnemersRecord}" Foreground="White" Grid.Row="10" Grid.Column="0" Margin="15" SelectedItem="{Binding SelectedDeelnemerReis}">
+                <ListView ItemsSource="{Binding DeelnemersInschrijven}" Foreground="White" Grid.Row="10" Grid.Column="0" Margin="15" SelectedItem="{Binding SelectedDeelnemerReis}">
                     <ListView.View>
                         <GridView>
 
