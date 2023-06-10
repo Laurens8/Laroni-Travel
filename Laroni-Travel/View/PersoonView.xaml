@@ -47,7 +47,7 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <TextBox
-                    Text="{Binding Voornaam, ValidatesOnDataErrors=True}"
+                    Text="{Binding Voornaam}"
         materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
         VerticalAlignment="center"
         materialDesign:HintAssist.Hint="Search..."

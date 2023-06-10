@@ -14,7 +14,7 @@ namespace Laroni_Travel.Models
             {
                 if (columnName == "Naam" && string.IsNullOrWhiteSpace(Naam))
                 {
-                    return "ThemaNaam moet ingevuld zijn";
+                    return "Thema naam moet ingevuld zijn";
                 }                
                 return "";
             }

@@ -8,6 +8,9 @@ namespace Laroni_Travel.Models.Partials
 {
     public partial class OpleidingBestemming
     {
-       
+        //public override string ToString()
+        //{
+        //    return BestemmingNaam;
+        //}
     }
 }

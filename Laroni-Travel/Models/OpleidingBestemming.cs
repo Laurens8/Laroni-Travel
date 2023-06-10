@@ -33,13 +33,13 @@ namespace Laroni_Travel.Models
             }
         }
 
+        //Navigatieproperty
+        public Opleiding Opleiding { get; set; }
+        public Bestemming Bestemming { get; set; }
+
         public override string ToString()
         {
             return BestemmingNaam;
         }
-
-        //Navigatieproperty
-        public Opleiding Opleiding { get; set; }
-        public Bestemming Bestemming { get; set; }
     }
 }
