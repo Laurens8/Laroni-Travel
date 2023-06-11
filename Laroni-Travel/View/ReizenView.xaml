@@ -46,6 +46,7 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <TextBox
                     Text="{Binding ID}"
@@ -70,7 +71,7 @@
                     </StackPanel>
                 </Label>
                 <Label Content="Beheer Reizen" Margin="15" Foreground="White" FontSize="25" Grid.Row="1" Grid.Column="0" />
-                <Label Content="{Binding Foutmelding}" Grid.Row="8" Grid.Column="3" Margin="10" Foreground="Red" FontSize="15" />
+                <Label Content="{Binding Foutmelding}" Grid.Row="7" Grid.Column="3" Margin="10" Foreground="Red" FontSize="20" />
                 <DataGrid ItemsSource="{Binding Reizen}"
                   SelectedItem="{Binding SelectedGroepsreis}"
 
