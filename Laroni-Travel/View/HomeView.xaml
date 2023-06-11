@@ -44,35 +44,35 @@
                 <Grid Margin="20">
                     <Grid.Resources>
                         <Style
-      x:Key="CustomCalendarDayButton"
-      TargetType="CalendarDayButton"
-      BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
+                              x:Key="CustomCalendarDayButton"
+                              TargetType="CalendarDayButton"
+                              BasedOn="{StaticResource MaterialDesignCalendarDayButton}">
                             <Setter
-        Property="materialDesign:CalendarAssist.SelectionColor"
-        Value="#B2F39B" />
+                                Property="materialDesign:CalendarAssist.SelectionColor"
+                                Value="#B2F39B" />
                             <Setter
-        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
-        Value="Black" />
+                                Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+                                Value="Black" />
                         </Style>
                         <Style
-      x:Key="CustomCalendarButton"
-      TargetType="CalendarButton"
-      BasedOn="{StaticResource MaterialDesignCalendarButton}">
+                              x:Key="CustomCalendarButton"
+                              TargetType="CalendarButton"
+                              BasedOn="{StaticResource MaterialDesignCalendarButton}">
                             <Setter
-        Property="materialDesign:CalendarAssist.SelectionColor"
-        Value="#B2F39B" />
+                                Property="materialDesign:CalendarAssist.SelectionColor"
+                                Value="#B2F39B" />
                             <Setter
-        Property="materialDesign:CalendarAssist.SelectionForegroundColor"
-        Value="Black" />
+                                Property="materialDesign:CalendarAssist.SelectionForegroundColor"
+                                Value="Black" />
                         </Style>
                     </Grid.Resources>
                     <Calendar
-    materialDesign:CalendarAssist.HeaderBackground="#B3005E"
-    materialDesign:CalendarAssist.HeaderForeground="Black"
-    Background="#3D004E"
-    CalendarButtonStyle="{StaticResource CustomCalendarButton}"
-    CalendarDayButtonStyle="{StaticResource CustomCalendarDayButton}"
-    Foreground="White" />
+                        materialDesign:CalendarAssist.HeaderBackground="#B3005E"
+                        materialDesign:CalendarAssist.HeaderForeground="Black"
+                        Background="#3D004E"
+                        CalendarButtonStyle="{StaticResource CustomCalendarButton}"
+                        CalendarDayButtonStyle="{StaticResource CustomCalendarDayButton}"
+                        Foreground="White" />
                 </Grid>
             </Grid>
         </ScrollViewer>

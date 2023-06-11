@@ -40,33 +40,28 @@
         <Label Content="Aanmelden" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="15" FontSize="32" Foreground="White" />
         <Label Content="{Binding Foutmelding}" Grid.Row="1" Grid.Column="2" Margin="10" Foreground="Red" FontSize="15" />
         <TextBox
-        Text="{Binding Email}"
-        materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
-        VerticalAlignment="center"
-        materialDesign:HintAssist.Hint="Emailadres"
-        AcceptsReturn="True"
-        IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
-        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-        TextWrapping="Wrap"
-        VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15" />
-
-        <TextBox
-        Text="{Binding Wachtwoord}"
-        materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
-        VerticalAlignment="center"
-        materialDesign:HintAssist.Hint="Wachtwoord"
-        AcceptsReturn="True"
-        IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
-        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-        TextWrapping="Wrap"
-        VerticalScrollBarVisibility="Auto" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15" />
+            Text="{Binding Email}"
+            materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
+            VerticalAlignment="center"
+            materialDesign:HintAssist.Hint="Emailadres"
+            AcceptsReturn="True"
+            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15" />
+        <PasswordBox
+            materialDesign:HintAssist.Hint="Wachtwoord"
+            materialDesign:PasswordBoxAssist.Password="{Binding Path=Wachtwoord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+            Style="{StaticResource MaterialDesignFilledRevealPasswordBox}"
+            materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
+            Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15" />
 
         <CheckBox
-        x:Name="MaterialDesignOutlinedPasswordBoxEnabledComboBox"
-        Content="Onthoud wachtwoord"
-        Grid.Column="1" Grid.Row="4" Margin="15" VerticalAlignment="Top" Foreground="White" />
+            x:Name="MaterialDesignOutlinedPasswordBoxEnabledComboBox"
+            Content="Onthoud wachtwoord"
+            Grid.Column="1" Grid.Row="4" Margin="15" VerticalAlignment="Top" Foreground="White" />
         <Button Content="Wachtwoord vergeten ?" Grid.Row="4" Grid.Column="2" VerticalAlignment="Top" Margin="15" Style="{StaticResource MaterialDesignFlatDarkButton}"
-  ToolTip="MaterialDesignFlatButton" Foreground="White" Command="{Binding}" CommandParameter="OpenWachtwoordVergetenView" />
+            ToolTip="MaterialDesignFlatButton" Foreground="White" Command="{Binding}" CommandParameter="OpenWachtwoordVergetenView" />
         <Button materialDesign:ButtonAssist.CornerRadius="20" Height="50" Content="Aanmelden" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="15" Background="#3D004E" Command="{Binding}" CommandParameter="OpenHomeView" />
     </Grid>
 </Window>
