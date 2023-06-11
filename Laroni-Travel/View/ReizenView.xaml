@@ -190,8 +190,8 @@
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="7" Grid.Column="1" Background="White" Margin="10" />
-                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Startdatum" Grid.Row="3" Grid.Column="2" Text="{Binding ReisRecord.Startdatum}" />
-                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Einddatum" Grid.Row="4" Grid.Column="2" Text="{Binding ReisRecord.Einddatum}" />
+                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Startdatum" Grid.Row="3" Grid.Column="2" SelectedDate="{Binding SelectedGroepsreis.Startdatum, Mode=TwoWay}" />
+                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Einddatum" Grid.Row="4" Grid.Column="2" SelectedDate="{Binding SelectedGroepsreis.Einddatum, Mode=TwoWay}" />
                 <TextBox
                     Text="{Binding ReisRecord.MaxAantalDeelnemers}"
                     VerticalAlignment="Top"
@@ -251,7 +251,7 @@
                 </Button>
                 <Separator Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="5" Margin="0 15 0 15" BorderBrush="White" BorderThickness="5" />
                 <Label Content="Deelnemers reis" Margin="15" Foreground="White" FontSize="25" Grid.Row="9" Grid.Column="0" />
-                <ListView ItemsSource="{Binding DeelnemersInschrijven}" Foreground="White" Grid.Row="10" Grid.Column="0" Margin="15" SelectedItem="{Binding SelectedDeelnemerReis}">
+                <ListView ItemsSource="{Binding DeelnemersInschrijven}" Foreground="White" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" Margin="15" SelectedItem="{Binding SelectedDeelnemerReis}">
                     <ListView.View>
                         <GridView>
 
@@ -302,7 +302,7 @@
                   AutoGenerateColumns="False" IsReadOnly="True"
                   AlternatingRowBackground="#BC80AB"
                   Background="LightGray"
-                  Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" Margin="10">
+                  Grid.Row="14" Grid.Column="0" Margin="10">
                     <DataGrid.Style>
                         <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MaterialDesignDataGrid}">
                             <Style.Triggers>
@@ -326,6 +326,11 @@
                 <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="9" Grid.Column="1" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="VerwijderenDeelnemerReis">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock>Verwijderen uit Reis</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="9" Grid.Column="2" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="BetalingOpslaan">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>Betaling opslaan</TextBlock>
                     </StackPanel>
                 </Button>
             </Grid>

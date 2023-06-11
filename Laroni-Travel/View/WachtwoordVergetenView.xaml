@@ -44,38 +44,38 @@
 
         <Label Content="Emailadres" Foreground="white" Grid.Column="0" Grid.Row="2" Margin="15 15 15 0" />
         <TextBox
-        Text="{Binding Email}"
-        materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
-        VerticalAlignment="center"
-        materialDesign:HintAssist.Hint="Emailadres"
-        AcceptsReturn="True"
-        IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
-        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-        TextWrapping="Wrap"
-        VerticalScrollBarVisibility="Auto" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15 0 15 15" />
+            Text="{Binding Email}"
+            materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
+            VerticalAlignment="center"
+            materialDesign:HintAssist.Hint="Emailadres"
+            AcceptsReturn="True"
+            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Auto" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15 0 15 15" />
         <Label Content="Wachtwoord" Foreground="white" Grid.Column="0" Grid.Row="4" Margin="15 15 15 0" />
         <TextBox
-        Text="{Binding Wachtwoord}"
-        materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
-        VerticalAlignment="center"
-        materialDesign:HintAssist.Hint="Wachtwoord"
-            materialDesign:HintAssist.HelperText=""
-        AcceptsReturn="True"
-        IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
-        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-        TextWrapping="Wrap"
-        VerticalScrollBarVisibility="Auto" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15 0 15 15" />
+            Text="{Binding Wachtwoord}"
+            materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
+            VerticalAlignment="center"
+            materialDesign:HintAssist.Hint="Wachtwoord"
+                materialDesign:HintAssist.HelperText=""
+            AcceptsReturn="True"
+            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Auto" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15 0 15 15" />
         <Label Content="Wachtwoord Vergeten" Foreground="white" Grid.Column="0" Grid.Row="6" Margin="15 15 15 0" />
         <TextBox
-        Text="{Binding WachtwoordBevestigen}"
-        materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
-        VerticalAlignment="center"
-        materialDesign:HintAssist.Hint="Bevestig Wachtwoord"
-        AcceptsReturn="True"
-        IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
-        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-        TextWrapping="Wrap"
-        VerticalScrollBarVisibility="Auto" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15 0 15 15" />
+            Text="{Binding WachtwoordBevestigen}"
+            materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
+            VerticalAlignment="center"
+            materialDesign:HintAssist.Hint="Bevestig Wachtwoord"
+            AcceptsReturn="True"
+            IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Auto" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15 0 15 15" />
         <Button materialDesign:ButtonAssist.CornerRadius="20" Height="40" Content="Opslaan" Grid.Row="8" Grid.Column="0" Margin="15" Background="#3D004E" Command="{Binding}" CommandParameter="Opslaan" />
         <Button materialDesign:ButtonAssist.CornerRadius="20" Height="40" Content="Terug" Grid.Row="8" Grid.Column="1" Margin="15" Background="#3D004E" Command="{Binding}" CommandParameter="OpenInlogView" />
     </Grid>
