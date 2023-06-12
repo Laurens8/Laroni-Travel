@@ -49,14 +49,14 @@
                 </Grid.RowDefinitions>
                 <TextBox
                     Text="{Binding ID}"
-        materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
-        VerticalAlignment="center"
-        materialDesign:HintAssist.Hint="Search..."
-        AcceptsReturn="True"
-        IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
-        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-        TextWrapping="Wrap"
-        VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15" />
+                    materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
+                    VerticalAlignment="center"
+                    materialDesign:HintAssist.Hint="Search..."
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" Background="White" Margin="15" />
                 <Button materialDesign:ButtonAssist.CornerRadius="20" Height="50" Grid.Row="0" Grid.Column="2" Margin="15" Background="#CBA0AE" Command="{Binding}" CommandParameter="Zoeken">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Search" Margin="0 0 10 0" Foreground="#3D004E" />
@@ -70,7 +70,7 @@
                     </StackPanel>
                 </Label>
                 <Label Content="Beheer Opleiding" Foreground="White" Grid.Row="1" Grid.Column="0" Margin="15" FontSize="25" />
-                <Label Content="{Binding Foutmelding}" Grid.Row="8" Grid.Column="3" Margin="10" Foreground="Red" FontSize="15" />
+                <Label Content="{Binding Foutmelding}" Grid.Row="7" Grid.Column="3" Margin="10" Foreground="Red" FontSize="20" />
                 <DataGrid ItemsSource="{Binding Opleidingen}"
                   SelectedItem="{Binding SelectedOpleiding}"
 
@@ -101,15 +101,15 @@
                 </DataGrid>
                 <TextBox
                     Text="{Binding OpleidingRecord.Beschrijving}"
-    VerticalAlignment="Top"
-    materialDesign:HintAssist.Hint="Beschrijving"
-    AcceptsReturn="True"
-    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
-    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-    TextWrapping="Wrap"
-    VerticalScrollBarVisibility="Auto"
-    Grid.Row="3" Grid.Column="0" Background="White" Margin="10" />
-                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Datum" Grid.Row="3" Grid.Column="0" Text="{Binding OpleidingRecord.DatumInfo}" />
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Beschrijving"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="3" Grid.Column="0" Background="White" Margin="10" />
+                <DatePicker Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Background="white" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Datum" Grid.Row="3" Grid.Column="0" SelectedDate="{Binding SelectedOpleiding.Datum, Mode=TwoWay}" />
 
                 <ComboBox
                     Width="250"
@@ -126,55 +126,55 @@
 
                 <TextBox
                     Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Straatnaam}"
-    VerticalAlignment="Top"
-    materialDesign:HintAssist.Hint="Straatnaam"
-    AcceptsReturn="True"
-    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
-    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-    TextWrapping="Wrap"
-    VerticalScrollBarVisibility="Auto"
-    Grid.Row="3" Grid.Column="1" Background="White" Margin="10" />
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Straatnaam"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="3" Grid.Column="1" Background="White" Margin="10" />
 
                 <TextBox
                     Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Huisnummer}"
-    VerticalAlignment="Top"
-    materialDesign:HintAssist.Hint="Huisnummer"
-    AcceptsReturn="True"
-    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
-    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-    TextWrapping="Wrap"
-    VerticalScrollBarVisibility="Auto"
-    Grid.Row="4" Grid.Column="1" Background="White" Margin="10" />
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Huisnummer"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="4" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
                     Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Postcode}"
-    VerticalAlignment="Top"
-    materialDesign:HintAssist.Hint="Postcode"
-    AcceptsReturn="True"
-    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
-    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-    TextWrapping="Wrap"
-    VerticalScrollBarVisibility="Auto"
-    Grid.Row="5" Grid.Column="1" Background="White" Margin="10" />
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Postcode"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="5" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
                     Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Gemeente}"
-    VerticalAlignment="Top"
-    materialDesign:HintAssist.Hint="Gemeente"
-    AcceptsReturn="True"
-    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
-    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-    TextWrapping="Wrap"
-    VerticalScrollBarVisibility="Auto"
-    Grid.Row="6" Grid.Column="1" Background="White" Margin="10" />
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Gemeente"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="6" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
                     Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Land}"
-    VerticalAlignment="Top"
-    materialDesign:HintAssist.Hint="Land"
-    AcceptsReturn="True"
-    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
-    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-    TextWrapping="Wrap"
-    VerticalScrollBarVisibility="Auto"
-    Grid.Row="7" Grid.Column="1" Background="White" Margin="10" />
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Land"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="7" Grid.Column="1" Background="White" Margin="10" />
                 <TextBox
                     Text="{Binding OpleidingRecord.MaxAantalDeelnemers}"
                     VerticalAlignment="Top"
@@ -263,7 +263,7 @@
                   AlternatingRowBackground="#BC80AB"
                   Background="LightGray"
                   Grid.Row="14" Grid.Column="0
-                          " Grid.ColumnSpan="2" Margin="10">
+                          " Margin="10">
                     <DataGrid.Style>
                         <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MaterialDesignDataGrid}">
                             <Style.Triggers>
