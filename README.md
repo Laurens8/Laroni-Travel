@@ -16,7 +16,9 @@
 <br>
 <br>
 <h2>Opzoekingswerk</h2>
-<p>Er is vooral veel opzoekingwerk gebeurd naar material design voor de Views zo te krijgen als dat ze nu zijn. Hoe je bv een gradient erin krijgt. Hoe je een textbox rond krijgt met material design.</p>
-<p>Er is opzoekingswerk gebeurd rond het hashen van een wachtwoord met salt</p>
-<p>Het gebruik van "not mapped" in de models hebben we verder opgezocht</p>
-<p>Hoe moet je een datum binden aan een datepicker is opgezocht geweest</p>
+<ul>
+<li>Er is vooral veel opzoekingwerk gebeurd naar material design voor de Views zo te krijgen als dat ze nu zijn. Hoe je bv een gradient erin krijgt. Hoe je een textbox rond krijgt met material design.</li>
+<li>Er is opzoekingswerk gebeurd rond het hashen van een wachtwoord met salt</li>
+<li>Het gebruik van "not mapped" in de models hebben we verder opgezocht</li>
+<li>Hoe moet je een datum binden aan een datepicker is opgezocht geweest</li>
+</ul>
