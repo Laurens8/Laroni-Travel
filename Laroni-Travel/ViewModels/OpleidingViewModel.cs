@@ -30,6 +30,7 @@ namespace Laroni_Travel.ViewModels
         private string _huisnummer;
         private string _inlogEmail;
         private string _land;
+        private string _Naam;
         private int _maxAantalDeelenemrs;
         private ObservableCollection<Opleiding> _opleidingen;
         private Opleiding _opleidingRecord;
@@ -40,16 +41,16 @@ namespace Laroni_Travel.ViewModels
         private DeelnemerOpleiding _selectedDeelnemerOpleiding;
         private string _straatnaam;
         private IUnitOfWork _unitOfWork = new UnitOfWork(new Laroni_TravelContext());
-        private Window _view;
-
-        public OpleidingViewModel(Window view, string email)
+        private Window _view;      
+        
+        public string Naam
         {
-            InlogEmail = email;
-            _view = view;
-            OpleidingRecordInstellen();
-            BestemmingRecordInstellen();
-            Bestemmingen = new ObservableCollection<OpleidingBestemming>(_unitOfWork.OpleidingBestemmingenRepo.Ophalen(b => b.Bestemming));
-            Bestemmingen.ToString();
+            get { return _Naam; }
+            set
+            {
+                _Naam = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public string Beschrijving
@@ -279,6 +280,16 @@ namespace Laroni_Travel.ViewModels
             }
         }
 
+        public OpleidingViewModel(Window view, string email)
+        {
+            InlogEmail = email;
+            _view = view;
+            OpleidingRecordInstellen();
+            BestemmingRecordInstellen();
+            Bestemmingen = new ObservableCollection<OpleidingBestemming>(_unitOfWork.OpleidingBestemmingenRepo.Ophalen(b => b.Bestemming));
+            Bestemmingen.ToString();
+        }
+
         public override string this[string columnName]
         {
             get { return columnName; }
@@ -499,7 +510,23 @@ namespace Laroni_Travel.ViewModels
         {
             if (OpleidingRecord != null)
             {
-                if (OpleidingRecord.IsGeldig())
+                if (OpleidingRecord.OpleidingBestemmingen.Bestemming != null) 
+                {
+                    BestemmingRecord = OpleidingRecord.OpleidingBestemmingen.Bestemming;
+                }
+                else
+                {
+                    BestemmingRecord = new Bestemming() 
+                    {
+                        Naam = Naam,
+                        Land = Land,
+                        Straatnaam= Straatnaam,
+                        Huisnummer = Huisnummer,
+                        Postcode = Postcode,
+                        Gemeente = Gemeente,
+                    };
+                }
+                if (OpleidingRecord.IsGeldig() && BestemmingRecord.IsGeldig())
                 {
                     _unitOfWork.OpleidingenRepo.Toevoegen(OpleidingRecord);
                     int ok = _unitOfWork.Save();
@@ -513,7 +540,7 @@ namespace Laroni_Travel.ViewModels
                 }
                 else
                 {
-                    Foutmelding = OpleidingRecord.Error;
+                    Foutmelding = OpleidingRecord.Error + BestemmingRecord.Error;
                 }
             }
             else
