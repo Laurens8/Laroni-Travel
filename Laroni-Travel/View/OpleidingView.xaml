@@ -197,6 +197,17 @@
                     VerticalScrollBarVisibility="Auto"
                     Grid.Row="4" Grid.Column="2" Background="White" Margin="10" />
 
+                <TextBox
+                    Text="{Binding OpleidingRecord.OpleidingBestemmingen.Bestemming.Naam}"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Hint="Naam"
+                    AcceptsReturn="True"
+                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Grid.Row="5" Grid.Column="2" Background="White" Margin="10" />
+
                 <Button materialDesign:ButtonAssist.CornerRadius="10" Grid.Row="3" Grid.Column="3" Padding="30 0 30 0" Margin="25 10 25 10" Width="auto" HorizontalAlignment="Left" Background="#3D004E" Command="{Binding}" CommandParameter="ToevoegenOpleiding">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FloppyDisk" Margin="0 0 10 0" />
